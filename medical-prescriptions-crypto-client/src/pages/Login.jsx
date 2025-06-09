@@ -1,8 +1,13 @@
-
+import { ThemeProvider } from '@mui/material/styles';
+import { Container, Stack, Box, Typography } from '@mui/material';
+import ThemeMaterialUI from '../components/ThemeMaterialUI.js';
 
 const Login = () => {
     return (
-        <p>Hola</p>
+        <ThemeProvider theme={ThemeMaterialUI}>
+            <p>OALSA</p>
+            <Typography variant='body2'>hola a todos</Typography>
+        </ThemeProvider>
     );
 }
 
