@@ -1,4 +1,6 @@
 import { createTheme } from '@mui/material/styles';
+import '@fontsource/poppins';
+import '@fontsource/montserrat';
 
 const ThemeMaterialUI = createTheme({
   palette: {
