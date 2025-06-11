@@ -10,6 +10,7 @@ function HomeHeader () {
         position: 'relative',
         overflow: 'hidden',
         borderRadius: 2,
+        marginBottom: '50px',
       }}>
 
      <Box

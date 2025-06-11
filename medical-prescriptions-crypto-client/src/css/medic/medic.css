@@ -18,3 +18,10 @@
   align-items: center;
   padding: 3%;
 }
+
+.medic-home-div {
+  background-color: black;
+  width: 1vh;
+  height: auto;
+  margin-right: 10px;
+}

@@ -19,6 +19,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import '../../css/medic/medic.css';
 import logo from '../../img/virus2.svg';
 import HomeHeader from '../../components/medic/HomeHeader';
+import HomeComponent from '../../components/medic/HomeComponent';
 
 const drawerWidth = 240;
 
@@ -167,7 +168,10 @@ const HomeMedic = () => {
         <Main open={open}>
           <DrawerHeader />
           { view === 'home' ? (
+            <>
             <HomeHeader/>
+            <HomeComponent/>
+            </>
           ) : (
             <Typography variant='h5' sx={{ mb: 2 }}>
               holafjdsnfjksndf
