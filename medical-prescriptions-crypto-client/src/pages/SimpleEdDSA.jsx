@@ -42,7 +42,7 @@ export default function SimpleEdDSA() {
       <h2>Firma digital EdDSA (Ed25519)</h2>
 
       <section style={{ marginBottom: 30 }}>
-        <button onClick={handleGenerarLlaves}>🗝️ Generar Llaves</button>
+        <button onClick={handleGenerarLlaves}> Generar Llaves</button>
       </section>
 
       <section style={{ marginBottom: 30 }}>

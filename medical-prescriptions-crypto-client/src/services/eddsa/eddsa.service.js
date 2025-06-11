@@ -41,11 +41,10 @@ export async function signFile(file, privateKeyFile, password) {
 
   const signatureBase64 = toBase64(signature);
 
-  // 📁 Descargar archivo .sig con firma en base64
   const blob = new Blob([signatureBase64], { type: 'text/plain' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `${file.name}.sig`; // ejemplo: documento.pdf.sig
+  a.download = `${file.name}.sig`;
   a.click();
 
   return {

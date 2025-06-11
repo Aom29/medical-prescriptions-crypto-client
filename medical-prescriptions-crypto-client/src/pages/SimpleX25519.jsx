@@ -28,10 +28,10 @@ export default function SimpleX25519Page() {
 
   return (
     <div style={{ padding: 20, fontFamily: 'sans-serif' }}>
-      <h2>🔐 Key Agreement con X25519</h2>
+      <h2>Key Agreement con X25519</h2>
 
       <section style={{ marginBottom: 20 }}>
-        <h4>🗝️ Generar claves</h4>
+        <h4>Generar claves</h4>
         <input
           type="text"
           placeholder="Identificador (ej. usuario1)"
@@ -42,7 +42,7 @@ export default function SimpleX25519Page() {
       </section>
 
       <section style={{ marginBottom: 20 }}>
-        <h4>🤝 Derivar secreto compartido</h4>
+        <h4>Derivar secreto compartido</h4>
         <p>Tu clave privada (.key):</p>
         <input type="file" accept=".key" onChange={(e) => setPrivateKeyFile(e.target.files[0])} />
         <p>Clave pública del otro usuario (.pub):</p>
