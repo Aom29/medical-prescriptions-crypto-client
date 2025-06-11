@@ -20,6 +20,7 @@ import '../../css/medic/medic.css';
 import logo from '../../img/virus2.svg';
 import HomeHeader from '../../components/medic/HomeHeader';
 import HomeComponent from '../../components/medic/HomeComponent';
+import SearchHeader from '../../components/medic/SearchHeader';
 
 const drawerWidth = 240;
 
@@ -173,9 +174,7 @@ const HomeMedic = () => {
             <HomeComponent/>
             </>
           ) : (
-            <Typography variant='h5' sx={{ mb: 2 }}>
-              holafjdsnfjksndf
-            </Typography>
+            <SearchHeader />
           )}
         </Main>
       </Box>
