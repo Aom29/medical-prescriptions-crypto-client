@@ -37,8 +37,7 @@ export async function signFile(file, privateKeyFile, password) {
   const privateKey = new Uint8Array(decrypted);
 
   const buffer = await file.arrayBuffer();
-  const hash = await crypto.subtle.digest('SHA-512', buffer);
-  const signature = await ed.signAsync(new Uint8Array(hash), privateKey);
+  const signature = await ed.signAsync(new Uint8Array(buffer), privateKey);
 
   const signatureBase64 = toBase64(signature);
 
@@ -62,9 +61,8 @@ export async function verifyFile(file, signatureFile, publicKeyFile) {
   const publicKey = Uint8Array.from(atob(publicKeyBase64), c => c.charCodeAt(0));
 
   const fileBuffer = await file.arrayBuffer();
-  const hash = await crypto.subtle.digest('SHA-512', fileBuffer);
 
-  return await ed.verifyAsync(signature, new Uint8Array(hash), publicKey);
+  return await ed.verifyAsync(signature, new Uint8Array(fileBuffer), publicKey);
 }
 
 
