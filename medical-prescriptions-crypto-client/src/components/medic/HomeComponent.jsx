@@ -1,9 +1,29 @@
+import { useRef, useState } from 'react';
 import { Card, Typography, CardContent, Stack, Box }  from '@mui/material';
 import KeyIcon from '@mui/icons-material/Key';
 import '../../css/medic/medic.css';
 import ButtonsMod from '../ButtonsMod';
 
 function HomeHeader () {
+  const [archivoCargado, setArchivoCargado] = useState(false);
+  const inputRef = useRef(null);
+
+  const handleClickBoton = () => {
+    console.log('Presioné esta mamada');
+    if (inputRef.current) {
+      inputRef.current.click();
+    }
+  };
+
+  const handleArchivoCargado = (event) => {
+    const archivo = event.target.files[0];
+    if (archivo) {
+      setArchivoCargado(true);
+    } else {
+      setArchivoCargado(false);
+    }
+  }
+
   return (
     <Card position='static' 
       sx={{
@@ -27,9 +47,9 @@ function HomeHeader () {
               alignContent: 'center',
               padding: 2,
               borderRadius: 1,
-              boxShadow: 2,
-              border: '0.1px solid #e0e0e0',
-              backgroundColor: 'white',
+              boxShadow: 1,
+              backgroundColor: archivoCargado ? '#a5ff91' : '#f48787',
+              transition: 'background-color 0.3s ease',
             }}
           >
             <Stack direction='row' sx={{ display: 'flex', alignItems: 'center' }}>
@@ -38,14 +58,22 @@ function HomeHeader () {
                 Llave privada 
               </Typography>
             </Stack>
+
             <div>
+              <input
+                type='file'
+                accept='.key,.pem'
+                ref={inputRef}
+                onChange={handleArchivoCargado}
+                style={{ display: 'none' }}
+              />
               <ButtonsMod
                 variant='principal'
                 textCont='Cargar archivo'
                 width='100%'
                 height='2.5rem'
-                clickEvent=''
-                type='submit'
+                clickEvent={handleClickBoton}
+                type='button'
               />
             </div>
           </Box>
