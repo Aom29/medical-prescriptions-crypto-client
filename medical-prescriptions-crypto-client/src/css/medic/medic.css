@@ -1,0 +1,11 @@
+.medic-logo-div {
+    justify-content: flex-start;
+}
+
+.medic-logo {
+  width: auto;
+  height: 2rem;
+  color: white;
+  fill: white;
+  margin-right: 10px;
+}
