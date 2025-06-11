@@ -2,7 +2,7 @@ import { Card, Typography, Box }  from '@mui/material';
 import '../../css/medic/medic.css';
 import background from '../../img/background.jpg';
 
-function HomeComponent () {
+function HomeHeader () {
   return (
     <Card position='static' 
       sx={{
@@ -48,4 +48,4 @@ function HomeComponent () {
   );
 };
 
-export default HomeComponent;
+export default HomeHeader;
