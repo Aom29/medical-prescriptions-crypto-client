@@ -14,6 +14,8 @@ function SearchHeader () {
         marginBottom: '50px',
         padding: '2%',
         alignItems: 'center',
+        display: 'center',
+        width: '100%',
       }}>
 
      <Box
@@ -31,7 +33,7 @@ function SearchHeader () {
         }}
       />
 
-      <Stack direction='row' sx={{ display: 'flex', justifyContent: {md: 'flex-end', xs: 'center' }, alignItems: 'center' }}>
+      <Stack direction='row' sx={{ display: 'flex', justifyContent: {md: 'flex-end', xs: 'center' }, alignItems: 'center', width: '100%' }}>
         <TextField
             id='filled-basic'
             label='Buscar Matrícula'
