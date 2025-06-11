@@ -1,6 +1,7 @@
 import { Card, CardContent, Box, Stack, Typography }  from '@mui/material';
 import '../../css/medic/medic.css';
 import PatientPersonalInformation from './PatientPersonalInformation';
+import PatientClinicHistory from './PatientClinicHistory';
 
 function SearchCard () {
   return (
@@ -22,11 +23,17 @@ function SearchCard () {
           <PatientPersonalInformation/>
         </Stack>
 
-        <Stack direction='row' sx={{ marginBottom: '30px' }}>
-          <div className='medic-home-div' />
-          <Typography fontSize='1.1rem' fontWeight='bold'>
-            Historial Clínico
-          </Typography>
+        <Stack variant='column'>
+          <Stack direction='row' sx={{ marginBottom: '30px' }}>
+            <div className='medic-home-div' />
+            <Typography fontSize='1.1rem' fontWeight='bold'>
+              Historial Clínico
+            </Typography>
+          </Stack>
+          <PatientClinicHistory 
+            fecha='10/06/2025'
+            diagnostico='Gastritis aguda'
+          />
         </Stack>
       </CardContent>
     </Card>
