@@ -21,6 +21,7 @@ import logo from '../../img/virus2.svg';
 import HomeHeader from '../../components/medic/HomeHeader';
 import HomeComponent from '../../components/medic/HomeComponent';
 import SearchHeader from '../../components/medic/SearchHeader';
+import SearchCard from '../../components/medic/SearchCard';
 
 const drawerWidth = 240;
 
@@ -174,7 +175,10 @@ const HomeMedic = () => {
             <HomeComponent/>
             </>
           ) : (
+            <>
             <SearchHeader />
+            <SearchCard />
+            </>
           )}
         </Main>
       </Box>
