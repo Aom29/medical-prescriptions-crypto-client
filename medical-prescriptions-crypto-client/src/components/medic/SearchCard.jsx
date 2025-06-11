@@ -20,7 +20,12 @@ function SearchCard () {
               Información general del paciente
             </Typography>
           </Stack>
-          <PatientPersonalInformation/>
+          <PatientPersonalInformation
+            matricula='2025938495'
+            nombre='Ramírez Sergio'
+            fechaNacimiento='02/02/1999'
+            sexo='hombre'
+          />
         </Stack>
 
         <Stack variant='column'>
