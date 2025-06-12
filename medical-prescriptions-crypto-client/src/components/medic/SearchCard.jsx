@@ -3,7 +3,7 @@ import '../../css/medic/medic.css';
 import PatientPersonalInformation from './PatientPersonalInformation';
 import PatientClinicHistory from './PatientClinicHistory';
 
-function SearchCard () {
+function SearchCard ({ setView }) {
   return (
     <Card
       sx={{
@@ -22,9 +22,11 @@ function SearchCard () {
           </Stack>
           <PatientPersonalInformation
             matricula='2025938495'
+            curp='RAMS990202HDFRRG09'
             nombre='Ramírez Sergio'
             fechaNacimiento='02/02/1999'
             sexo='hombre'
+            onGenerate={() => setView('generate')}
           />
         </Stack>
 

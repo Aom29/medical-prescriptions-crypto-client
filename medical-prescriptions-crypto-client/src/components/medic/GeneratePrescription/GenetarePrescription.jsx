@@ -5,10 +5,17 @@ import Diagnosis from './Diagnosis';
 import Treatment from './Treatment';
 import ButtonsMod from '../../ButtonsMod';
 
-function GeneratePrescription () {
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import IconButton from '@mui/material/IconButton';
+
+function GeneratePrescription ({ setView }) {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
       <Card sx={{ width: { md: '80%', xs: '100%' }, padding: '2%' }}>
+        <IconButton onClick={() => setView('buscar')} sx={{ alignSelf: 'flex-start' }}>
+          <ArrowBackIcon />
+        </IconButton>
+
         <CardHeader title='Generar receta' />
         <CardContent>
           <Stack direction='column' sx={{ marginBottom: '30px' }}>

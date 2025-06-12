@@ -172,14 +172,15 @@ const HomeMedic = () => {
           <DrawerHeader />
           { view === 'home' ? (
             <>
-            <HomeHeader/>
-            <HomeComponent/>
+              <HomeHeader/>
+              <HomeComponent/>
             </>
+          ) : view === 'generate' ? (
+              <GeneratePrescription setView={setView}/>
           ) : (
             <>
-            <GeneratePrescription />
-            {/* <SearchHeader />
-            <SearchCard /> */}
+              <SearchHeader />
+              <SearchCard setView={setView}/>
             </>
           )}
         </Main>

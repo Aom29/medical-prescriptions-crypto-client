@@ -2,16 +2,19 @@ import { Box, Stack, Typography }  from '@mui/material';
 import '../../css/medic/medic.css';
 import ButtonsMod from '../ButtonsMod';
 
-function PatientPersonalInformation ({ matricula, nombre, fechaNacimiento, sexo }) {
+function PatientPersonalInformation ({ matricula, curp, nombre, fechaNacimiento, sexo, onGenerate}) {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginBottom: '50px' }}>
       <Stack direction='row' sx={{ display: 'flex', width: '100%', flexDirection: {md: 'row', xs: 'column'}, justifyContent: 'space-between' }}>
-        <Stack direction='row' sx={{ width: {md: '60%', xs:'100%'}, marginBottom: '30px' }}>
+        <Stack direction='column' sx={{ width: {md: '60%', xs:'100%'}, marginBottom: '30px' }}>
           <Typography variant='body1' fontWeight='bold' color='#4224B0'>
-            Matrícula {matricula}
+            Matrícula: {matricula}
+          </Typography>
+          <Typography variant='body1' fontWeight={'bold'}>
+            CURP: {curp}
           </Typography>
           <Typography>
-            {nombre}
+            Nombre del Paciente: {nombre}
           </Typography>
           <Typography>
             Fecha de nacimiento: {fechaNacimiento}
@@ -26,7 +29,7 @@ function PatientPersonalInformation ({ matricula, nombre, fechaNacimiento, sexo 
             textCont='Generar receta'
             width='10rem'
             height='2.5rem'
-            clickEvent=''
+            clickEvent={onGenerate}
             type='button'
           />
         </Box>
