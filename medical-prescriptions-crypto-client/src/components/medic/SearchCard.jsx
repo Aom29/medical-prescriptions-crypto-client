@@ -13,7 +13,7 @@ function SearchCard () {
       }}>
 
       <CardContent>
-        <Stack variant='column'>
+        <Stack direction='column'>
           <Stack direction='row' sx={{ marginBottom: '30px' }}>
             <div className='medic-home-div' />
             <Typography fontSize='1.1rem' fontWeight='bold'>
@@ -28,7 +28,7 @@ function SearchCard () {
           />
         </Stack>
 
-        <Stack variant='column'>
+        <Stack direction='column'>
           <Stack direction='row' sx={{ marginBottom: '30px' }}>
             <div className='medic-home-div' />
             <Typography fontSize='1.1rem' fontWeight='bold'>

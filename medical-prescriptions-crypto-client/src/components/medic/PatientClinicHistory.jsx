@@ -12,7 +12,7 @@ function PatientClinicHistory ({fecha, diagnostico}) {
       boxShadow: 1,
     }}>
       <Stack sx={{ justifyContent: { sm: 'space-between' }, alignItems: 'center', width:'100%', flexDirection: {sm: 'row', xs: 'column'}}}>
-        <Stack variant='column' sx={{ justifyContent: {xs: 'flex-start', width: { xs: '100%' }, alignContent: 'flex-start' }}}>
+        <Stack direction='column' sx={{ justifyContent: {xs: 'flex-start', width: { xs: '100%' }, alignContent: 'flex-start' }}}>
           <Typography>
             Fecha de realización: {fecha}
           </Typography>

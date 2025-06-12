@@ -22,6 +22,7 @@ import HomeHeader from '../../components/medic/HomeHeader';
 import HomeComponent from '../../components/medic/HomeComponent';
 import SearchHeader from '../../components/medic/SearchHeader';
 import SearchCard from '../../components/medic/SearchCard';
+import GeneratePrescription from '../../components/medic/GeneratePrescription/GenetarePrescription';
 
 const drawerWidth = 240;
 
@@ -176,8 +177,9 @@ const HomeMedic = () => {
             </>
           ) : (
             <>
-            <SearchHeader />
-            <SearchCard />
+            <GeneratePrescription />
+            {/* <SearchHeader />
+            <SearchCard /> */}
             </>
           )}
         </Main>
