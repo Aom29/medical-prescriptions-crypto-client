@@ -24,25 +24,43 @@ import { Typography } from '@mui/material';
 
 function ButtonsMod({ variant, textCont, clickEvent, width, height, startIcon, type }) {
   // condicion para el color del boton
-  const buttonStyle = variant === 'principal' ? {
-    backgroundColor: '#6034FD',
-    color: '#FFFFFF',
-    width: width,
-    height: height,
-    '&:hover': {
-      backgroundColor: '#4224B0',
-      transition: '0.4s',
-    }
-  } : {
-    backgroundColor: '#FFFFFF',
-    color: '#6034FD',
-    width: width,
-    height: height,
-    '&:hover': {
+  let buttonStyle = {
+    width,
+    height,
+    transition: '0.4s',
+  }
+
+  if (variant == 'principal') {
+    buttonStyle = {
+      ...buttonStyle,
       backgroundColor: '#6034FD',
       color: '#FFFFFF',
-      borderColor: '#FFFFFF',
-      transition: '0.4s',
+      '&:hover': {
+        backgroundColor: '#4224B0',
+      }
+    }
+  } else if (variant === 'secundario') {
+    buttonStyle = {
+      ...buttonStyle,
+      backgroundColor: '#FFFFFF',
+      color: '#6034FD',
+      '&:hover': {
+        backgroundColor: '#6034FD',
+        color: '#FFFFFF',
+        borderColor: '#FFFFFF',
+      }
+    }
+  } else {
+    buttonStyle = {
+      ...buttonStyle,
+      backgroundColor: '#FFFFFF',
+      borderColor: '#FF4D4F',
+      color: '#FF4D4F',
+      '&:hover': {
+        backgroundColor: '#FF4D4F',
+        borderColor: '#FFFFFF',
+        color: '#FFFFFF',
+      }
     }
   }
 
