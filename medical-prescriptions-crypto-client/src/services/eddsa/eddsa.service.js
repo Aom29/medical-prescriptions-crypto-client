@@ -26,7 +26,8 @@ export async function generateKeyPair(password) {
   };
 }
 
-export async function signFile(file, privateKeyFile, password) {
+export async function signFile(buffer, privateKeyFile, password) {
+  // Leer llave privada y decodificar
   const base64 = await privateKeyFile.text();
   const combined = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
 
@@ -36,17 +37,9 @@ export async function signFile(file, privateKeyFile, password) {
   const decrypted = await decryptAESGCM(ciphertext, password, salt, iv);
   const privateKey = new Uint8Array(decrypted);
 
-  const buffer = await file.arrayBuffer();
-  const signature = await ed.signAsync(new Uint8Array(buffer), privateKey);
+  const signature = await ed.signAsync(buffer, privateKey);
 
   const signatureBase64 = toBase64(signature);
-
-  const blob = new Blob([signatureBase64], { type: 'text/plain' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `${file.name}.sig`;
-  a.click();
-
   return {
     base64: signatureBase64
   };

@@ -1,7 +1,7 @@
 import { Box, Stack, Typography }  from '@mui/material';
 import '../../../css/medic/medic.css';
 
-function GeneralData ({ matricula, nombrePaciente, fechaNacimiento, sexo, fechaEmision, nombreMedico, especialidad, cedula }) {
+function GeneralData ({ matricula, nombrePaciente, fechaNacimiento, sexo, fechaEmision, nombreMedico, clinica, especialidad, cedula }) {
   return (
     <Stack direction={{ md: 'row', xs: 'column' }} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
 
@@ -10,8 +10,11 @@ function GeneralData ({ matricula, nombrePaciente, fechaNacimiento, sexo, fechaE
         <Typography fontWeight='bold' color='#4224B0'>
           Matrícula {matricula}
         </Typography>
+        <Typography fontWeight='bold'>
+          CURP: {matricula}
+        </Typography>
         <Typography>
-          {nombrePaciente}
+          Nombre del Paciente: {nombrePaciente}
         </Typography>
         <Typography>
           Fecha de nacimiento: {fechaNacimiento}
@@ -23,17 +26,20 @@ function GeneralData ({ matricula, nombrePaciente, fechaNacimiento, sexo, fechaE
 
       {/* Datos médico y generales ----------------- */}
       <Stack direction='column'>
-        <Typography fontWeight='bold'>
-          Fecha de emisión: {fechaEmision}
+        <Typography fontWeight={'bold'} color='#4224B0'>
+          Cédula Profesional: {cedula}
         </Typography>
         <Typography>
           Médico: {nombreMedico}
         </Typography>
         <Typography>
-          Especialidad: {especialidad}
+          Clínica: {clinica}
         </Typography>
         <Typography>
-          Cédula Profesional: {cedula}
+          Especialidad: {especialidad}
+        </Typography>
+        <Typography fontWeight='bold'>
+          Fecha de emisión: {fechaEmision}
         </Typography>
       </Stack>
 
