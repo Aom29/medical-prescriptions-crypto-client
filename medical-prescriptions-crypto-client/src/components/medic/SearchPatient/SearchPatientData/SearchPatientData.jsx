@@ -1,7 +1,7 @@
 import { Card, CardContent, Stack }  from '@mui/material';
-import PatientPersonalInformation from '../PatientPersonalInformation';
-import PatientClinicHistory from '../PatientClinicHistory';
-import Subtitle from '../../layout/Subtitle';
+import PatientPersonalInformation from './PatientPersonalInformation';
+import PatientClinicHistory from './PatientClinicHistory';
+import Subtitle from '../../../layout/Subtitle';
 
 function SearchPatientData ({ setView }) {
   return (

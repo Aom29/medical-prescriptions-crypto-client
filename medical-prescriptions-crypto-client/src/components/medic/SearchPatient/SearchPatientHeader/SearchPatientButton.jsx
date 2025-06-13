@@ -1,7 +1,7 @@
 import { TextField, InputAdornment } from "@mui/material";
 import ButtonsMod from "../../../layout/ButtonsMod";
 
-function SearchPationButton () {
+function SearchPatientButton () {
   return (
     <TextField
       id='filled-basic'
@@ -29,4 +29,4 @@ function SearchPationButton () {
   );
 }
 
-export default SearchPationButton;
+export default SearchPatientButton;

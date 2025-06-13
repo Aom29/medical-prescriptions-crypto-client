@@ -1,6 +1,6 @@
 import { Card, Box, Stack }  from '@mui/material';
 import background from '../../../../img/background.jpg';
-import SearchPationButton from './SearchPatientButton';
+import SearchPatientButton from './SearchPatientButton';
 
 function SearchPatientHeader () {
   return (
@@ -32,7 +32,7 @@ function SearchPatientHeader () {
       />
 
       <Stack direction='row' sx={{ display: 'flex', justifyContent: {md: 'flex-end', xs: 'center' }, alignItems: 'center', width: '100%' }}>
-        <SearchPationButton/>
+        <SearchPatientButton/>
       </Stack>
     </Card>
   );

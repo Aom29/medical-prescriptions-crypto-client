@@ -1,11 +1,11 @@
 import SearchPatientHeader from "./SearchPatientHeader/SearchPatientHeader";
-import SearchPatientData from "./SearchPatientData";
+import SearchPatientData from "./SearchPatientData/SearchPatientData";
 
-function SearchPatient () {
+function SearchPatient ({setView}) {
   return (
     <>
       <SearchPatientHeader/>
-      <SearchPatientData/>
+      <SearchPatientData setView={setView} />
     </>
   );
 }

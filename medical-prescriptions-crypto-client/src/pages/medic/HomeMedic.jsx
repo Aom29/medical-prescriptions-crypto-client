@@ -169,7 +169,7 @@ const HomeMedic = () => {
           ) : view === 'generate' ? (
             <GeneratePrescription setView={setView}/>
           ) : (
-            <SearchPatient/>
+            <SearchPatient setView={setView} />
           )}
         </Main>
       </Box>
