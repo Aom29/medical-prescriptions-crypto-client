@@ -1,21 +1,21 @@
 import { Stack, TextField, Box } from '@mui/material';
 import ButtonsMod from '../../ButtonsMod';
-import '../../../css/medic/medic.css';
 
 function Medicament({ id, data, showDelete, onDelete, onChange }) {
   const { nombre, duracion, frecuencia } = data;
 
-  console.log('Medicament data:', data); // Para depuración
+  const handleInputChange = (e, field) => {
+    const updatedFields = { [field]: e.target.value }; // Crea un objeto con el campo actualizado
+    onChange(id, updatedFields); // Pasa los datos al padre
+  };
+
   return (
     <>
       <Stack direction="row" sx={{ width: '100%', marginBottom: '15px' }}>
         <TextField
           label="Nombre del medicamento"
           value={nombre}
-          onChange={(e) => onChange(id, { nombre: e.target.value })}  // Llama a onChange para actualizar el estado
-          multiline
-          rows={1}
-          placeholder="Ej. Butilbromuro de hioscina"
+          onChange={(e) => handleInputChange(e, 'nombre')}
           fullWidth
         />
       </Stack>
@@ -23,25 +23,19 @@ function Medicament({ id, data, showDelete, onDelete, onChange }) {
       <Stack direction={{ md: 'row', xs: 'column' }} sx={{ marginBottom: '15px' }}>
         <TextField
           label="Duración"
-          value={duracion}  
-          onChange={(e) => onChange(id, { duracion: e.target.value })}  // Llama a onChange para actualizar el estado
-          multiline
-          rows={1}
-          placeholder="Ej. Por 7 días"
+          value={duracion}
+          onChange={(e) => handleInputChange(e, 'duracion')}
           fullWidth
         />
         <TextField
           label="Frecuencia"
-          value={frecuencia}  // Sincroniza el valor con el estado de "frecuencia"
-          onChange={(e) => onChange(id, { frecuencia: e.target.value })}  // Llama a onChange para actualizar el estado
-          multiline
-          rows={1}
-          placeholder="Ej. Cada 8 horas"
+          value={frecuencia}
+          onChange={(e) => handleInputChange(e, 'frecuencia')}
           fullWidth
         />
       </Stack>
 
-      <Box sx={{ marginBottom: '35px', width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
         {showDelete && (
           <ButtonsMod
             variant="eliminar"
