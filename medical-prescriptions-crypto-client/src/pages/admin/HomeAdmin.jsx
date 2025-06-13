@@ -19,11 +19,13 @@ import {
 } from '@mui/material';
 
 import {
+  Home as HomeIcon,
   Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
-  MoveToInbox as InboxIcon,
-  Mail as MailIcon,
+  PersonalInjury as PersonalInjuryIcon,
+  MedicalServices as MedicalServicesIcon,
+  Vaccines as VaccinesIcon,
 } from '@mui/icons-material';
 
 import '../../css/medic/medic.css';
@@ -145,10 +147,10 @@ const HomeAdmin = () => {
           <Divider />
           <List>
             {[
-              { text: 'Home', view: 'home', icon: <InboxIcon/> },
-              { text: 'Registrar Médico', view: 'buscar', icon: <MailIcon/> },
-              { text: 'Registrar Farmacéutico', view: 'buscar', icon: <MailIcon/> },
-              { text: 'Registrar Paciente', view: 'buscar', icon: <MailIcon/> }
+              { text: 'Home', view: 'home', icon: <HomeIcon/> },
+              { text: 'Registrar Médico', view: 'registerMedic', icon: <MedicalServicesIcon/> },
+              { text: 'Registrar Farmacéutico', view: 'registerPharmacist', icon: <VaccinesIcon/> },
+              { text: 'Registrar Paciente', view: 'registerPatient', icon: <PersonalInjuryIcon/> }
             ].map(({ text, view: viewName, icon }) => (
               <ListItem key={text} disablePadding onClick={() => setView(viewName)}>
                 <ListItemButton>
@@ -166,11 +168,18 @@ const HomeAdmin = () => {
         <Main open={open}>
           <DrawerHeader />
           { view === 'home' ? (
+            <HomeAdminComponent setView={setView}/>
+          ) : view === 'registerMedic' ? (
             <>
-              <HomeAdminComponent/>
+            hola esta es la vista
+            </>
+          ) : view === 'registerPharmacist' ? (
+            <>
+            hola esta es farmaceutico
             </>
           ) : (
             <>
+            esta paciente
             </>
           )}
         </Main>

@@ -9,7 +9,7 @@ function HomeAdminButton ({ nombreBoton, clickEvent }) {
         textCont={nombreBoton}
         height='2.5rem'
         width={{ xs: '100%', md: '70%' }}
-        clickEvent=''
+        clickEvent={clickEvent}
         type='button'
       />
     </Box>
