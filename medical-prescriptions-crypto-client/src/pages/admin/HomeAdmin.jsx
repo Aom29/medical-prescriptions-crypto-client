@@ -28,7 +28,7 @@ import {
 
 import '../../css/medic/medic.css';
 import NavbarDashboard from '../../components/navbar/NavbarDashboard';
-import HomeAdminComponent from '../../components/admin/Home/HomeAdminComponent';
+import HomeAdminComponent from '../../components/admin/HomeComponent/HomeAdminComponent';
 
 const drawerWidth = 240;
 
