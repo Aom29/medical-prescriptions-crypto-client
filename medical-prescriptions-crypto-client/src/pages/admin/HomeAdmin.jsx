@@ -28,9 +28,6 @@ import {
 
 import '../../css/medic/medic.css';
 import NavbarDashboard from '../../components/admin/NavbarDashboard';
-import HomeHeader from '../../components/medic/HomeHeader';
-import HomeComponent from '../../components/medic/HomeComponent';
-import GeneratePrescription from '../../components/medic/GeneratePrescription/GenetarePrescription';
 
 const drawerWidth = 240;
 
