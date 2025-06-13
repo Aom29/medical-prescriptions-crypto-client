@@ -55,10 +55,24 @@ function GeneratePrescription({ setView }) {
       tratamiento,
     };
 
-    console.log('Receta generada:', receta);
     const jsonBuffer = new TextEncoder().encode(JSON.stringify(receta));
     
-  }
+    try {
+      const signature = await signFile(jsonBuffer, privateKey, password);
+      console.log('Firma generada:', signature);
+      const recetaFirmada = {
+        ...receta,
+        firma_medico: signature.base64,
+      };
+
+      console.log('Json que se envía al backend:', recetaFirmada);
+      setPassword(''); // Limpiar la contraseña después de usarla
+      alert('Receta generada y firmada exitosamente');
+    } catch (error) {
+      alert('Error al firmar la receta: ' + error.message);
+    }
+
+  };
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>

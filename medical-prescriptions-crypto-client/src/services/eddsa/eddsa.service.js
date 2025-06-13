@@ -27,9 +27,7 @@ export async function generateKeyPair(password) {
 }
 
 export async function signFile(buffer, privateKeyFile, password) {
-  // Leer llave privada y decodificar
-  const base64 = await privateKeyFile.text();
-  const combined = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+  const combined = Uint8Array.from(atob(privateKeyFile), c => c.charCodeAt(0));
 
   const salt = combined.slice(0, 16);
   const iv = combined.slice(16, 28);
