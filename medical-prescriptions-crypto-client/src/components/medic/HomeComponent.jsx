@@ -7,9 +7,10 @@ import ButtonsMod from '../ButtonsMod';
 function HomeHeader () {
   const [archivoCargado, setArchivoCargado] = useState(false);
   const inputRef = useRef(null);
+  const [privateKey, setPrivateKey] = useState(null);
+
 
   const handleClickBoton = () => {
-    console.log('Presioné esta mamada');
     if (inputRef.current) {
       inputRef.current.click();
     }
@@ -18,7 +19,14 @@ function HomeHeader () {
   const handleArchivoCargado = (event) => {
     const archivo = event.target.files[0];
     if (archivo) {
-      setArchivoCargado(true);
+      const reader = new FileReader();
+      reader.onload = () => {
+        const contenido = reader.result;
+        setPrivateKey(contenido);
+        console.log('Contenido del archivo:', contenido);
+        setArchivoCargado(true);
+      }
+      reader.readAsText(archivo);
     } else {
       setArchivoCargado(false);
     }
