@@ -1,9 +1,14 @@
-import { Box } from '@mui/material'
+import { Box } from '@mui/material';
+import Header from '../../layout/Header';
 
 function HomeAdminComponent () {
-  <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-
-  </Box>
-}
+  return (
+    <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <Header
+        nombre='Admin'
+      />
+    </Box>
+  );
+};
 
 export default HomeAdminComponent;

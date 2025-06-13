@@ -1,13 +1,15 @@
 import { useRef, useState } from 'react';
 import { Card, Typography, CardContent, Stack, Box }  from '@mui/material';
 import KeyIcon from '@mui/icons-material/Key';
-import '../../css/medic/medic.css';
-import ButtonsMod from '../ButtonsMod';
+//* Componentes
+import ButtonsMod from '../../layout/ButtonsMod';
+import Header from '../../layout/Header';
+import Subtitle from '../../layout/Subtitle';
 
-function HomeHeader () {
+function HomeComponent () {
   const [archivoCargado, setArchivoCargado] = useState(false);
   const inputRef = useRef(null);
-  const [privateKey, setPrivateKey] = useState(null);
+  const [setPrivateKey] = useState(null);
 
 
   const handleClickBoton = () => {
@@ -33,6 +35,8 @@ function HomeHeader () {
   }
 
   return (
+    <>
+    <Header />
     <Card position='static' 
       sx={{
         borderRadius: 2,
@@ -41,13 +45,7 @@ function HomeHeader () {
 
       <CardContent>
         <Stack direction='column'>
-          <Stack direction='row' sx={{ marginBottom: '30px' }}>
-            <div className='medic-home-div' />
-            <Typography variant='h6' fontWeight='bold'>
-              Estado del sistema
-            </Typography>
-          </Stack>
-
+          <Subtitle subtitulo='Estado del sistema' />
           <Box 
             sx={{ 
               display: 'flex',
@@ -85,11 +83,11 @@ function HomeHeader () {
               />
             </div>
           </Box>
-
         </Stack>
       </CardContent>
     </Card>
+    </>
   );
 };
 
-export default HomeHeader;
+export default HomeComponent;

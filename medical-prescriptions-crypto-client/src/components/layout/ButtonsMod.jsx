@@ -1,4 +1,4 @@
-import ThemeMaterialUI from '../components/ThemeMaterialUI';
+import ThemeMaterialUI from '../ThemeMaterialUI';
 import { ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';

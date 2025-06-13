@@ -2,27 +2,35 @@ import { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import ThemeMaterialUI from '../../components/ThemeMaterialUI';
 import { styled, useTheme } from '@mui/material/styles';
-import { Box, Drawer, CssBaseline, List, Typography, Divider, IconButton, Stack } from '@mui/material';
-import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import LogoutIcon from '@mui/icons-material/Logout';
 
+import {
+  AppBar as MuiAppBar,
+  Toolbar,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Box,
+  Drawer,
+  CssBaseline,
+  List,
+  Divider,
+  IconButton,
+} from '@mui/material';
+
+import {
+  Menu as MenuIcon,
+  ChevronLeft as ChevronLeftIcon,
+  ChevronRight as ChevronRightIcon,
+  MoveToInbox as InboxIcon,
+  Mail as MailIcon,
+} from '@mui/icons-material';
+//* Componentes
 import '../../css/medic/medic.css';
-import logo from '../../img/virus2.svg';
-import HomeHeader from '../../components/medic/HomeHeader';
-import HomeComponent from '../../components/medic/HomeComponent';
-import SearchHeader from '../../components/medic/SearchHeader';
-import SearchCard from '../../components/medic/SearchCard';
+import NavbarDashboard from '../../components/navbar/NavbarDashboard';
+import HomeComponent from '../../components/medic/HomeComponent/HomeComponent';
 import GeneratePrescription from '../../components/medic/GeneratePrescription/GenetarePrescription';
+import SearchPatient from '../../components/medic/SearchPatient/SearchPatient';
 
 const drawerWidth = 240;
 
@@ -111,21 +119,7 @@ const HomeMedic = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Stack variant='row' sx={{ display: 'flex', flexDirection: 'row' }}>
-              <div className='medic-logo-div'>
-                <img src={logo} alt='Logo' className='medic-logo'/>
-              </div>
-              <Typography variant='h6' noWrap component='div' fontWeight='bold' color='black'>
-                Cryptosoma
-              </Typography>
-            </Stack>
-            <IconButton
-              color='black'
-              aria-label='logout'
-              // onClick={onLogout}
-            >
-              <LogoutIcon />
-            </IconButton>
+            <NavbarDashboard />
           </Toolbar>
         </AppBar>
 
@@ -171,17 +165,11 @@ const HomeMedic = () => {
         <Main open={open}>
           <DrawerHeader />
           { view === 'home' ? (
-            <>
-              <HomeHeader/>
-              <HomeComponent/>
-            </>
+            <HomeComponent/>
           ) : view === 'generate' ? (
-              <GeneratePrescription setView={setView}/>
+            <GeneratePrescription setView={setView}/>
           ) : (
-            <>
-              <SearchHeader />
-              <SearchCard setView={setView}/>
-            </>
+            <SearchPatient/>
           )}
         </Main>
       </Box>

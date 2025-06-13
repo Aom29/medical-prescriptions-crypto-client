@@ -3,7 +3,7 @@ import HomePage from '../screens/HomePage';
 import Login from '../pages/Login';
 import SimpleEdDSAPage from '../pages/SimpleEdDSA'
 import SimpleX25519Page from '../pages/SimpleX25519'
-import HomeMedic from '../pages/medic/Home';
+import HomeMedic from '../pages/medic/HomeMedic';
 import HomeAdmin from '../pages/admin/HomeAdmin';
 
 function AppRouter() {

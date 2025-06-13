@@ -2,7 +2,7 @@ import { Card, Typography, Box }  from '@mui/material';
 import '../../css/medic/medic.css';
 import background from '../../img/background.jpg';
 
-function HomeHeader ({nombre}) {
+function Header ({nombre}) {
   return (
     <Card position='static' 
       sx={{
@@ -11,6 +11,7 @@ function HomeHeader ({nombre}) {
         overflow: 'hidden',
         borderRadius: 2,
         marginBottom: '50px',
+        width: '100%',
       }}>
 
      <Box
@@ -42,11 +43,11 @@ function HomeHeader ({nombre}) {
             zIndex: 2,
           }}
         >
-          ¡Bienvenido {nombre} !
+          ¡Bienvenido {nombre}!
         </Typography>
       </div>
     </Card>
   );
 };
 
-export default HomeHeader;
+export default Header;

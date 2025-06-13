@@ -1,7 +1,7 @@
-import { Box, Stack, Typography }  from '@mui/material';
+import { Stack, Typography }  from '@mui/material';
 import '../../../css/medic/medic.css';
 
-function GeneralData ({ matricula, nombrePaciente, fechaNacimiento, sexo, fechaEmision, nombreMedico, clinica, especialidad, cedula }) {
+function PrescriptionData ({ matricula, nombrePaciente, fechaNacimiento, sexo, fechaEmision, nombreMedico, clinica, especialidad, cedula }) {
   return (
     <Stack direction={{ md: 'row', xs: 'column' }} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
 
@@ -47,4 +47,4 @@ function GeneralData ({ matricula, nombrePaciente, fechaNacimiento, sexo, fechaE
   );
 };
 
-export default GeneralData;
+export default PrescriptionData;

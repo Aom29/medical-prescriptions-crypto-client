@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import { Container, Stack, Box, Card, Typography, CardContent, TextField, InputAdornment, IconButton, Button } from '@mui/material';
+import { Container, Stack, Box, Card, Typography, CardContent, TextField, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff, AccountCircle } from '@mui/icons-material';
 import ThemeMaterialUI from '../components/ThemeMaterialUI.js';
-import Navbar from '../components/Navbar.jsx';
-import ButtonsMod from '../components/ButtonsMod.jsx';
+import Navbar from '../components/navbar/Navbar.jsx';
+import ButtonsMod from '../components/layout/ButtonsMod.jsx';
 
 import '../css/login/login.css';
 import background from '../img/background.jpg';

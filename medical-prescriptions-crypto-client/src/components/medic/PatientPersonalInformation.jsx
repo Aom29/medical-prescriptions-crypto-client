@@ -1,6 +1,6 @@
 import { Box, Stack, Typography }  from '@mui/material';
 import '../../css/medic/medic.css';
-import ButtonsMod from '../ButtonsMod';
+import ButtonsMod from '../layout/ButtonsMod';
 
 function PatientPersonalInformation ({ matricula, curp, nombre, fechaNacimiento, sexo, onGenerate}) {
   return (

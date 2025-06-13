@@ -1,7 +1,7 @@
 import { TextField }  from '@mui/material';
 import '../../../css/medic/medic.css';
 
-function Diagnosis ({ value, onChange }) {
+function PrescriptionDiagnosis ({ value, onChange }) {
   return (
     <TextField
       id='filled-multiline-static'
@@ -15,4 +15,4 @@ function Diagnosis ({ value, onChange }) {
   );
 };
 
-export default Diagnosis;
+export default PrescriptionDiagnosis;

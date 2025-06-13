@@ -27,7 +27,8 @@ import {
 } from '@mui/icons-material';
 
 import '../../css/medic/medic.css';
-import NavbarDashboard from '../../components/admin/NavbarDashboard';
+import NavbarDashboard from '../../components/navbar/NavbarDashboard';
+import HomeAdminComponent from '../../components/admin/Home/HomeAdminComponent';
 
 const drawerWidth = 240;
 
@@ -85,7 +86,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-const HomeMedic = () => {
+const HomeAdmin = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [view, setView] = useState('home');
@@ -166,6 +167,7 @@ const HomeMedic = () => {
           <DrawerHeader />
           { view === 'home' ? (
             <>
+              <HomeAdminComponent/>
             </>
           ) : (
             <>
@@ -175,6 +177,6 @@ const HomeMedic = () => {
       </Box>
     </ThemeProvider>
   );
-}
+};
 
-export default HomeMedic;
+export default HomeAdmin;

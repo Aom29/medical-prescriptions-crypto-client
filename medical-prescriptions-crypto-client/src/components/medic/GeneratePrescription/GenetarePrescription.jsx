@@ -1,11 +1,12 @@
 import { useRef, useState } from 'react';
-import { Card, CardContent, CardHeader, Stack, Typography, TextField, Box, Divider, Button, Dialog, DialogTitle, DialogContent, DialogActions} from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import IconButton from '@mui/material/IconButton';
-import GeneralData from './GeneralData';
-import Diagnosis from './Diagnosis';
-import Treatment from './Treatment';
-import ButtonsMod from '../../ButtonsMod';
+import { Card, CardContent, CardHeader, Stack, TextField, Box, Divider, Button, Dialog, DialogTitle, DialogContent, DialogActions, IconButton } from '@mui/material';
+import ArrowBack from '@mui/icons-material/ArrowBack';
+//* Componentes
+import PrescriptionData from './PrescriptionData';
+import PrescriptionDiagnosis from './PrescriptionDiagnosis';
+import PrescriptionTreatment from './PrescriptionTreatment';
+import ButtonsMod from '../../layout/ButtonsMod';
+import Subtitle from '../../layout/Subtitle';
 import { signFile } from '../../../services/eddsa/eddsa.service';
 
 function GeneratePrescription({ setView }) {
@@ -78,20 +79,15 @@ function GeneratePrescription({ setView }) {
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
       <Card sx={{ width: { md: '80%', xs: '100%' }, padding: '2%' }}>
         <IconButton onClick={() => setView('buscar')} sx={{ alignSelf: 'flex-start' }}>
-          <ArrowBackIcon />
+          <ArrowBack />
         </IconButton>
 
-        <CardHeader title="Generar receta" />
+        <CardHeader title='Generar receta' />
         <CardContent>
+          {/* Datos generales ---------------------- */}
           <Stack direction="column" sx={{ marginBottom: '30px' }}>
-            {/* Datos generales ---------------------- */}
-            <Stack direction="row" sx={{ marginBottom: '30px' }}>
-              <div className="medic-home-div" />
-              <Typography fontSize="1.1rem" fontWeight="bold">
-                Datos generales
-              </Typography>
-            </Stack>
-            <GeneralData
+            <Subtitle subtitulo='Datos generales'/>
+            <PrescriptionData
               matricula="202249885"
               nombrePaciente="Aarón Reyes"
               fechaNacimiento="23/01/2003"
@@ -106,28 +102,18 @@ function GeneratePrescription({ setView }) {
 
           <Divider />
 
+          {/* Diagnóstico ---------------------- */}
           <Stack direction="column" sx={{ marginTop: '30px', marginBottom: '30px' }}>
-            {/* Diagnóstico ---------------------- */}
-            <Stack direction="row" sx={{ marginBottom: '30px' }}>
-              <div className="medic-home-div" />
-              <Typography fontSize="1.1rem" fontWeight="bold">
-                Diagnóstico
-              </Typography>
-            </Stack>
-            <Diagnosis value={diagnostico} onChange={setDiagnostico} />
+            <Subtitle subtitulo='Diagnóstico'/>
+            <PrescriptionDiagnosis value={diagnostico} onChange={setDiagnostico} />
           </Stack>
 
           <Divider />
 
+          {/* Tratamiento ---------------------- */}
           <Stack direction="column" sx={{ marginTop: '30px', marginBottom: '30px' }}>
-            {/* Tratamiento ---------------------- */}
-            <Stack direction="row" sx={{ marginBottom: '30px' }}>
-              <div className="medic-home-div" />
-              <Typography fontSize="1.1rem" fontWeight="bold">
-                Tratamiento
-              </Typography>
-            </Stack>
-            <Treatment value={tratamiento} onChange={setTratamiento} />
+            <Subtitle subtitulo='Tratamiento'/>
+            <PrescriptionTreatment value={tratamiento} onChange={setTratamiento} />
           </Stack>
 
           <Divider />
@@ -161,7 +147,7 @@ function GeneratePrescription({ setView }) {
 
 
           {/* HACER COMPONENTE MÁS BONITO */}
-           <Dialog open={openPasswordDialog} onClose={() => setOpenPasswordDialog(false)}>
+          <Dialog open={openPasswordDialog} onClose={() => setOpenPasswordDialog(false)}>
             <DialogTitle>Ingresa tu contraseña</DialogTitle>
             <DialogContent>
               <TextField
