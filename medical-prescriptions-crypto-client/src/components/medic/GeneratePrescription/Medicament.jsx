@@ -2,7 +2,7 @@ import { Stack, TextField, Box } from '@mui/material';
 import ButtonsMod from '../../ButtonsMod';
 
 function Medicament({ id, data, showDelete, onDelete, onChange }) {
-  const { nombre, duracion, frecuencia } = data;
+  const { nombre, dosis, duracion, frecuencia } = data;
 
   const handleInputChange = (e, field) => {
     const updatedFields = { [field]: e.target.value }; // Crea un objeto con el campo actualizado
@@ -16,6 +16,15 @@ function Medicament({ id, data, showDelete, onDelete, onChange }) {
           label="Nombre del medicamento"
           value={nombre}
           onChange={(e) => handleInputChange(e, 'nombre')}
+          fullWidth
+        />
+      </Stack>
+
+      <Stack direction={{ md: 'row', xs: 'column' }} sx={{ marginBottom: '15px' }}>
+        <TextField
+          label="Dosis"
+          value={dosis}
+          onChange={(e) => handleInputChange(e, 'dosis')}
           fullWidth
         />
       </Stack>
