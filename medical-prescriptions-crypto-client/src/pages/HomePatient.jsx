@@ -168,7 +168,7 @@ const HomePatient = () => {
             </>
           ) : (
             <>
-            <PrescriptionDetail/>
+            <PrescriptionDetail setView={setView}/>
             </>
           )}
         </Main>

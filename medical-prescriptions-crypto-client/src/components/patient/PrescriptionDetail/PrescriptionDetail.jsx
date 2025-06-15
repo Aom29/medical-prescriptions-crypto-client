@@ -1,10 +1,13 @@
-import { Card, CardContent, Stack, Divider } from '@mui/material';
+import { Card, CardContent, Stack, Divider, IconButton } from '@mui/material';
+import ArrowBack from '@mui/icons-material/ArrowBack';
 import Subtitle from '../../layout/Subtitle';
 import PrescriptionData from '../../medic/GeneratePrescription/PrescriptionData';
 import PrescriptionDiagnosis from './PrescriptionDiagnosis';
 import PrescriptionTreatment from './PrescriptionTreatment';
+import PrescriptionButton from './PrescriptionButton';
+import PrescriptionSign from './PrescriptionSign';
 
-function PrescriptionDetail () {
+function PrescriptionDetail ({ setView }) {
   const medicamentos = [
     {
       nombre: 'Paracetamol',
@@ -18,12 +21,19 @@ function PrescriptionDetail () {
       duracion: '3 días',
       frecuencia: 'Cada 12 horas',
     },
-    // ...otros medicamentos
   ];
+
+  const receta = {
+    surtida: true,
+    fechaSurtido: '10/04/2025',
+  };
 
   return (
     <Stack direction='column' sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <Card sx={{ width: {xs: '100%', sm: '100%', md: '80%'},  padding: '2%' }}>
+        <IconButton onClick={() => setView('home')} sx={{ alignSelf: 'flex-start' }}>
+          <ArrowBack />
+        </IconButton>
         <CardContent>
           {/* Información general de la receta ------------------- */}
           <Subtitle subtitulo='Información de la receta' />
@@ -39,12 +49,18 @@ function PrescriptionDetail () {
             especialidad='alta especialidad'
             fechaEmision='03/04/2025'
           />
+          <PrescriptionButton
+            surtida={receta.surtida}
+            fechaSurtido={receta.fechaSurtido}
+          />
+
           <Divider sx={{ marginTop: '30px', marginBottom: '30px'}} />
           {/* Diagnóstico ---------------------------------------- */}
           <Subtitle subtitulo='Diagnóstico' />
           <PrescriptionDiagnosis
             diagnosis='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod, debitis necessitatibus. Illo eum laboriosam laudantium? Nisi, eveniet. Voluptatum, voluptate tempore.'
           />
+
           <Divider sx={{ marginTop: '30px', marginBottom: '30px'}} />
           {/* Tratamiento ---------------------------------------- */}
           <Subtitle subtitulo='Tratamiento' />
@@ -55,6 +71,17 @@ function PrescriptionDetail () {
             </>
           ))}
 
+          {/* Firmas ---------------------------------------- */}
+          <Subtitle subtitulo='Firmas' />
+          <PrescriptionSign
+            label='Firma médico'
+          />
+          {receta.surtida && (
+            <PrescriptionSign
+              label='Firma farmacéutico'
+            />
+          )}
+          
         </CardContent>
       </Card>
     </Stack>
