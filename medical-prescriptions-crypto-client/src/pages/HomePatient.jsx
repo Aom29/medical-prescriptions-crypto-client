@@ -167,7 +167,6 @@ const HomePatient = () => {
           { view === 'home' ? (
             <>
             <HomePatientComponent/>
-            hola
             </>
           ) : (
             <>
