@@ -1,17 +1,17 @@
 import { Stack, Typography }  from '@mui/material';
 import '../../../css/medic/medic.css';
 
-function PrescriptionData ({ matricula, nombrePaciente, fechaNacimiento, sexo, fechaEmision, nombreMedico, clinica, especialidad, cedula }) {
+function PrescriptionData ({ matricula, curp, nombrePaciente, fechaNacimiento, sexo, fechaEmision, nombreMedico, clinica, especialidad, cedula }) {
   return (
     <Stack direction={{ md: 'row', xs: 'column' }} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
 
       {/* Datos paciente ------------------------- */}
-      <Stack direction='column' sx={{ marginBottom: { md: '0px', xs: '30px' }, marginRight: { md: '20%', xs: '0px' } }}>
+      <Stack direction='column' sx={{ marginBottom: { md: '0px', xs: '30px' }, marginRight: { md: '50px', xs: '0px' } }}>
         <Typography fontWeight='bold' color='#4224B0'>
           Matrícula {matricula}
         </Typography>
         <Typography fontWeight='bold'>
-          CURP: {matricula}
+          CURP: {curp}
         </Typography>
         <Typography>
           Nombre del Paciente: {nombrePaciente}

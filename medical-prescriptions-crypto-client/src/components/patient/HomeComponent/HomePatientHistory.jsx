@@ -1,7 +1,7 @@
 import { Box, Card, Stack, Typography } from '@mui/material';
 import ButtonsMod from '../../layout/ButtonsMod';
 
-function HomePatientHistory ({ fechaEmision, diagnostico, clinica }) {
+function HomePatientHistory ({ fechaEmision, diagnostico, clinica, setView }) {
   return (
     <Stack direction='row' sx={{ width: '100%', justifyContent: 'space-between', marginBottom: '5px', padding: '1%', alignItems:'center' }}>
       <Stack direction='column'>
@@ -20,7 +20,7 @@ function HomePatientHistory ({ fechaEmision, diagnostico, clinica }) {
           variant='secundario'
           textCont='Ver detalles'
           width='auto'
-          clickEvent=''
+          clickEvent={() => setView('prescriptionDetail')}
           type='button'
         />
       </Box>

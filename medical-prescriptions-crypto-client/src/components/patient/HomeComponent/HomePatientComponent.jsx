@@ -4,7 +4,7 @@ import Subtitle from '../../layout/Subtitle';
 import HomePatientInformation from './HomePatientInformation';
 import HomePatientHistory from './HomePatientHistory';
 
-function HomePatientComponent () {
+function HomePatientComponent ({ setView }) {
   const recetas = [
     {
       fechaEmision: '11/06/2025',
@@ -61,6 +61,7 @@ function HomePatientComponent () {
                     fechaEmision={receta.fechaEmision}
                     diagnostico={receta.diagnostico}
                     clinica={receta.clinica}
+                    setView={setView}
                   />
                 </ListItemButton>
                 {index < recetas.length - 1 && <Divider />}

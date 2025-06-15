@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import ThemeMaterialUI from '../components/ThemeMaterialUI';
 import { styled, useTheme } from '@mui/material/styles';
-
 import {
   AppBar as MuiAppBar,
   Toolbar,
@@ -17,20 +16,18 @@ import {
   Divider,
   IconButton,
 } from '@mui/material';
-
 import {
   Home as HomeIcon,
   Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
-  PersonalInjury as PersonalInjuryIcon,
-  MedicalServices as MedicalServicesIcon,
   Vaccines as VaccinesIcon,
 } from '@mui/icons-material';
 
 import '../css/medic/medic.css';
 import NavbarDashboard from '../components/navbar/NavbarDashboard';
 import HomePatientComponent from '../components/patient/HomeComponent/HomePatientComponent';
+import PrescriptionDetail from '../components/patient/PrescriptionDetail/PrescriptionDetail';
 
 const drawerWidth = 240;
 
@@ -148,6 +145,7 @@ const HomePatient = () => {
           <List>
             {[
               { text: 'Home', view: 'home', icon: <HomeIcon/> },
+              { text: 'Vista receta', view: 'prescriptionDetail', icon: <VaccinesIcon/> },
             ].map(({ text, view: viewName, icon }) => (
               <ListItem key={text} disablePadding onClick={() => setView(viewName)}>
                 <ListItemButton>
@@ -166,11 +164,11 @@ const HomePatient = () => {
           <DrawerHeader />
           { view === 'home' ? (
             <>
-            <HomePatientComponent/>
+            <HomePatientComponent setView={setView}/>
             </>
           ) : (
             <>
-            <RegisterPatient setView={setView}/>
+            <PrescriptionDetail/>
             </>
           )}
         </Main>

@@ -89,6 +89,7 @@ function GeneratePrescription({ setView }) {
             <Subtitle subtitulo='Datos generales'/>
             <PrescriptionData
               matricula="202249885"
+              curp='394839489'
               nombrePaciente="Aarón Reyes"
               fechaNacimiento="23/01/2003"
               sexo="Masculino"
