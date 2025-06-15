@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import ThemeMaterialUI from '../../components/ThemeMaterialUI';
+import ThemeMaterialUI from '../components/ThemeMaterialUI';
 import { styled, useTheme } from '@mui/material/styles';
-
 import {
   AppBar as MuiAppBar,
   Toolbar,
@@ -17,7 +16,6 @@ import {
   Divider,
   IconButton,
 } from '@mui/material';
-
 import {
   Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
@@ -26,11 +24,11 @@ import {
   Mail as MailIcon,
 } from '@mui/icons-material';
 //* Componentes
-import '../../css/medic/medic.css';
-import NavbarDashboard from '../../components/navbar/NavbarDashboard';
-import HomeComponent from '../../components/medic/HomeComponent/HomeComponent';
-import GeneratePrescription from '../../components/medic/GeneratePrescription/GenetarePrescription';
-import SearchPatient from '../../components/medic/SearchPatient/SearchPatient';
+import '../css/medic/medic.css';
+import NavbarDashboard from '../components/navbar/NavbarDashboard';
+import HomeComponent from '../components/medic/HomeComponent/HomeComponent';
+import GeneratePrescription from '../components/medic/GeneratePrescription/GenetarePrescription';
+import SearchPatient from '../components/medic/SearchPatient/SearchPatient';
 
 const drawerWidth = 240;
 

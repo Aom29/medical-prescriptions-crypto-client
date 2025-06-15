@@ -36,7 +36,7 @@ function RegisterMedic ({ setView }) {
   return (
     <Box width='100%' sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
       <RegisterHomeButton setView={setView} />
-      <Card sx={{ width: {xs: '80%', md: '50%' }, padding: '3%' }}>
+      <Card sx={{ width: {xs: '90%', md: '50%' }, padding: '3%' }}>
         <CardContent>
           <Subtitle subtitulo='Registrar médico' />
           {/* Correo electrónico ------------ */}

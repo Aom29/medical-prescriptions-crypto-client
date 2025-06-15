@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import ThemeMaterialUI from '../../components/ThemeMaterialUI';
+import ThemeMaterialUI from '../components/ThemeMaterialUI';
 import { styled, useTheme } from '@mui/material/styles';
 
 import {
@@ -28,12 +28,12 @@ import {
   Vaccines as VaccinesIcon,
 } from '@mui/icons-material';
 
-import '../../css/medic/medic.css';
-import NavbarDashboard from '../../components/navbar/NavbarDashboard';
-import HomeAdminComponent from '../../components/admin/HomeComponent/HomeAdminComponent';
-import RegisterMedic from '../../components/admin/RegisterUser/RegisterMedic';
-import RegisterPatient from '../../components/admin/RegisterUser/RegisterPatient';
-import RegisterPharmacist from '../../components/admin/RegisterUser/RegisterPharmacist';
+import '../css/medic/medic.css';
+import NavbarDashboard from '../components/navbar/NavbarDashboard';
+import HomeAdminComponent from '../components/admin/HomeComponent/HomeAdminComponent';
+import RegisterMedic from '../components/admin/RegisterUser/RegisterMedic';
+import RegisterPatient from '../components/admin/RegisterUser/RegisterPatient';
+import RegisterPharmacist from '../components/admin/RegisterUser/RegisterPharmacist';
 
 const drawerWidth = 240;
 
