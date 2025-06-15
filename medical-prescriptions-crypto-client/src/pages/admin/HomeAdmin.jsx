@@ -174,15 +174,15 @@ const HomeAdmin = () => {
             <HomeAdminComponent setView={setView}/>
           ) : view === 'registerMedic' ? (
             <>
-            <RegisterMedic/>
+            <RegisterMedic setView={setView}/>
             </>
           ) : view === 'registerPharmacist' ? (
             <>
-            <RegisterPharmacist/>
+            <RegisterPharmacist setView={setView}/>
             </>
           ) : (
             <>
-            <RegisterPatient/>
+            <RegisterPatient setView={setView}/>
             </>
           )}
         </Main>

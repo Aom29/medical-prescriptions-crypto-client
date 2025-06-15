@@ -1,10 +1,12 @@
-import { Box, Card, TextField, CardContent } from '@mui/material';
+import { Box, Card, TextField, CardContent, Stack, Typography } from '@mui/material';
 import Subtitle from '../../layout/Subtitle';
 import ButtonsMod from '../../layout/ButtonsMod';
+import RegisterHomeButton from './RegisterHomeButton';
 
-function RegisterMedic () {
+function RegisterMedic ({ setView }) {
   return (
-    <Box width='100%' sx={{ display: 'flex', justifyContent: 'center' }}>
+    <Box width='100%' sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+      <RegisterHomeButton setView={setView} />
       <Card sx={{ width:'80%', padding: '3%' }}>
         <CardContent>
           <Subtitle subtitulo='Registrar médico' />
