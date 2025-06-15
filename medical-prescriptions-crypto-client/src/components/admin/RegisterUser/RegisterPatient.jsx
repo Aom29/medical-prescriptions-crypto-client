@@ -1,49 +1,70 @@
+import { useState } from 'react';
 import { Box, Card, TextField, CardContent } from '@mui/material';
 import Subtitle from '../../layout/Subtitle';
 import ButtonsMod from '../../layout/ButtonsMod';
 import RegisterHomeButton from './RegisterHomeButton';
+import RegisterTextField from './RegisterTextField';
 
 function RegisterPatient ({ setView }) {
+  const [formData, setFormData] = useState({
+    email: '',
+    nombre: '',
+    fechaNacimiento: '',
+    curp: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Datos: ', formData);
+  };
+
   return (
     <Box width='100%' sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
       <RegisterHomeButton setView={setView} />
-      <Card sx={{ width:'80%', padding: '3%' }}>
+      <Card sx={{ width: {xs: '80%', md: '50%' }, padding: '3%' }}>
         <CardContent>
           <Subtitle subtitulo='Registrar paciente' />
-          <TextField
-            sx={{ width: '100%', marginBottom: '20px' }}
-            id='filled-multiline-static'
+          {/* Correo electrónico ------------ */}
+          <RegisterTextField 
+            campo='email'
+            formData={formData} 
+            handleChange={handleChange}
             label='Correo electrónico'
-            multiline
-            rows={1}
           />
-          <TextField
-            sx={{ width: '100%', marginBottom: '20px' }}
-            id='filled-multiline-static'
+          {/* Nombre ------------------------ */}
+          <RegisterTextField 
+            campo='nombre'
+            formData={formData}
+            handleChange={handleChange}
             label='Nombre'
-            multiline
-            rows={1}
           />
-          <TextField
-            sx={{ width: '100%', marginBottom: '20px' }}
-            id='filled-multiline-static'
-            label='Fecha de nacimiento'
-            multiline
-            rows={1}
+          {/* Fecha de nacimiento ------------ */}
+          <RegisterTextField 
+            campo='fechaNacimiento'
+            formData={formData}
+            handleChange={handleChange}
+            label='Fecha de Nacimiento'
+            type='date'
           />
-          <TextField
-            sx={{ width: '100%', marginBottom: '20px' }}
-            id='filled-multiline-static'
+          {/* CURP -------------------------- */}
+          <RegisterTextField 
+            campo='curp'
+            formData={formData}
+            handleChange={handleChange}
             label='CURP'
-            multiline
-            rows={1}
           />
-          <TextField
-            sx={{ width: '100%', marginBottom: '20px' }}
-            id='filled-multiline-static'
+          {/* Contraseña -------------------- */}
+          <RegisterTextField 
+            campo='password'
+            formData={formData}
+            handleChange={handleChange}
             label='Contraseña'
-            multiline
-            rows={1}
           />
 
           <Box sx={{ display: 'flex', width: '100%', marginTop: '10px' }}>
@@ -51,7 +72,7 @@ function RegisterPatient ({ setView }) {
               variant='principal'
               textCont='Registrar'
               width='100%'
-              clickEvent=''
+              clickEvent={handleSubmit}
               type='submit'
             />
           </Box>
