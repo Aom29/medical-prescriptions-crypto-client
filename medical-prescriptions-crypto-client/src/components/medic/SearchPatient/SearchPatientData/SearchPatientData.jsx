@@ -1,9 +1,32 @@
-import { Card, CardContent, Stack }  from '@mui/material';
+import { Card, CardContent, Stack, List, ListItemButton, Divider }  from '@mui/material';
 import PatientPersonalInformation from './PatientPersonalInformation';
 import PatientClinicHistory from './PatientClinicHistory';
 import Subtitle from '../../../layout/Subtitle';
 
 function SearchPatientData ({ setView }) {
+  const recetas = [
+    {
+      fechaEmision: '11/06/2025',
+      diagnostico: 'Ébola'
+    },
+    {
+      fechaEmision: '01/05/2025',
+      diagnostico: 'Influenza'
+    },
+    {
+      fechaEmision: '01/05/2025',
+      diagnostico: 'Influenza'
+    },
+    {
+      fechaEmision: '01/05/2025',
+      diagnostico: 'Influenza'
+    },
+    {
+      fechaEmision: '01/05/2025',
+      diagnostico: 'Influenza'
+    },
+  ];
+
   return (
     <Card
       sx={{
@@ -14,6 +37,7 @@ function SearchPatientData ({ setView }) {
 
       <CardContent>
         <Stack direction='column'>
+          {/* Información general del paciente ----------------- */}
           <Subtitle subtitulo='Información general del paciente' />
           <PatientPersonalInformation
             matricula='2025938495'
@@ -26,11 +50,22 @@ function SearchPatientData ({ setView }) {
         </Stack>
 
         <Stack direction='column'>
+          {/* Historial Clínico -------------------------------- */}
           <Subtitle subtitulo='Historial Clínico' />
-          <PatientClinicHistory 
-            fecha='10/06/2025'
-            diagnostico='Gastritis aguda'
-          />
+          <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+            {recetas.map((receta, index) => (
+              <div key={index}>
+                <ListItemButton>
+                  <PatientClinicHistory
+                    fechaEmision={receta.fechaEmision}
+                    diagnostico={receta.diagnostico}
+                    setView={setView}
+                  />
+                </ListItemButton>
+                {index < recetas.length - 1 && <Divider />}
+              </div>
+            ))}
+          </List>
         </Stack>
       </CardContent>
     </Card>

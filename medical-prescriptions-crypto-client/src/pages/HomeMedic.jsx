@@ -145,7 +145,7 @@ const HomeMedic = () => {
           <List>
             {[
               { text: 'Home', view: 'home', icon: <InboxIcon/> },
-              { text: 'Buscar matrícula', view: 'buscar', icon: <MailIcon/> }
+              { text: 'Buscar matrícula', view: 'buscar', icon: <MailIcon/> },
             ].map(({ text, view: viewName, icon }) => (
               <ListItem key={text} disablePadding onClick={() => setView(viewName)}>
                 <ListItemButton>
@@ -166,8 +166,11 @@ const HomeMedic = () => {
             <HomeComponent/>
           ) : view === 'generate' ? (
             <GeneratePrescription setView={setView}/>
-          ) : (
+          ) : view === 'buscar' ? (
             <SearchPatient setView={setView} />
+          ) :(
+            <>
+            </>
           )}
         </Main>
       </Box>
