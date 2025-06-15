@@ -2,12 +2,12 @@ import { Box, Card, TextField, CardContent } from '@mui/material';
 import Subtitle from '../../layout/Subtitle';
 import ButtonsMod from '../../layout/ButtonsMod';
 
-function RegisterMedic () {
+function RegisterPharmacist () {
   return (
     <Box width='100%' sx={{ display: 'flex', justifyContent: 'center' }}>
       <Card sx={{ width:'80%', padding: '3%' }}>
         <CardContent>
-          <Subtitle subtitulo='Registrar médico' />
+          <Subtitle subtitulo='Registrar farmacéutico' />
           <TextField
             sx={{ width: '100%', marginBottom: '20px' }}
             id='filled-multiline-static'
@@ -18,7 +18,7 @@ function RegisterMedic () {
           <TextField
             sx={{ width: '100%', marginBottom: '20px' }}
             id='filled-multiline-static'
-            label='Nombre del médico'
+            label='Nombre'
             multiline
             rows={1}
           />
@@ -32,21 +32,7 @@ function RegisterMedic () {
           <TextField
             sx={{ width: '100%', marginBottom: '20px' }}
             id='filled-multiline-static'
-            label='Especialidad'
-            multiline
-            rows={1}
-          />
-          <TextField
-            sx={{ width: '100%', marginBottom: '20px' }}
-            id='filled-multiline-static'
-            label='Cédula Profesional'
-            multiline
-            rows={1}
-          />
-          <TextField
-            sx={{ width: '100%', marginBottom: '20px' }}
-            id='filled-multiline-static'
-            label='Clínica'
+            label='Farmacia'
             multiline
             rows={1}
           />
@@ -80,4 +66,4 @@ function RegisterMedic () {
   );
 }
 
-export default RegisterMedic;
+export default RegisterPharmacist;
