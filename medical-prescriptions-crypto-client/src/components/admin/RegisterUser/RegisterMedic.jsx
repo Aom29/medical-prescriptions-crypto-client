@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Card, TextField, CardContent, Stack, Typography } from '@mui/material';
+import { Box, Card, Select, CardContent, MenuItem, InputLabel, FormControl } from '@mui/material';
 import Subtitle from '../../layout/Subtitle';
 import ButtonsMod from '../../layout/ButtonsMod';
 import RegisterHomeButton from './RegisterHomeButton';
@@ -17,6 +17,11 @@ function RegisterMedic ({ setView }) {
     password: '',
   });
 
+  const especialidades = [
+    { value: 'General', label: 'General' },
+    { value: 'Alta Especialidad', label: 'Alta Especialidad' },
+  ];
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -25,18 +30,18 @@ function RegisterMedic ({ setView }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Datos: ', formData);
-  }
+  };
 
   return (
     <Box width='100%' sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
       <RegisterHomeButton setView={setView} />
-      <Card sx={{ width:'80%', padding: '3%' }}>
+      <Card sx={{ width: {xs: '80%', md: '50%' }, padding: '3%' }}>
         <CardContent>
           <Subtitle subtitulo='Registrar médico' />
           {/* Correo electrónico ------------ */}
           <RegisterTextField 
             campo='email'
-            formData={formData}
+            formData={formData} 
             handleChange={handleChange}
             label='Correo electrónico'
           />
@@ -53,14 +58,25 @@ function RegisterMedic ({ setView }) {
             formData={formData}
             handleChange={handleChange}
             label='Fecha de Nacimiento'
+            type='date'
           />
           {/* Especialidad -------------------- */}
-          <RegisterTextField 
-            campo='especialidad'
-            formData={formData}
-            handleChange={handleChange}
-            label='Especialidad'
-          />
+          <FormControl sx={{ width: '100%' }} >
+            <InputLabel id='select-especialidad'>Especialidad</InputLabel>
+            <Select
+              id='select-especialidad'
+              name='especialidad'
+              value={formData.especialidad}
+              onChange={handleChange}
+              label='Especialidad'
+              sx={{ width: '100%', marginBottom: '20px' }}
+              required
+            >
+              {especialidades.map(({value, label}) => (
+                <MenuItem key={value} value={value}>{label}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           {/* Cédula profesional -------------- */}
           <RegisterTextField 
             campo='cedula'

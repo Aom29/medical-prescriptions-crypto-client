@@ -4,7 +4,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function RegisterHomeButton ({ setView }) {
   return (
-    <Stack direction='row' sx={{ width: '80%', alignItems: 'flex-start', marginBottom: '30px' }}>
+    <Stack direction='row' sx={{ width: {xs: '80%', md: '50%' }, alignItems: 'flex-start', marginBottom: '30px' }}>
       <ButtonsMod
         variant='secundario'
         textCont='Home'
