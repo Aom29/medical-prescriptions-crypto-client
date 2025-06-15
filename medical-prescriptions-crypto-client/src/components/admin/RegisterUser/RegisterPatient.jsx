@@ -4,6 +4,7 @@ import Subtitle from '../../layout/Subtitle';
 import ButtonsMod from '../../layout/ButtonsMod';
 import RegisterHomeButton from './RegisterHomeButton';
 import RegisterTextField from './RegisterTextField';
+import RegisterPassword from './RegisterPassword';
 
 function RegisterPatient ({ setView }) {
   const [formData, setFormData] = useState({
@@ -60,11 +61,10 @@ function RegisterPatient ({ setView }) {
             label='CURP'
           />
           {/* Contraseña -------------------- */}
-          <RegisterTextField 
+          <RegisterPassword
             campo='password'
             formData={formData}
             handleChange={handleChange}
-            label='Contraseña'
           />
 
           <Box sx={{ display: 'flex', width: '100%', marginTop: '10px' }}>
