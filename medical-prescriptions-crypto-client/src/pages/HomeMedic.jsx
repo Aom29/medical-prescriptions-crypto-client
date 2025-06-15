@@ -29,6 +29,7 @@ import NavbarDashboard from '../components/navbar/NavbarDashboard';
 import HomeComponent from '../components/medic/HomeComponent/HomeComponent';
 import GeneratePrescription from '../components/medic/GeneratePrescription/GenetarePrescription';
 import SearchPatient from '../components/medic/SearchPatient/SearchPatient';
+import PrescriptionDetailComponent from '../components/medic/PrescriptionDetail/PrescriptionDetailComponent';
 
 const drawerWidth = 240;
 
@@ -169,8 +170,7 @@ const HomeMedic = () => {
           ) : view === 'buscar' ? (
             <SearchPatient setView={setView} />
           ) :(
-            <>
-            </>
+            <PrescriptionDetailComponent setView={setView}/>
           )}
         </Main>
       </Box>
