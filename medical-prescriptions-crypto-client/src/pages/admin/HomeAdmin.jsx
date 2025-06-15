@@ -31,6 +31,7 @@ import {
 import '../../css/medic/medic.css';
 import NavbarDashboard from '../../components/navbar/NavbarDashboard';
 import HomeAdminComponent from '../../components/admin/HomeComponent/HomeAdminComponent';
+import RegisterMedic from '../../components/admin/RegisterMedic/RegisterMedic';
 
 const drawerWidth = 240;
 
@@ -171,7 +172,7 @@ const HomeAdmin = () => {
             <HomeAdminComponent setView={setView}/>
           ) : view === 'registerMedic' ? (
             <>
-            hola esta es la vista
+            <RegisterMedic/>
             </>
           ) : view === 'registerPharmacist' ? (
             <>
