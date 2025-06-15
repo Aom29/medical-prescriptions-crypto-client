@@ -37,7 +37,6 @@ function Header ({nombre}) {
             mr: 2,
             display: 'flex',
             fontWeight: 700,
-            color: 'inherit',
             textDecoration: 'none',
             color: 'white',
             zIndex: 2,
