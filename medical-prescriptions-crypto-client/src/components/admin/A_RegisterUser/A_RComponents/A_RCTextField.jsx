@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 
-function RegisterTextField ({ campo, formData, handleChange, label, type='text' }) {
+function A_RCTextField ({ campo, formData, handleChange, label, type='text' }) {
   return (
     <TextField
       name={campo}
@@ -15,4 +15,4 @@ function RegisterTextField ({ campo, formData, handleChange, label, type='text' 
   );
 }
 
-export default RegisterTextField;
+export default A_RCTextField;

@@ -1,20 +1,20 @@
 import { Stack } from '@mui/material';
 import Header from '../../layout/Header';
-import HomeAdminButton from './HomeAdminButton';
+import A_HContent from './A_HContent';
 
-function HomeAdminComponent ({ setView }) {
+function A_HMain ({ setView }) {
   return (
     <Stack direction='column' sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <Header nombre='Admin'/>
-      <HomeAdminButton
+      <A_HContent
         nombreBoton='Registrar Médico'
         clickEvent={() => setView('registerMedic')}
       />
-      <HomeAdminButton
+      <A_HContent
         nombreBoton='Registrar Farmacéutico'
         clickEvent={() => setView('registerPharmacist')}
       />
-      <HomeAdminButton
+      <A_HContent
         nombreBoton='Registrar Paciente'
         clickEvent={() => setView('')}
       />
@@ -22,4 +22,4 @@ function HomeAdminComponent ({ setView }) {
   );
 };
 
-export default HomeAdminComponent;
+export default A_HMain;

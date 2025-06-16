@@ -1,8 +1,8 @@
 import { Stack } from '@mui/material';
-import ButtonsMod from '../../layout/ButtonsMod';
+import ButtonsMod from '../../../layout/ButtonsMod';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-function RegisterHomeButton ({ setView }) {
+function A_RCButtonHome ({ setView }) {
   return (
     <Stack direction='row' sx={{ width: {xs: '90%', md: '50%' }, alignItems: 'flex-start', marginBottom: '30px' }}>
       <ButtonsMod
@@ -11,10 +11,10 @@ function RegisterHomeButton ({ setView }) {
         width='9rem'
         clickEvent={() => setView('home')}
         startIcon={<ArrowBackIcon />}
-        type='submit'
+        type='button'
       />
     </Stack>
   );
 }
 
-export default RegisterHomeButton;
+export default A_RCButtonHome;

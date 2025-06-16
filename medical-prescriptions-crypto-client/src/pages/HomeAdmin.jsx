@@ -30,10 +30,10 @@ import {
 
 import '../css/medic/medic.css';
 import NavbarDashboard from '../components/navbar/NavbarDashboard';
-import HomeAdminComponent from '../components/admin/HomeComponent/HomeAdminComponent';
-import RegisterMedic from '../components/admin/RegisterUser/RegisterMedic';
-import RegisterPatient from '../components/admin/RegisterUser/RegisterPatient';
-import RegisterPharmacist from '../components/admin/RegisterUser/RegisterPharmacist';
+import A_HMain from '../components/admin/A_Home/A_HMain';
+import A_RMedic from '../components/admin/A_RegisterUser/A_RMedic';
+import A_RPatient from '../components/admin/A_RegisterUser/A_RPatient';
+import A_RPharmacist from '../components/admin/A_RegisterUser/A_RPharmacist';
 
 const drawerWidth = 240;
 
@@ -171,18 +171,18 @@ const HomeAdmin = () => {
         <Main open={open}>
           <DrawerHeader />
           { view === 'home' ? (
-            <HomeAdminComponent setView={setView}/>
+            <A_HMain setView={setView}/>
           ) : view === 'registerMedic' ? (
             <>
-            <RegisterMedic setView={setView}/>
+            <A_RMedic setView={setView}/>
             </>
           ) : view === 'registerPharmacist' ? (
             <>
-            <RegisterPharmacist setView={setView}/>
+            <A_RPharmacist setView={setView}/>
             </>
           ) : (
             <>
-            <RegisterPatient setView={setView}/>
+            <A_RPatient setView={setView}/>
             </>
           )}
         </Main>

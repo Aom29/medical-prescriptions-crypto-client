@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import ButtonsMod from '../../layout/ButtonsMod';
 
-function HomeAdminButton ({ nombreBoton, clickEvent }) {
+function A_HContent ({ nombreBoton, clickEvent }) {
   return (
     <Box sx={{ width: '100%', justifyContent: 'center', display: 'flex', marginBottom: '20px' }}>
       <ButtonsMod
@@ -16,4 +16,4 @@ function HomeAdminButton ({ nombreBoton, clickEvent }) {
   );
 };
 
-export default HomeAdminButton;
+export default A_HContent;

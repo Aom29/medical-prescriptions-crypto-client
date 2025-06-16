@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { TextField, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-function RegisterPassword ({ campo, formData, handleChange }) {
+function A_RCPassword ({ campo, formData, handleChange }) {
   const [showPassword, setShowPassword] = useState(false);
   
   const togglePasswordVisibility = () => {
@@ -38,4 +38,4 @@ function RegisterPassword ({ campo, formData, handleChange }) {
   );
 }
 
-export default RegisterPassword;
+export default A_RCPassword;

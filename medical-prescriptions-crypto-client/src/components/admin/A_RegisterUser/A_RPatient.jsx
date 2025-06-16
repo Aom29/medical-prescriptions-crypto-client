@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Box, Card, TextField, CardContent } from '@mui/material';
+import { Box, Card, CardContent } from '@mui/material';
 import Subtitle from '../../layout/Subtitle';
 import ButtonsMod from '../../layout/ButtonsMod';
-import RegisterHomeButton from './RegisterHomeButton';
-import RegisterTextField from './RegisterTextField';
-import RegisterPassword from './RegisterPassword';
+import A_RCButtonHome from './A_RComponents/A_RCButtonHome';
+import A_RCTextField from './A_RComponents/A_RCTextField';
+import A_RCPassword from './A_RComponents/A_RCPassword';
 
-function RegisterPatient ({ setView }) {
+function A_RegisterPatient ({ setView }) {
   const [formData, setFormData] = useState({
     email: '',
     nombre: '',
@@ -27,26 +27,26 @@ function RegisterPatient ({ setView }) {
 
   return (
     <Box width='100%' sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-      <RegisterHomeButton setView={setView} />
+      <A_RCButtonHome setView={setView} />
       <Card sx={{ width: {xs: '90%', md: '50%' }, padding: '3%' }}>
         <CardContent>
           <Subtitle subtitulo='Registrar paciente' />
           {/* Correo electrónico ------------ */}
-          <RegisterTextField 
+          <A_RCTextField 
             campo='email'
             formData={formData} 
             handleChange={handleChange}
             label='Correo electrónico'
           />
           {/* Nombre ------------------------ */}
-          <RegisterTextField 
+          <A_RCTextField 
             campo='nombre'
             formData={formData}
             handleChange={handleChange}
             label='Nombre'
           />
           {/* Fecha de nacimiento ------------ */}
-          <RegisterTextField 
+          <A_RCTextField 
             campo='fechaNacimiento'
             formData={formData}
             handleChange={handleChange}
@@ -54,14 +54,14 @@ function RegisterPatient ({ setView }) {
             type='date'
           />
           {/* CURP -------------------------- */}
-          <RegisterTextField 
+          <A_RCTextField 
             campo='curp'
             formData={formData}
             handleChange={handleChange}
             label='CURP'
           />
           {/* Contraseña -------------------- */}
-          <RegisterPassword
+          <A_RCPassword
             campo='password'
             formData={formData}
             handleChange={handleChange}
@@ -82,4 +82,4 @@ function RegisterPatient ({ setView }) {
   );
 }
 
-export default RegisterPatient;
+export default A_RegisterPatient;
