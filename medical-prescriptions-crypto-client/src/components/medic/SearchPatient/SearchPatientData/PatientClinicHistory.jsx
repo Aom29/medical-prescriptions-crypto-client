@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import { Box, Stack, Typography }  from '@mui/material';
 import ButtonsMod from '../../../layout/ButtonsMod';
+import PrescriptionModal from '../../PrescriptionDetail/PrescriptionModal';
 
 function PatientClinicHistory ({fechaEmision, diagnostico, setView}) {
+  const [open, setOpen] = useState(false);
+  
   return (
+    <>
     <Box sx={{
       display: 'flex',
       width: '100%',
@@ -23,12 +28,35 @@ function PatientClinicHistory ({fechaEmision, diagnostico, setView}) {
             textCont='Ver detalles'
             width='10rem'
             height='2.5rem'
-            clickEvent={() => setView('prescriptionDetail')}
-            type='button'
+            clickEvent={() => setOpen(true)}
+            type=''
           />
         </Box>
       </Stack>
     </Box>
+
+    <PrescriptionModal
+      open={open}
+      onClose={() => setOpen(false)}
+      receta={{
+        matricula: '392039029304',
+        curp: '2329832938',
+        nombrePaciente: 'Sergio martínez de la nieves',
+        fechaNacimiento: '03/05/1293',
+        sexo: 'Indefinido',
+        cedula: '2390290329',
+        nombreMedico: 'Sergino Fininino',
+        clinica: 'escom',
+        especialidad: 'alta especialidad',
+        fechaEmision: '03/04/2025',
+        diagnostico: 'Lorem ipsum dolor sit amet...'
+      }}
+      medicamentos={[
+        { nombre: 'Paracetamol', dosis: '500mg', duracion: '5 días', frecuencia: 'cada 8h' },
+        { nombre: 'Ibuprofeno', dosis: '200mg', duracion: '3 días', frecuencia: 'cada 6h' },
+      ]}
+    />
+    </>
   );
 };
 
