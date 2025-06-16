@@ -1,11 +1,13 @@
 import { Card, CardContent, Stack, Divider, IconButton } from '@mui/material';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import Subtitle from '../../layout/Subtitle';
+//* Componentes
 import PrescriptionData from '../../medic/GeneratePrescription/PrescriptionData';
-import P_PDiagnosis from './P_PDiagnosis';
-import P_PTreatment from './P_PTreatment';
-import PrescriptionButton from './PrescriptionButton';
-import PrescriptionSign from './PrescriptionSign';
+import P_PDiagnosis from './P_PContent/P_PDiagnosis';
+import P_PTreatment from './P_PContent/P_PTreatment';
+import P_PSign from './P_PContent/P_PSign';
+
+import P_PCButton from './P_PComponents/P_PCButton';
 
 function P_PMain ({ setView }) {
   const medicamentos = [
@@ -52,7 +54,7 @@ function P_PMain ({ setView }) {
             especialidad='alta especialidad'
             fechaEmision='03/04/2025'
           />
-          <PrescriptionButton
+          <P_PCButton
             surtida={receta.surtida}
             fechaSurtido={receta.fechaSurtido}
           />
@@ -70,13 +72,9 @@ function P_PMain ({ setView }) {
 
           {/* Firmas ---------------------------------------- */}
           <Subtitle subtitulo='Firmas' />
-          <PrescriptionSign
-            label='Firma médico'
-          />
+          <P_PSign label='Firma médico'/>
           {receta.surtida && (
-            <PrescriptionSign
-              label='Firma farmacéutico'
-            />
+            <P_PSign label='Firma farmacéutico'/>
           )}
           
         </CardContent>

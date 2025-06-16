@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
-import ButtonsMod from '../../layout/ButtonsMod';
+import ButtonsMod from '../../../layout/ButtonsMod';
 
-function PrescriptionSign ({ label }) {
+function P_PSign ({ label }) {
   return (
     <Box sx={{ width: '100%', marginBottom: '20px' }}>
       <ButtonsMod
@@ -15,4 +15,4 @@ function PrescriptionSign ({ label }) {
   );
 }
 
-export default PrescriptionSign;
+export default P_PSign;

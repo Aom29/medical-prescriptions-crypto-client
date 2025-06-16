@@ -1,5 +1,5 @@
 import { Divider } from '@mui/material'; 
-import P_PCTextField from './P_PComponents/P_PCTextField';
+import P_PCTextField from '../P_PComponents/P_PCTextField';
 
 function P_PTreatment ({ medicamento }) {
   return (

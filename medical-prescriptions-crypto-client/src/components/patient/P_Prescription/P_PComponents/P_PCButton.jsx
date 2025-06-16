@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
-import ButtonsMod from '../../layout/ButtonsMod';
+import ButtonsMod from '../../../layout/ButtonsMod';
 
-function PrescriptionButton ({ surtida, fechaSurtido }) {
+function P_PCButton ({ surtida, fechaSurtido }) {
   if (surtida) {
     return (
       <Box sx={{ marginTop: '30px', marginBottom: '30px', width: '100%' }}>
@@ -24,4 +24,4 @@ function PrescriptionButton ({ surtida, fechaSurtido }) {
   );
 }
 
-export default PrescriptionButton;
+export default P_PCButton;

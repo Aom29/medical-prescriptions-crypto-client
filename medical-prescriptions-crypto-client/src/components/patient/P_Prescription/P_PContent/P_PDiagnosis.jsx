@@ -1,5 +1,5 @@
 import { TextField, Divider }  from '@mui/material';
-import Subtitle from '../../layout/Subtitle';
+import Subtitle from '../../../layout/Subtitle';
 
 function P_PDiagnosis ({ diagnostico }) {
   return (
