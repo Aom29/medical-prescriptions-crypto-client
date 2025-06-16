@@ -1,8 +1,20 @@
 import { Card, Typography, Box }  from '@mui/material';
 import '../../css/medic/medic.css';
 import background from '../../img/background.jpg';
+import pharmacist from '../../img/pharmacist.jpg';
+import patient from '../../img/patient.jpg';
 
-function Header ({nombre}) {
+function Header ({ nombre, rol = 'default' }) {
+  const getBackgroundImage = () => {
+    switch (rol) {
+      case 'pharmacist':
+        return pharmacist;
+      case 'patient':
+        return patient;
+      default:
+        return background;
+    }
+  }
   return (
     <Card position='static' 
       sx={{
@@ -21,7 +33,7 @@ function Header ({nombre}) {
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundImage: `url(${background})`, 
+          backgroundImage: `url(${getBackgroundImage()})`, 
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           filter: 'brightness(0.4)', 

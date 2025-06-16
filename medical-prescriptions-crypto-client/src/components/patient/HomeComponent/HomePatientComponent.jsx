@@ -35,7 +35,7 @@ function HomePatientComponent ({ setView }) {
   
   return (
     <Stack direction='column' sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Header/>
+      <Header rol='patient' />
 
       <Card sx={{ 
         width: { xs: '100%', md: '80%' },

@@ -17,17 +17,16 @@ import {
   IconButton,
 } from '@mui/material';
 import {
-  Home as HomeIcon,
   Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
-  Vaccines as VaccinesIcon,
+  MoveToInbox as InboxIcon,
+  Mail as MailIcon,
 } from '@mui/icons-material';
-
+//* Componentes
 import '../css/medic/medic.css';
 import NavbarDashboard from '../components/navbar/NavbarDashboard';
-import HomePatientComponent from '../components/patient/HomeComponent/HomePatientComponent';
-import PrescriptionDetail from '../components/patient/PrescriptionDetail/PrescriptionDetail';
+import HomePharmacistComponent from '../components/pharmacist/HomePharmacist/HomePharmacistComponent';
 
 const drawerWidth = 240;
 
@@ -85,7 +84,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-const HomePatient = () => {
+const HomePharmacist = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [view, setView] = useState('home');
@@ -116,7 +115,6 @@ const HomePatient = () => {
             >
               <MenuIcon />
             </IconButton>
-            {/* Navegador superior del Dashboard --------- */}
             <NavbarDashboard />
           </Toolbar>
         </AppBar>
@@ -126,7 +124,7 @@ const HomePatient = () => {
             width: drawerWidth,
             flexShrink: 0,
             '& .MuiDrawer-paper': {
-              backgroundColor: '#ff5725',
+              backgroundColor: '#4d6eff',
               color: 'white',
               width: drawerWidth,
               boxSizing: 'border-box',
@@ -142,10 +140,11 @@ const HomePatient = () => {
             </IconButton>
           </DrawerHeader>
           <Divider />
+          {/* Esta parte es la que se edita para las vistas --------------------------------------------- */}
           <List>
             {[
-              { text: 'Home', view: 'home', icon: <HomeIcon/> },
-              { text: 'Vista receta', view: 'prescriptionDetail', icon: <VaccinesIcon/> },
+              { text: 'Home', view: 'home', icon: <InboxIcon/> },
+              { text: 'Buscar matrícula', view: 'buscar', icon: <MailIcon/> },
             ].map(({ text, view: viewName, icon }) => (
               <ListItem key={text} disablePadding onClick={() => setView(viewName)}>
                 <ListItemButton>
@@ -163,18 +162,22 @@ const HomePatient = () => {
         <Main open={open}>
           <DrawerHeader />
           { view === 'home' ? (
+            <HomePharmacistComponent/>
+          ) : view === 'generate' ? (
+            <>gregnjrn</>
+          ) : view === 'buscar' ? (
             <>
-            <HomePatientComponent setView={setView}/>
-            </>
-          ) : (
+            hkohki</>
+          ) :(
             <>
-            <PrescriptionDetail setView={setView}/>
+            hola
             </>
           )}
         </Main>
+        {/* Aquí termina la que se edita para las vistas --------------------------------------------- */}
       </Box>
     </ThemeProvider>
   );
-};
+}
 
-export default HomePatient;
+export default HomePharmacist;
