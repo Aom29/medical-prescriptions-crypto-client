@@ -2,12 +2,12 @@ import { Card, CardContent, Stack, Divider, IconButton } from '@mui/material';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import Subtitle from '../../layout/Subtitle';
 import PrescriptionData from '../../medic/GeneratePrescription/PrescriptionData';
-import PrescriptionDiagnosis from './PrescriptionDiagnosis';
-import PrescriptionTreatment from './PrescriptionTreatment';
+import P_PDiagnosis from './P_PDiagnosis';
+import P_PTreatment from './P_PTreatment';
 import PrescriptionButton from './PrescriptionButton';
 import PrescriptionSign from './PrescriptionSign';
 
-function PrescriptionDetail ({ setView }) {
+function P_PMain ({ setView }) {
   const medicamentos = [
     {
       nombre: 'Paracetamol',
@@ -24,8 +24,11 @@ function PrescriptionDetail ({ setView }) {
   ];
 
   const receta = {
-    surtida: true,
-    fechaSurtido: '10/04/2025',
+      fechaEmision: '11/06/2025',
+      diagnostico: 'Ébola',
+      clinica: 'San Rafael',
+      surtida: true,
+      fechaSurtido: '10/04/2025',
   };
 
   return (
@@ -54,21 +57,15 @@ function PrescriptionDetail ({ setView }) {
             fechaSurtido={receta.fechaSurtido}
           />
 
-          <Divider sx={{ marginTop: '30px', marginBottom: '30px'}} />
           {/* Diagnóstico ---------------------------------------- */}
-          <Subtitle subtitulo='Diagnóstico' />
-          <PrescriptionDiagnosis
-            diagnosis='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod, debitis necessitatibus. Illo eum laboriosam laudantium? Nisi, eveniet. Voluptatum, voluptate tempore.'
-          />
-
-          <Divider sx={{ marginTop: '30px', marginBottom: '30px'}} />
+          <P_PDiagnosis diagnostico={receta.diagnostico} />
+          
           {/* Tratamiento ---------------------------------------- */}
+          <Divider sx={{ marginTop: '30px', marginBottom: '30px'}} />
           <Subtitle subtitulo='Tratamiento' />
+
           {medicamentos.map((med, idx) => (
-            <>
-            <PrescriptionTreatment key={idx} medicamento={med} />
-            <Divider sx={{ marginTop: '30px', marginBottom: '30px'}} />
-            </>
+            <P_PTreatment key={idx} medicamento={med} />
           ))}
 
           {/* Firmas ---------------------------------------- */}
@@ -88,4 +85,4 @@ function PrescriptionDetail ({ setView }) {
   );
 }
 
-export default PrescriptionDetail;
+export default P_PMain;

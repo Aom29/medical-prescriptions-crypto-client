@@ -26,8 +26,8 @@ import {
 
 import '../css/medic/medic.css';
 import NavbarDashboard from '../components/navbar/NavbarDashboard';
-import HomePatientComponent from '../components/patient/HomeComponent/HomePatientComponent';
-import PrescriptionDetail from '../components/patient/PrescriptionDetail/PrescriptionDetail';
+import P_HMain from '../components/patient/P_Home/P_HMain';
+import P_PMain from '../components/patient/P_Prescription/P_PMain';
 
 const drawerWidth = 240;
 
@@ -164,11 +164,11 @@ const HomePatient = () => {
           <DrawerHeader />
           { view === 'home' ? (
             <>
-            <HomePatientComponent setView={setView}/>
+            <P_HMain setView={setView}/>
             </>
           ) : (
             <>
-            <PrescriptionDetail setView={setView}/>
+            <P_PMain setView={setView}/>
             </>
           )}
         </Main>

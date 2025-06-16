@@ -1,18 +1,18 @@
-import { Box, Card, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import ButtonsMod from '../../layout/ButtonsMod';
 
-function HomePatientHistory ({ fechaEmision, diagnostico, clinica, setView }) {
+function P_HHistory ({ receta, setView }) {
   return (
     <Stack direction='row' sx={{ width: '100%', justifyContent: 'space-between', marginBottom: '5px', padding: '1%', alignItems:'center' }}>
       <Stack direction='column'>
         <Typography>
-          Fecha de emisión: {fechaEmision}
+          Fecha de emisión: {receta.fechaEmision}
         </Typography>
         <Typography>
-          Diagnóstico: {diagnostico}
+          Diagnóstico: {receta.diagnostico}
         </Typography>
         <Typography>
-          Clínica: {clinica}
+          Clínica: {receta.clinica}
         </Typography>
       </Stack>
       <Box>
@@ -28,4 +28,4 @@ function HomePatientHistory ({ fechaEmision, diagnostico, clinica, setView }) {
   );
 }
 
-export default HomePatientHistory;
+export default P_HHistory;

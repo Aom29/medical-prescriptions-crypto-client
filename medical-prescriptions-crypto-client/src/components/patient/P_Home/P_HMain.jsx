@@ -1,35 +1,53 @@
 import { Stack, Card, CardContent, List, ListItemButton, Divider } from '@mui/material';
 import Header from '../../layout/Header';
 import Subtitle from '../../layout/Subtitle';
-import HomePatientInformation from './HomePatientInformation';
-import HomePatientHistory from './HomePatientHistory';
+import P_HInformation from './P_HInformation';
+import P_HHistory from './P_HHistory';
 
-function HomePatientComponent ({ setView }) {
+function P_HMain ({ setView }) {
+  const datosPaciente = {
+    matricula: '2025938495',
+    curp: 'RAMS990202HDFRRG09',
+    nombre: 'Ramírez Sergio',
+    fechaNacimiento: '02/02/1999',
+    sexo: 'Hombre',
+  };
+  
   const recetas = [
     {
       fechaEmision: '11/06/2025',
       diagnostico: 'Ébola',
-      clinica: 'San Rafael'
+      clinica: 'San Rafael',
+      surtida: true,
+      fechaSurtido: '10/04/2025',
     },
     {
       fechaEmision: '01/05/2025',
       diagnostico: 'Influenza',
-      clinica: 'San Martínez'
+      clinica: 'San Martínez',
+      surtida: false,
+      fechaSurtido: '10/04/2025',
     },
     {
-      fechaEmision: '01/05/2025',
+      fechaEmision: '02/05/2025',
       diagnostico: 'Influenza',
-      clinica: 'San Martínez'
+      clinica: 'San Martínez',
+      surtida: true,
+      fechaSurtido: '10/04/2025',
     },
     {
-      fechaEmision: '01/05/2025',
+      fechaEmision: '03/05/2025',
       diagnostico: 'Influenza',
-      clinica: 'San Martínez'
+      clinica: 'San Martínez',
+      surtida: true,
+      fechaSurtido: '10/04/2025',
     },
     {
-      fechaEmision: '01/05/2025',
+      fechaEmision: '04/05/2025',
       diagnostico: 'Influenza',
-      clinica: 'San Martínez'
+      clinica: 'San Martínez',
+      surtida: false,
+      fechaSurtido: '10/04/2025',
     },
   ];
   
@@ -44,12 +62,8 @@ function HomePatientComponent ({ setView }) {
         <CardContent>
           {/* Información general ---------------- */}
           <Subtitle subtitulo='Información general' />
-          <HomePatientInformation
-            matricula='20229933344'
-            curp='REOF032911FFKET1'
-            nombre='Sergio Ramírez'
-            fechaNacimiento='02/34/1929'
-            sexo='Masculino'
+          <P_HInformation
+            datosPaciente={datosPaciente}
           />
           {/* Historial clínico ----------------- */}
           <Subtitle subtitulo='Historial clínico' />
@@ -57,10 +71,8 @@ function HomePatientComponent ({ setView }) {
             {recetas.map((receta, index) => (
               <div key={index}>
                 <ListItemButton>
-                  <HomePatientHistory
-                    fechaEmision={receta.fechaEmision}
-                    diagnostico={receta.diagnostico}
-                    clinica={receta.clinica}
+                  <P_HHistory
+                    receta={receta}
                     setView={setView}
                   />
                 </ListItemButton>
@@ -74,4 +86,4 @@ function HomePatientComponent ({ setView }) {
   );
 };
 
-export default HomePatientComponent;
+export default P_HMain;
