@@ -11,9 +11,9 @@ function PrescriptionMedicament({ id, data, showDelete, onDelete, onChange }) {
 
   return (
     <>
-      <Stack direction="row" sx={{ width: '100%', marginBottom: '15px' }}>
+      <Stack direction='row' sx={{ width: '100%', marginBottom: '15px' }}>
         <TextField
-          label="Nombre del medicamento"
+          label='Nombre del medicamento'
           value={nombre}
           onChange={(e) => handleInputChange(e, 'nombre')}
           fullWidth
@@ -22,7 +22,7 @@ function PrescriptionMedicament({ id, data, showDelete, onDelete, onChange }) {
 
       <Stack direction={{ md: 'row', xs: 'column' }} sx={{ marginBottom: '15px' }}>
         <TextField
-          label="Dosis"
+          label='Dosis'
           value={dosis}
           onChange={(e) => handleInputChange(e, 'dosis')}
           fullWidth
@@ -31,13 +31,16 @@ function PrescriptionMedicament({ id, data, showDelete, onDelete, onChange }) {
 
       <Stack direction={{ md: 'row', xs: 'column' }} sx={{ marginBottom: '15px' }}>
         <TextField
-          label="Duración"
+          label='Duración'
           value={duracion}
           onChange={(e) => handleInputChange(e, 'duracion')}
           fullWidth
         />
+      </Stack>
+
+      <Stack direction={{ md: 'row', xs: 'column' }} sx={{ marginBottom: '15px' }}>
         <TextField
-          label="Frecuencia"
+          label='Frecuencia'
           value={frecuencia}
           onChange={(e) => handleInputChange(e, 'frecuencia')}
           fullWidth
