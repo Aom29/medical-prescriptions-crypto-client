@@ -6,7 +6,7 @@ import ButtonsMod from '../../layout/ButtonsMod';
 import Header from '../../layout/Header';
 import Subtitle from '../../layout/Subtitle';
 
-function HomePharmacistComponent () {
+function F_Home () {
     const [archivoCargado, setArchivoCargado] = useState(false);
     const inputRef = useRef(null);
     const [privateKey, setPrivateKey] = useState(null);
@@ -91,4 +91,4 @@ function HomePharmacistComponent () {
   );
 }
 
-export default HomePharmacistComponent;
+export default F_Home;
