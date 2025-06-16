@@ -9,8 +9,7 @@ import Subtitle from '../../layout/Subtitle';
 function HomeComponent () {
   const [archivoCargado, setArchivoCargado] = useState(false);
   const inputRef = useRef(null);
-  const [setPrivateKey] = useState(null);
-
+  const [privateKey, setPrivateKey] = useState(null);
 
   const handleClickBoton = () => {
     if (inputRef.current) {
@@ -50,12 +49,14 @@ function HomeComponent () {
             sx={{ 
               display: 'flex',
               justifyContent: 'space-between',
-              alignContent: 'center',
+              alignItems: 'center',
               padding: 2,
-              borderRadius: 1,
+              borderRadius: 2,
+              borderWidth: 2,
+              border: '2px solid',
               boxShadow: 1,
-              backgroundColor: archivoCargado ? '#a5ff91' : '#f48787',
-              transition: 'background-color 0.3s ease',
+              borderColor: archivoCargado ? '#00ff21' : '#ff3c3c',
+              transition: 'border-color 0.3s ease',
             }}
           >
             <Stack direction='row' sx={{ display: 'flex', alignItems: 'center' }}>
