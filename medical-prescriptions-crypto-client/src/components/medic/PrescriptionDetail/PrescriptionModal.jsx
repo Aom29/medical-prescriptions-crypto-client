@@ -2,9 +2,9 @@ import { Box, CardContent, Stack, Divider, IconButton, Dialog, DialogContent } f
 import CloseIcon from '@mui/icons-material/Close';
 import Subtitle from '../../layout/Subtitle';
 import PrescriptionData from '../GeneratePrescription/PrescriptionData';
-import PrescriptionTreatment from '../../patient/PrescriptionDetail/PrescriptionTreatment';
-import PrescriptionSign from '../../patient/PrescriptionDetail/PrescriptionSign';
-import PrescriptionDiagnosis from '../../patient/PrescriptionDetail/PrescriptionDiagnosis';
+import P_PTreatment from '../../patient/P_Prescription/P_PContent/P_PTreatment';
+import P_PSign from '../../patient/P_Prescription/P_PContent/P_PSign';
+import P_PDiagnosis from '../../patient/P_Prescription/P_PContent/P_PDiagnosis';
 
 function PrescriptionModal ({ open, onClose, receta }) {
   const medicamentos = [
@@ -48,7 +48,7 @@ function PrescriptionModal ({ open, onClose, receta }) {
         <Divider sx={{ marginTop: '30px', marginBottom: '30px'}} />
         {/* Diagnóstico ---------------------------------------- */}
         <Subtitle subtitulo='Diagnóstico' />
-        <PrescriptionDiagnosis
+        <P_PDiagnosis
           diagnosis={receta.diagnosis}
         />
 
@@ -57,14 +57,14 @@ function PrescriptionModal ({ open, onClose, receta }) {
         <Subtitle subtitulo='Tratamiento' />
         {medicamentos.map((med, idx) => (
           <>
-          <PrescriptionTreatment key={idx} medicamento={med} />
+          <P_PTreatment key={idx} medicamento={med} />
           <Divider sx={{ marginTop: '30px', marginBottom: '30px'}} />
           </>
         ))}
 
         {/* Firmas ---------------------------------------- */}
         <Subtitle subtitulo='Firmas' />
-        <PrescriptionSign
+        <P_PSign
           label='Firma médico'
         />
 
