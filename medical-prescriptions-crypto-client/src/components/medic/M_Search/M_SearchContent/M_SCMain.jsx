@@ -1,9 +1,9 @@
 import { Card, CardContent, Stack, List, ListItemButton, Divider }  from '@mui/material';
-import PatientPersonalInformation from './PatientPersonalInformation';
-import PatientClinicHistory from './PatientClinicHistory';
+import M_SCInformation from './M_SCInformation';
+import M_SCHistory from './M_SCHistory';
 import Subtitle from '../../../layout/Subtitle';
 
-function SearchPatientData ({ setView }) {
+function M_SCMain ({ setView }) {
   const recetas = [
     {
       fechaEmision: '11/06/2025',
@@ -39,7 +39,7 @@ function SearchPatientData ({ setView }) {
         <Stack direction='column'>
           {/* Información general del paciente ----------------- */}
           <Subtitle subtitulo='Información general del paciente' />
-          <PatientPersonalInformation
+          <M_SCInformation
             matricula='2025938495'
             curp='RAMS990202HDFRRG09'
             nombre='Ramírez Sergio'
@@ -56,7 +56,7 @@ function SearchPatientData ({ setView }) {
             {recetas.map((receta, index) => (
               <div key={index}>
                 <ListItemButton>
-                  <PatientClinicHistory
+                  <M_SCHistory
                     fechaEmision={receta.fechaEmision}
                     diagnostico={receta.diagnostico}
                     setView={setView}
@@ -72,4 +72,4 @@ function SearchPatientData ({ setView }) {
   );
 };
 
-export default SearchPatientData;
+export default M_SCMain;

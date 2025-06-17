@@ -6,7 +6,7 @@ import ButtonsMod from '../../layout/ButtonsMod';
 import Header from '../../layout/Header';
 import Subtitle from '../../layout/Subtitle';
 
-function HomeComponent () {
+function M_HMain () {
   const [archivoCargado, setArchivoCargado] = useState(false);
   const inputRef = useRef(null);
   const [privateKey, setPrivateKey] = useState(null);
@@ -91,4 +91,4 @@ function HomeComponent () {
   );
 };
 
-export default HomeComponent;
+export default M_HMain;

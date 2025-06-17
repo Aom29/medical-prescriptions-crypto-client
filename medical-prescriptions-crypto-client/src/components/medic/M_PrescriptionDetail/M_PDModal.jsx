@@ -1,12 +1,12 @@
-import { Box, CardContent, Stack, Divider, IconButton, Dialog, DialogContent } from '@mui/material';
+import { Box, Divider, IconButton, Dialog, DialogContent } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Subtitle from '../../layout/Subtitle';
-import PrescriptionData from '../GeneratePrescription/PrescriptionData';
+import M_GCInformation from '../M_GeneratePrescription/M_GContent/M_GCInformation';
 import P_PTreatment from '../../patient/P_Prescription/P_PContent/P_PTreatment';
 import P_PSign from '../../patient/P_Prescription/P_PContent/P_PSign';
 import P_PDiagnosis from '../../patient/P_Prescription/P_PContent/P_PDiagnosis';
 
-function PrescriptionModal ({ open, onClose, receta }) {
+function M_PDModal ({ open, onClose, receta }) {
   const medicamentos = [
     {
       nombre: 'Paracetamol',
@@ -32,7 +32,7 @@ function PrescriptionModal ({ open, onClose, receta }) {
         </Box>
         {/* Información general de la receta ------------------- */}
         <Subtitle subtitulo='Información de la receta' />
-        <PrescriptionData
+        <M_GCInformation
           matricula={receta.matricula}
           curp={receta.curp}
           nombrePaciente={receta.nombrePaciente}
@@ -73,4 +73,4 @@ function PrescriptionModal ({ open, onClose, receta }) {
   );
 }
 
-export default PrescriptionModal;
+export default M_PDModal;

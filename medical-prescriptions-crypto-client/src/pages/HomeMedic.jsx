@@ -26,10 +26,10 @@ import {
 //* Componentes
 import '../css/medic/medic.css';
 import NavbarDashboard from '../components/navbar/NavbarDashboard';
-import HomeComponent from '../components/medic/HomeComponent/HomeComponent';
-import GeneratePrescription from '../components/medic/GeneratePrescription/GenetarePrescription';
-import SearchPatient from '../components/medic/SearchPatient/SearchPatient';
-import PrescriptionModal from '../components/medic/PrescriptionDetail/PrescriptionModal';
+import M_HMain from '../components/medic/M_Home/M_HMain';
+import M_GMain from '../components/medic/M_GeneratePrescription/M_GMain';
+import M_SearchMain from '../components/medic/M_Search/M_SearchMain';
+import M_PDModal from '../components/medic/M_PrescriptionDetail/M_PDModal';
 
 const drawerWidth = 240;
 
@@ -164,13 +164,13 @@ const HomeMedic = () => {
         <Main open={open}>
           <DrawerHeader />
           { view === 'home' ? (
-            <HomeComponent/>
+            <M_HMain/>
           ) : view === 'generate' ? (
-            <GeneratePrescription setView={setView}/>
+            <M_GMain setView={setView}/>
           ) : view === 'buscar' ? (
-            <SearchPatient setView={setView} />
+            <M_SearchMain setView={setView} />
           ) :(
-            <PrescriptionModal setView={setView}/>
+            <M_PDModal setView={setView}/>
           )}
         </Main>
       </Box>

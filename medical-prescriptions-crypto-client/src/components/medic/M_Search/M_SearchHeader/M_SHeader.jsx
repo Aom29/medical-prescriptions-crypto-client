@@ -1,8 +1,8 @@
 import { Card, Box, Stack }  from '@mui/material';
 import background from '../../../../img/background.jpg';
-import SearchPatientButton from './SearchPatientButton';
+import M_SButton from './M_SButton';
 
-function SearchPatientHeader () {
+function M_SHeader () {
   return (
     <Card position='static' 
       sx={{
@@ -32,10 +32,10 @@ function SearchPatientHeader () {
       />
 
       <Stack direction='row' sx={{ display: 'flex', justifyContent: {md: 'flex-end', xs: 'center' }, alignItems: 'center', width: '100%' }}>
-        <SearchPatientButton/>
+        <M_SButton/>
       </Stack>
     </Card>
   );
 };
 
-export default SearchPatientHeader;
+export default M_SHeader;

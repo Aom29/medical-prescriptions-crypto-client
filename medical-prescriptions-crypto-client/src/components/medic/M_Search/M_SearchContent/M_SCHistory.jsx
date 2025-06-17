@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Box, Stack, Typography }  from '@mui/material';
 import ButtonsMod from '../../../layout/ButtonsMod';
-import PrescriptionModal from '../../PrescriptionDetail/PrescriptionModal';
+import M_PDModal from '../../M_PrescriptionDetail/M_PDModal';
 
-function PatientClinicHistory ({fechaEmision, diagnostico, setView}) {
+function M_SCHistory ({fechaEmision, diagnostico}) {
   const [open, setOpen] = useState(false);
   
   return (
@@ -35,7 +35,7 @@ function PatientClinicHistory ({fechaEmision, diagnostico, setView}) {
       </Stack>
     </Box>
 
-    <PrescriptionModal
+    <M_PDModal
       open={open}
       onClose={() => setOpen(false)}
       receta={{
@@ -60,4 +60,4 @@ function PatientClinicHistory ({fechaEmision, diagnostico, setView}) {
   );
 };
 
-export default PatientClinicHistory;
+export default M_SCHistory;

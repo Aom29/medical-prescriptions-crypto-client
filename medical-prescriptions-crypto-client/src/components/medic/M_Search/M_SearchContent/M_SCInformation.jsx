@@ -1,7 +1,7 @@
 import { Box, Stack, Typography }  from '@mui/material';
 import ButtonsMod from '../../../layout/ButtonsMod';
 
-function PatientPersonalInformation ({ matricula, curp, nombre, fechaNacimiento, sexo, onGenerate}) {
+function M_SCInformation ({ matricula, curp, nombre, fechaNacimiento, sexo, onGenerate}) {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginBottom: '50px' }}>
       <Stack direction='row' sx={{ display: 'flex', width: '100%', flexDirection: {md: 'row', xs: 'column'}, justifyContent: 'space-between' }}>
@@ -37,4 +37,4 @@ function PatientPersonalInformation ({ matricula, curp, nombre, fechaNacimiento,
   );
 };
 
-export default PatientPersonalInformation;
+export default M_SCInformation;

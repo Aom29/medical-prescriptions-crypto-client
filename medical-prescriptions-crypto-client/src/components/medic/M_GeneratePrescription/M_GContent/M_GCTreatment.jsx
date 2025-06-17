@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Stack, Box } from '@mui/material';
-import PrescriptionMedicament from './PrescriptionMedicament';
-import ButtonsMod from '../../layout/ButtonsMod';
+import M_GCMedicament from './M_GCMedicament';
+import ButtonsMod from '../../../layout/ButtonsMod';
 
-function PrescriptionTreatment({ value, onChange }) {
+function M_GCTreatment({ value, onChange }) {
   const [medicamentos, setMedicamentos] = useState(value.length > 0 ? value : [{ id: 0, nombre: '', dosis: '', frecuencia: '', duracion: '' }]);
 
   const handleChange = (id, updatedFields) => {
@@ -30,7 +30,7 @@ function PrescriptionTreatment({ value, onChange }) {
   return (
     <Stack direction="column">
       {medicamentos.map((med) => (
-        <PrescriptionMedicament
+        <M_GCMedicament
           key={med.id}
           id={med.id}
           data={med}
@@ -52,4 +52,4 @@ function PrescriptionTreatment({ value, onChange }) {
   );
 }
 
-export default PrescriptionTreatment;
+export default M_GCTreatment;

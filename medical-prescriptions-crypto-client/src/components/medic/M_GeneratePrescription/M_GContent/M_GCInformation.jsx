@@ -1,7 +1,6 @@
 import { Stack, Typography }  from '@mui/material';
-import '../../../css/medic/medic.css';
 
-function PrescriptionData ({ matricula, curp, nombrePaciente, fechaNacimiento, sexo, fechaEmision, nombreMedico, clinica, especialidad, cedula }) {
+function M_GCInformation ({ matricula, curp, nombrePaciente, fechaNacimiento, sexo, fechaEmision, nombreMedico, clinica, especialidad, cedula }) {
   return (
     <Stack direction={{ md: 'row', xs: 'column' }} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
 
@@ -47,4 +46,4 @@ function PrescriptionData ({ matricula, curp, nombrePaciente, fechaNacimiento, s
   );
 };
 
-export default PrescriptionData;
+export default M_GCInformation;

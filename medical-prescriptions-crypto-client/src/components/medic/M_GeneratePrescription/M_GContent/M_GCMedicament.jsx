@@ -1,7 +1,7 @@
 import { Stack, TextField, Box } from '@mui/material';
-import ButtonsMod from '../../layout/ButtonsMod';
+import ButtonsMod from '../../../layout/ButtonsMod';
 
-function PrescriptionMedicament({ id, data, showDelete, onDelete, onChange }) {
+function M_GCMedicament({ id, data, showDelete, onDelete, onChange }) {
   const { nombre, dosis, duracion, frecuencia } = data;
 
   const handleInputChange = (e, field) => {
@@ -62,4 +62,4 @@ function PrescriptionMedicament({ id, data, showDelete, onDelete, onChange }) {
   );
 }
 
-export default PrescriptionMedicament;
+export default M_GCMedicament;

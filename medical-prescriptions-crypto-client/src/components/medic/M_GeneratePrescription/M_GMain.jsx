@@ -2,14 +2,14 @@ import { useRef, useState } from 'react';
 import { Card, CardContent, CardHeader, Stack, TextField, Box, Divider, Button, Dialog, DialogTitle, DialogContent, DialogActions, IconButton } from '@mui/material';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 //* Componentes
-import PrescriptionData from './PrescriptionData';
-import PrescriptionDiagnosis from './PrescriptionDiagnosis';
-import PrescriptionTreatment from './PrescriptionTreatment';
+import M_GCInformation from './M_GContent/M_GCInformation';
+import M_GCDiagnosis from './M_GContent/M_GCDiagnosis';
+import M_GCTreatment from './M_GContent/M_GCTreatment';
 import ButtonsMod from '../../layout/ButtonsMod';
 import Subtitle from '../../layout/Subtitle';
 import { signFile } from '../../../services/eddsa/eddsa.service';
 
-function GeneratePrescription({ setView }) {
+function M_GMain ({ setView }) {
   const [diagnostico, setDiagnostico] = useState('');
   const [tratamiento, setTratamiento] = useState([]);
   const [privateKey, setPrivateKey] = useState(null);
@@ -87,7 +87,7 @@ function GeneratePrescription({ setView }) {
           {/* Datos generales ---------------------- */}
           <Stack direction="column" sx={{ marginBottom: '30px' }}>
             <Subtitle subtitulo='Datos generales'/>
-            <PrescriptionData
+            <M_GCInformation
               matricula="202249885"
               curp='394839489'
               nombrePaciente="Aarón Reyes"
@@ -106,7 +106,7 @@ function GeneratePrescription({ setView }) {
           {/* Diagnóstico ---------------------- */}
           <Stack direction="column" sx={{ marginTop: '30px', marginBottom: '30px' }}>
             <Subtitle subtitulo='Diagnóstico'/>
-            <PrescriptionDiagnosis value={diagnostico} onChange={setDiagnostico} />
+            <M_GCDiagnosis value={diagnostico} onChange={setDiagnostico} />
           </Stack>
 
           <Divider />
@@ -114,7 +114,7 @@ function GeneratePrescription({ setView }) {
           {/* Tratamiento ---------------------- */}
           <Stack direction="column" sx={{ marginTop: '30px', marginBottom: '30px' }}>
             <Subtitle subtitulo='Tratamiento'/>
-            <PrescriptionTreatment value={tratamiento} onChange={setTratamiento} />
+            <M_GCTreatment value={tratamiento} onChange={setTratamiento} />
           </Stack>
 
           <Divider />
@@ -177,4 +177,4 @@ function GeneratePrescription({ setView }) {
   );
 }
 
-export default GeneratePrescription;
+export default M_GMain;

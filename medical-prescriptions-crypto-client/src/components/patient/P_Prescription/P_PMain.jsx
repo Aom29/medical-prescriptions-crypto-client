@@ -2,7 +2,7 @@ import { Card, CardContent, Stack, Divider, IconButton } from '@mui/material';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import Subtitle from '../../layout/Subtitle';
 //* Componentes
-import PrescriptionData from '../../medic/GeneratePrescription/PrescriptionData';
+import M_GCInformation from '../../medic/M_GeneratePrescription/M_GContent/M_GCInformation';
 import P_PDiagnosis from './P_PContent/P_PDiagnosis';
 import P_PTreatment from './P_PContent/P_PTreatment';
 import P_PSign from './P_PContent/P_PSign';
@@ -42,7 +42,7 @@ function P_PMain ({ setView }) {
         <CardContent>
           {/* Información general de la receta ------------------- */}
           <Subtitle subtitulo='Información de la receta' />
-          <PrescriptionData
+          <M_GCInformation
             matricula='392039029304'
             curp='2329832938'
             nombrePaciente='Sergio martínez de la nieves'

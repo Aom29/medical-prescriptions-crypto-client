@@ -1,4 +1,4 @@
-import { Box, CardContent, Stack, Divider, IconButton, Dialog, DialogContent } from '@mui/material';
+import { Box, Divider, IconButton, Dialog, DialogContent } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Subtitle from '../../../layout/Subtitle';
 
