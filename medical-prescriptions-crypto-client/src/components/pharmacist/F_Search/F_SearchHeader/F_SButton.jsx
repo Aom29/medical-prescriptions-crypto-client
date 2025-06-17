@@ -1,9 +1,11 @@
 import { TextField, InputAdornment } from "@mui/material";
 import ButtonsMod from "../../../layout/ButtonsMod";
 
-function F_SButton () {
+function F_SButton ({ matricula, setMatricula, handleBuscar }) {
   return (
     <TextField
+      value={matricula}
+      onChange={(e) => setMatricula(e.target.value)}
       id='filled-basic'
       label='Buscar Matrícula'
       variant='filled'
@@ -18,7 +20,7 @@ function F_SButton () {
                 textCont='Buscar'
                 width='6rem'
                 height='2.2rem'
-                clickEvent={() => alert('hola saluditos')}
+                clickEvent={handleBuscar}
                 type='button'
               />
             </InputAdornment>
