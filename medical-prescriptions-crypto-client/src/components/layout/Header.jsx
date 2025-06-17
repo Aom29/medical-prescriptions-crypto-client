@@ -3,6 +3,7 @@ import '../../css/medic/medic.css';
 import background from '../../img/background.jpg';
 import pharmacist from '../../img/pharmacist.jpg';
 import patient from '../../img/patient.jpg';
+import admin from '../../img/admin.jpg';
 
 function Header ({ nombre, rol = 'default' }) {
   const getBackgroundImage = () => {
@@ -11,6 +12,8 @@ function Header ({ nombre, rol = 'default' }) {
         return pharmacist;
       case 'patient':
         return patient;
+      case 'admin':
+        return admin;
       default:
         return background;
     }

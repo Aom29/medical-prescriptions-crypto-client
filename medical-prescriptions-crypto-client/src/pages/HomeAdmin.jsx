@@ -132,7 +132,7 @@ const HomeAdmin = () => {
             width: drawerWidth,
             flexShrink: 0,
             '& .MuiDrawer-paper': {
-              backgroundColor: '#6034FD',
+              backgroundColor: '#830000',
               color: 'white',
               width: drawerWidth,
               boxSizing: 'border-box',

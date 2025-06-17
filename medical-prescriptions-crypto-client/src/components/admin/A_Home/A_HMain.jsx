@@ -5,7 +5,7 @@ import A_HContent from './A_HContent';
 function A_HMain ({ setView }) {
   return (
     <Stack direction='column' sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-      <Header nombre='Admin'/>
+      <Header nombre='Admin' rol='admin'/>
       <A_HContent
         nombreBoton='Registrar Médico'
         clickEvent={() => setView('registerMedic')}
