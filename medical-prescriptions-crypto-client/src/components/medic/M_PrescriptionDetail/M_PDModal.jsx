@@ -20,6 +20,12 @@ function M_PDModal ({ open, onClose, receta }) {
       duracion: '3 días',
       frecuencia: 'Cada 12 horas',
     },
+    {
+      nombre: '',
+      dosis: '400mg',
+      duracion: '3 días',
+      frecuencia: 'Cada 12 horas',
+    },
   ];
 
   return (
@@ -45,28 +51,23 @@ function M_PDModal ({ open, onClose, receta }) {
           fechaEmision={receta.fechaEmision}
         />
 
-        <Divider sx={{ marginTop: '30px', marginBottom: '30px'}} />
         {/* Diagnóstico ---------------------------------------- */}
-        <Subtitle subtitulo='Diagnóstico' />
         <P_PDiagnosis
-          diagnosis={receta.diagnosis}
+          diagnostico={receta.diagnostico}
         />
 
         <Divider sx={{ marginTop: '30px', marginBottom: '30px'}} />
         {/* Tratamiento ---------------------------------------- */}
         <Subtitle subtitulo='Tratamiento' />
-        {medicamentos.map((med, idx) => (
+        {medicamentos.map((medicamento, idx) => (
           <>
-          <P_PTreatment key={idx} medicamento={med} />
-          <Divider sx={{ marginTop: '30px', marginBottom: '30px'}} />
+          <P_PTreatment key={idx} medicamento={medicamento} />
           </>
         ))}
 
         {/* Firmas ---------------------------------------- */}
         <Subtitle subtitulo='Firmas' />
-        <P_PSign
-          label='Firma médico'
-        />
+        <P_PSign label='Firma médico'/>
 
       </DialogContent>
     </Dialog>
