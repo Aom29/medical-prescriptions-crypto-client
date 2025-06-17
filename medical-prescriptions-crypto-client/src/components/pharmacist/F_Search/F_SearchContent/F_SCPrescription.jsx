@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
 import ButtonsMod from '../../../layout/ButtonsMod';
+import F_PMMain from '../../F_PrescriptionModal/F_PMMain';
 
 function F_SCPrescription ({ receta }) {
+  const [open, setOpen] = useState(false);
   return (
     <>
     <Box sx={{
@@ -30,6 +33,28 @@ function F_SCPrescription ({ receta }) {
         </Box>
       </Stack>
     </Box>
+
+    <F_PMMain
+      open={open}
+      onClose={() => setOpen(false)}
+      receta={{
+        matricula: '392039029304',
+        curp: '2329832938',
+        nombrePaciente: 'Sergio martínez de la nieves',
+        fechaNacimiento: '03/05/1293',
+        sexo: 'Indefinido',
+        cedula: '2390290329',
+        nombreMedico: 'Sergino Fininino',
+        clinica: 'escom',
+        especialidad: 'alta especialidad',
+        fechaEmision: '03/04/2025',
+        diagnostico: 'Lorem ipsum dolor sit amet...'
+      }}
+      medicamentos={[
+        { nombre: 'Paracetamol', dosis: '500mg', duracion: '5 días', frecuencia: 'cada 8h' },
+        { nombre: 'Ibuprofeno', dosis: '200mg', duracion: '3 días', frecuencia: 'cada 6h' },
+      ]}
+    />
     </>
   );
 }

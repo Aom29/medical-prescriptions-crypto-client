@@ -28,6 +28,7 @@ import '../css/medic/medic.css';
 import NavbarDashboard from '../components/navbar/NavbarDashboard';
 import F_Home from '../components/pharmacist/F_Home/F_Home';
 import F_SearchMain from '../components/pharmacist/F_Search/F_SearchMain';
+import F_PMMain from '../components/pharmacist/F_PrescriptionModal/F_PMMain';
 
 const drawerWidth = 240;
 
@@ -166,13 +167,8 @@ const HomePharmacist = () => {
             <F_Home/>
           ) : view === 'buscar' ? (
             <F_SearchMain/>
-          ) : view === 'hola' ? (
-            <>
-            hkohki</>
-          ) :(
-            <>
-            hola
-            </>
+          ) : (
+            <F_PMMain/>
           )}
         </Main>
         {/* Aquí termina la que se edita para las vistas --------------------------------------------- */}

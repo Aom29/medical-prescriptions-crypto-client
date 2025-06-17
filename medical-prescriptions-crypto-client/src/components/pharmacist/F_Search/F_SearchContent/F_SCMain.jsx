@@ -31,7 +31,7 @@ function F_SCMain ({ receta, datosPaciente }) {
               .map((recetaFiltrada, index, arrayFiltrada) => (
               <div key={index}>
                 <ListItemButton>
-                  <F_SCPrescription receta={recetaFiltrada} />
+                  <F_SCPrescription receta={recetaFiltrada}/>
                 </ListItemButton>
                 {index < arrayFiltrada.length - 1 && <Divider />
               }
