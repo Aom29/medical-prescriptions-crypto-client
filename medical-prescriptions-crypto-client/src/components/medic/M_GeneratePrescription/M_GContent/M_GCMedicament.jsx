@@ -47,7 +47,7 @@ function M_GCMedicament({ id, data, showDelete, onDelete, onChange }) {
         />
       </Stack>
 
-      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
         {showDelete && (
           <ButtonsMod
             variant="eliminar"

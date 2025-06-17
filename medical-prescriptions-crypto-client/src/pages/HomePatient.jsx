@@ -145,7 +145,6 @@ const HomePatient = () => {
           <List>
             {[
               { text: 'Home', view: 'home', icon: <HomeIcon/> },
-              { text: 'Vista receta', view: 'prescriptionDetail', icon: <VaccinesIcon/> },
             ].map(({ text, view: viewName, icon }) => (
               <ListItem key={text} disablePadding onClick={() => setView(viewName)}>
                 <ListItemButton>

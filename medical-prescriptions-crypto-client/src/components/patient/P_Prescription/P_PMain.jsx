@@ -29,7 +29,7 @@ function P_PMain ({ setView }) {
       fechaEmision: '11/06/2025',
       diagnostico: 'Ébola',
       clinica: 'San Rafael',
-      surtida: true,
+      surtida: false,
       fechaSurtido: '10/04/2025',
   };
 
