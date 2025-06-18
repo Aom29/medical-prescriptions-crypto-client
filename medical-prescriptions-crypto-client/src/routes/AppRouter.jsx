@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from '../screens/HomePage';
 import Login from '../pages/Login';
 import SimpleEdDSAPage from '../pages/SimpleEdDSA'
 import SimpleX25519Page from '../pages/SimpleX25519'
@@ -12,8 +11,7 @@ function AppRouter() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/' element={<Login />} />
         <Route path='/home-medic' element={<HomeMedic />} />
         <Route path='/home-admin' element={<HomeAdmin />} />
         <Route path='/home-patient' element={<HomePatient />} />

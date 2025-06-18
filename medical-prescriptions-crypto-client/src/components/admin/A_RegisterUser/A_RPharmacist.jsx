@@ -5,6 +5,8 @@ import ButtonsMod from '../../layout/ButtonsMod';
 import A_RCButtonHome from './A_RComponents/A_RCButtonHome';
 import A_RCTextField from './A_RComponents/A_RCTextField';
 import A_RCPassword from './A_RComponents/A_RCPassword';
+import Admin from '../../../services/admin/Admin';
+import { useAlert } from '../../../context/Alert/AlertContext';
 
 function A_RPharmacist ({ setView }) {
   const [formData, setFormData] = useState({
@@ -16,14 +18,21 @@ function A_RPharmacist ({ setView }) {
       password: '',
     });
 
+    const { showAlert } = useAlert();
+
     const handleChange = (e) => {
       const { name, value } = e.target;
       setFormData((prev) => ({ ...prev, [name]: value }));
     };
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log('Datos: ', formData);
+      try {
+        const data = await Admin.registerPharmacist(formData);
+        showAlert(data.message, 'success');
+      } catch (error) {
+        showAlert(error, 'error');
+      }
     };
 
   return (

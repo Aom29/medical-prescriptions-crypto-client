@@ -5,18 +5,22 @@ import ButtonsMod from '../../layout/ButtonsMod';
 import A_RCButtonHome from './A_RComponents/A_RCButtonHome';
 import A_RCTextField from './A_RComponents/A_RCTextField';
 import A_RCPassword from './A_RComponents/A_RCPassword';
+import Admin from '../../../services/admin/Admin';
+import { useAlert } from '../../../context/Alert/AlertContext';
 
 function A_RMedic ({ setView }) {
   const [formData, setFormData] = useState({
     email: '',
+    password: '',
     nombre: '',
     fechaNacimiento: '',
     especialidad: '',
     cedula: '',
     clinica: '',
     tel: '',
-    password: '',
   });
+
+  const { showAlert } = useAlert();
 
   const especialidades = [
     { value: 'General', label: 'General' },
@@ -28,9 +32,21 @@ function A_RMedic ({ setView }) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Datos: ', formData);
+    try {
+      const data = await Admin.registerDoctor(formData);
+      if(data.status === 'error') {
+        showAlert(data.message, 'error');
+      }
+
+      else {
+        showAlert(data.message, 'success');
+      }
+
+    } catch {
+      showAlert("Error al establecer la conexión", "error");
+    }
   };
 
   return (
