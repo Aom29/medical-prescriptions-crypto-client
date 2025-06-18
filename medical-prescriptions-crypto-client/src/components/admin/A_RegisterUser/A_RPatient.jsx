@@ -5,6 +5,8 @@ import ButtonsMod from '../../layout/ButtonsMod';
 import A_RCButtonHome from './A_RComponents/A_RCButtonHome';
 import A_RCTextField from './A_RComponents/A_RCTextField';
 import A_RCPassword from './A_RComponents/A_RCPassword';
+import { useAlert } from '../../../context/Alert/AlertContext';
+import Admin from '../../../services/admin/Admin';
 
 function A_RegisterPatient ({ setView }) {
   const [formData, setFormData] = useState({
@@ -15,14 +17,30 @@ function A_RegisterPatient ({ setView }) {
     password: '',
   });
 
+  const { showAlert } = useAlert();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Datos: ', formData);
+    const data = await Admin.registerPatient(formData);
+    if(data.status >= 400) {
+      if(data.errors) {
+        const errorValidation = Object.values(data.errors)[0];
+        showAlert(errorValidation, 'error');
+      }
+
+      else {
+        showAlert(data.message, 'error');
+      }
+
+      return;
+    }
+
+    showAlert(data.message, 'success');
   };
 
   return (

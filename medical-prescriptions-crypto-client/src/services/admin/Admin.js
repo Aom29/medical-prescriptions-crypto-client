@@ -28,9 +28,24 @@ const Admin = (() => {
     }
   }
 
+  const registerPatient = async (formData) => {
+    try {
+      const response = await api.post(`/admin/register-patient`, formData);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      if(error.response?.data) {
+        return error.response.data;
+      }
+
+      return { status: 'error', message: 'Error al conectar con el servidor'};
+    }
+  }
+
   return {
     registerDoctor,
-    registerPharmacist
+    registerPharmacist,
+    registerPatient
   }
 })();
 
