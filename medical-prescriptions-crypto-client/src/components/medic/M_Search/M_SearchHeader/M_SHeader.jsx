@@ -20,6 +20,7 @@ function M_SHeader ({ onBuscar }) {
     nuevoPaciente.fechaNacimiento = data.fechaNacimiento
     nuevoPaciente.curp = data.curp
     nuevoPaciente.recetas = []
+    nuevoPaciente.id = data.id
 
     onBuscar(nuevoPaciente)
 

@@ -23,11 +23,11 @@ function M_GMain ({ setView, paciente }) {
   const { showAlert } = useAlert();
   const inputRef = useRef(null); // Referencia al input de archivo
 
-  const handleClickBoton = () => {
-    if (inputRef.current) {
-      inputRef.current.click(); // Simula el clic en el input de archivo
-    }
-  };
+  // const handleClickBoton = () => {
+  //   if (inputRef.current) {
+  //     inputRef.current.click(); // Simula el clic en el input de archivo
+  //   }
+  // };
 
   const handleArchivoCargado = (event) => {
     const archivo = event.target.files[0];
@@ -43,19 +43,20 @@ function M_GMain ({ setView, paciente }) {
   };
 
   const handleGenerateAndSign = async () => {
-    if (!privateKey) {
-      alert('Por favor, carga tu clave privada antes de generar la receta.');
-      return;
-    }
+    // if (!privateKey) {
+    //   alert('Por favor, carga tu clave privada antes de generar la receta.');
+    //   return;
+    // }
 
     setOpenPasswordDialog(true);
   };
 
   const handlePasswordSubmit = async () => {
+    console.log(paciente.id);
     const fechaEmision = new Date().toISOString().split('T')[0];
     const tratamiento = tratamientoState.map(({id, ...rest}) => rest);
     const receta = {
-      id_paciente: 'ac7f5a98-ef61-4a37-b53c-b28c50727b0d',
+      id_paciente: paciente.id,
       id_medico: auth.userId,
       fechaEmision,
       diagnostico,
@@ -87,6 +88,7 @@ function M_GMain ({ setView, paciente }) {
         }
         return;
       }
+      showAlert('Receta generada y firmada correctamente', 'success');
     } catch (error) {
       showAlert('Error al firmar la receta: ' + error.message, 'error');
     }
@@ -141,14 +143,14 @@ function M_GMain ({ setView, paciente }) {
               onChange={handleArchivoCargado}
               style={{ display: 'none' }} // Ocultar el input de archivo
             />
-            <Button
+            {/* <Button
               variant="outlined"
               onClick={handleClickBoton} // Activar el input de archivo
               fullWidth
               sx={{ marginBottom: '20px' }}
             >
               Cargar clave privada
-            </Button>
+            </Button> */}
             {/* Generar receta ---------------------- */}
             <ButtonsMod
               variant="principal"
