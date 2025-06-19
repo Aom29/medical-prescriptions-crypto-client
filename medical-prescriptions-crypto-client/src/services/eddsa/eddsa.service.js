@@ -5,7 +5,7 @@ import { toBase64 } from '../crypto/file.utils';
 
 ed.utils.randomBytes = (len) => crypto.getRandomValues(new Uint8Array(len));
 
-export async function generateKeyPair(password) {
+export async function generateKeyPair(identifier, password) {
   
   const privateKey = ed.utils.randomPrivateKey();
   const publicKey = await ed.getPublicKeyAsync(privateKey);
@@ -17,8 +17,8 @@ export async function generateKeyPair(password) {
 
   console.log('Private Key:', privateBase64);
   console.log('Public Key:', publicBase64);
-  downloadBase64File(privateBase64, 'privateKey.key');
-  downloadBase64File(publicBase64, 'publicKey.pub');
+  downloadBase64File(privateBase64, `privateKeyEdDSA_${identifier}.key`);
+  downloadBase64File(publicBase64, `publicKeyEdDSA_${identifier}.key`);
 
   return {
     privateKey: privateBase64,

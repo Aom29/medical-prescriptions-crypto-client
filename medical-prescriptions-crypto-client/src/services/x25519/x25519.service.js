@@ -19,8 +19,8 @@ export async function generateDHKeyPair(identifier, password) {
   const privateBase64 = toBase64(combined);
   const publicBase64 = toBase64(publicKey);
 
-  downloadBase64File(privateBase64, `privateKey_${identifier}.key`);
-  downloadBase64File(publicBase64, `publicKey_${identifier}.pub`);
+  downloadBase64File(privateBase64, `privateKeyX25519_${identifier}.key`);
+  downloadBase64File(publicBase64, `publicKeyX25519_${identifier}.key`);
 
   return { privateBase64, publicBase64 };
 }
