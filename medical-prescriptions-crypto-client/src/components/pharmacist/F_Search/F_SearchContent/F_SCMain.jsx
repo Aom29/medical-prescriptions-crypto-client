@@ -24,7 +24,6 @@ function F_SCMain ({ paciente }) {
       <CardContent>
         <Stack direction='column'>
           {/* Información general del paciente ----------------- */}
-          <Subtitle subtitulo='Información general del paciente' />
           <F_SCInformation
             paciente={paciente}
           />

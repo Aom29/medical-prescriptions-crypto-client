@@ -9,6 +9,9 @@ function F_PMInformation ({ matricula, nombrePaciente, sexo, fechaEmision, nombr
         <Typography fontWeight='bold' color='#4224B0'>
           Matrícula {matricula}
         </Typography>
+        <Typography fontWeight='bold'>
+          Fecha de emisión: {fechaEmision}
+        </Typography>
         <Typography>
           Nombre del Paciente: {nombrePaciente}
         </Typography>
@@ -30,9 +33,6 @@ function F_PMInformation ({ matricula, nombrePaciente, sexo, fechaEmision, nombr
         </Typography>
         <Typography>
           Especialidad: {especialidad}
-        </Typography>
-        <Typography fontWeight='bold'>
-          Fecha de emisión: {fechaEmision}
         </Typography>
       </Stack>
 
