@@ -43,18 +43,6 @@ export async function signFile(buffer, privateKeyFile, password) {
   };
 }
 
-// export async function verifyFile(file, signatureFile, publicKeyFile) {
-//   const signatureBase64 = await signatureFile.text();
-//   const signature = Uint8Array.from(atob(signatureBase64.trim()), c => c.charCodeAt(0));
-
-//   const publicKeyBase64 = await publicKeyFile.text();
-//   const publicKey = Uint8Array.from(atob(publicKeyBase64), c => c.charCodeAt(0));
-
-//   const fileBuffer = await file.arrayBuffer();
-
-//   return await ed.verifyAsync(signature, new Uint8Array(fileBuffer), publicKey);
-// }
-
 export async function verifyFile(fileBuffer, signatureBase64, publicKeyBase64) {
   if (typeof signatureBase64 !== 'string' || typeof publicKeyBase64 !== 'string') {
     throw new Error('Firma y clave pública deben ser cadenas en Base64');

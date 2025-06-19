@@ -9,10 +9,10 @@ import ButtonsMod from '../../layout/ButtonsMod';
 import Subtitle from '../../layout/Subtitle';
 import { signFile } from '../../../services/eddsa/eddsa.service';
 import { useAuth } from '../../../context/Auth/AuthContext';
-import Prescriptions from '../../../services/prescriptions/prescriptions.service';
+import Prescriptions from '../../../services/prescriptions/prescriptions.service.js';
 import { useAlert } from '../../../context/Alert/AlertContext.jsx';
 
-function M_GMain ({ setView }) {
+function M_GMain ({ setView, paciente }) {
   const [diagnostico, setDiagnostico] = useState('');
   const [tratamientoState, setTratamientoState] = useState([]);
   const [privateKey, setPrivateKey] = useState(null);
@@ -23,11 +23,11 @@ function M_GMain ({ setView }) {
   const { showAlert } = useAlert();
   const inputRef = useRef(null); // Referencia al input de archivo
 
-  const handleClickBoton = () => {
-    if (inputRef.current) {
-      inputRef.current.click(); // Simula el clic en el input de archivo
-    }
-  };
+  // const handleClickBoton = () => {
+  //   if (inputRef.current) {
+  //     inputRef.current.click(); // Simula el clic en el input de archivo
+  //   }
+  // };
 
   const handleArchivoCargado = (event) => {
     const archivo = event.target.files[0];
@@ -43,19 +43,20 @@ function M_GMain ({ setView }) {
   };
 
   const handleGenerateAndSign = async () => {
-    if (!privateKey) {
-      alert('Por favor, carga tu clave privada antes de generar la receta.');
-      return;
-    }
+    // if (!privateKey) {
+    //   alert('Por favor, carga tu clave privada antes de generar la receta.');
+    //   return;
+    // }
 
     setOpenPasswordDialog(true);
   };
 
   const handlePasswordSubmit = async () => {
+    console.log(paciente.id);
     const fechaEmision = new Date().toISOString().split('T')[0];
     const tratamiento = tratamientoState.map(({id, ...rest}) => rest);
     const receta = {
-      id_paciente: '6702440e-c261-4218-a9b1-c00fb1c6f05d',
+      id_paciente: paciente.id,
       id_medico: auth.userId,
       fechaEmision,
       diagnostico,
@@ -87,6 +88,7 @@ function M_GMain ({ setView }) {
         }
         return;
       }
+      showAlert('Receta generada y firmada correctamente', 'success');
     } catch (error) {
       showAlert('Error al firmar la receta: ' + error.message, 'error');
     }
@@ -106,11 +108,7 @@ function M_GMain ({ setView }) {
           <Stack direction="column" sx={{ marginBottom: '30px' }}>
             <Subtitle subtitulo='Datos generales'/>
             <M_GCInformation
-              matricula="202249885"
-              curp='394839489'
-              nombrePaciente="Aarón Reyes"
-              fechaNacimiento="23/01/2003"
-              sexo="Masculino"
+              paciente={paciente}
               fechaEmision="11/06/2025"
               nombreMedico="Paolina Olvera"
               clinica="Clínica de Iztapalacra"
@@ -145,14 +143,14 @@ function M_GMain ({ setView }) {
               onChange={handleArchivoCargado}
               style={{ display: 'none' }} // Ocultar el input de archivo
             />
-            <Button
+            {/* <Button
               variant="outlined"
               onClick={handleClickBoton} // Activar el input de archivo
               fullWidth
               sx={{ marginBottom: '20px' }}
             >
               Cargar clave privada
-            </Button>
+            </Button> */}
             {/* Generar receta ---------------------- */}
             <ButtonsMod
               variant="principal"

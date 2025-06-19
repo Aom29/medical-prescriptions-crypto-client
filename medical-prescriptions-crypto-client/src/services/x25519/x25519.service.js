@@ -12,7 +12,7 @@ function fromBase64(base64) {
 
 export async function generateDHKeyPair(identifier, password) {
   const privateKey = x25519.utils.randomPrivateKey(); // Uint8Array(32)
-  const publicKey = x25519.getPublicKey(privateKey); // Uint8Array(32)
+  const publicKey = x25519.getPublicKey(privateKey);  // Uint8Array(32)
 
   const { ciphertext, salt, iv } = await encryptAESGCM(privateKey, password);
   const combined = new Uint8Array([...salt, ...iv, ...new Uint8Array(ciphertext)]);
@@ -26,8 +26,8 @@ export async function generateDHKeyPair(identifier, password) {
 }
 
 export async function generateDHKeyPairNoDownload(identifier, password) {
-  const privateKey = x25519.utils.randomPrivateKey(); // Uint8Array(32)
-  const publicKey = x25519.getPublicKey(privateKey); // Uint8Array(32)
+  const privateKey = x25519.utils.randomPrivateKey();
+  const publicKey = x25519.getPublicKey(privateKey);
 
   const { ciphertext, salt, iv } = await encryptAESGCM(privateKey, password);
   const combined = new Uint8Array([...salt, ...iv, ...new Uint8Array(ciphertext)]);
@@ -37,20 +37,23 @@ export async function generateDHKeyPairNoDownload(identifier, password) {
   return { privateBase64, publicBase64 };
 }
 
-
-export async function computeSharedSecret(myPrivateFile, password, otherPublicFile) {
-  const myPrivateText = await myPrivateFile.text();
-  const myCombined = fromBase64(myPrivateText);
+// ✅ Versión actualizada: ya no recibe archivos, sino directamente las claves
+export async function computeSharedSecret(
+  myPrivateKeyEncryptedBase64,
+  password,
+  otherPublicKeyBase64
+) {
+  const myCombined = fromBase64(myPrivateKeyEncryptedBase64);
   const salt = myCombined.slice(0, 16);
   const iv = myCombined.slice(16, 28);
   const ciphertext = myCombined.slice(28);
+
   const decrypted = await decryptAESGCM(ciphertext, password, salt, iv);
   const myPrivateKey = new Uint8Array(decrypted);
 
-  const otherPublicText = await otherPublicFile.text();
-  const otherPublicKey = fromBase64(otherPublicText);
-
+  const otherPublicKey = fromBase64(otherPublicKeyBase64);
   const sharedSecret = x25519.getSharedSecret(myPrivateKey, otherPublicKey);
+
   const sharedHex = [...sharedSecret].map(b => b.toString(16).padStart(2, '0')).join('');
   return sharedHex;
 }

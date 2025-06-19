@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import { Card, CardContent, Stack, List, ListItemButton, Divider, Typography }  from '@mui/material';
 import M_SCInformation from './M_SCInformation';
 import M_SCHistory from './M_SCHistory';
 import Subtitle from '../../../layout/Subtitle';
 
-function M_SCMain ({ paciente, setView }) {
+function M_SCMain ({ setView, paciente }) {
 
   if (!paciente) {
     return (
@@ -27,11 +28,10 @@ function M_SCMain ({ paciente, setView }) {
           {/* Información general del paciente ----------------- */}
           <Subtitle subtitulo='Información general del paciente' />
           <M_SCInformation
-            matricula={paciente.matricula}
-            curp={paciente.curp}
-            nombre={paciente.nombre}
-            fechaNacimiento={paciente.fechaNacimiento}
-            onGenerate={() => setView('generate')}
+            paciente={paciente}
+            onGenerate={() => {
+              setView('generate');
+            }}
           />
         </Stack>
 
