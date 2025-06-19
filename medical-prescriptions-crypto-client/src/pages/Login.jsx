@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { Container, Stack, Box, Card, Typography, CardContent, TextField, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff, AccountCircle } from '@mui/icons-material';
@@ -10,13 +10,65 @@ import '../css/login/login.css';
 import background from '../img/background.jpg';
 import logo from '../img/virus2.svg';
 
+import Auth from '../services/auth/auth';
+import { useAlert } from '../context/Alert/AlertContext.jsx';
+import { useAuth } from '../context/Auth/AuthContext.jsx';
+
+
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  
+  const { login, auth } = useAuth();
+  const { showAlert } = useAlert();
+
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = await Auth.login(formData);
+    console.log(data);
+    if(data.status >= 400) {
+      if(data.errors) {
+        const errorValidation = Object.values(data.errors)[0];
+        showAlert(errorValidation, 'error');
+      }
+
+      else {
+        showAlert(data.message, 'error');
+      }
+
+      return;
+    }
+
+    login(data);
+    if(data.rol === 'ADMIN') {
+      window.location.href = '/home-admin';
+    } else if(data.rol === 'MEDICO') {
+      window.location.href = '/home-medic';
+    } else if(data.rol === 'FARMACEUTICO') {
+      window.location.href = '/home-pharmacist';
+    } else if(data.rol === 'PACIENTE') {
+      window.location.href = '/home-patient';
+    }
+    else {
+      showAlert('Rol no reconocido', 'error');
+      return;
+    }
+    showAlert(data.message, 'success');
+  };
+  
   return (
     <ThemeProvider theme={ThemeMaterialUI}>
       <Navbar/>
@@ -52,8 +104,11 @@ const Login = () => {
                     sx={{ width: '100%' }}
                     required
                     variant='outlined'
-                    label='Matrícula'
-                    placeholder='Ej. 2025449933'
+                    label='Correo electrónico'
+                    placeholder='Ej. user@example.com'
+                    onChange={handleChange}
+                    name='email'
+                    value={formData.email}
                     slotProps={{
                       input: {
                         endAdornment: (
@@ -74,6 +129,9 @@ const Login = () => {
                     type={showPassword ? 'text' : 'password'}
                     label='Contraseña'
                     placeholder='Ingresa tu contraseña'
+                    onChange={handleChange}
+                    name='password'
+                    value={formData.password}
                     slotProps={{
                       input: {
                         endAdornment: (
@@ -99,7 +157,7 @@ const Login = () => {
                   textCont='Login'
                   width='100%'
                   height='2.5rem'
-                  clickEvent=''
+                  clickEvent={handleSubmit}
                   type='submit'
                 />
               </Box>

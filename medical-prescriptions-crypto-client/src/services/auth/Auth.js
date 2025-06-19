@@ -1,0 +1,24 @@
+import api from '../api';
+
+const Auth = (() => {
+
+  const login = async (formData) => {
+    try {
+      const response = await api.post(`/auth/login`, formData);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      if(error.response?.data) {
+        return error.response.data;
+      }
+
+      return { status: 'error', message: 'Error al conectar con el servidor'};
+    }
+  }
+
+  return {
+    login
+  }
+})();
+
+export default Auth;
