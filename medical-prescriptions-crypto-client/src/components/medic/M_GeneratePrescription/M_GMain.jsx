@@ -14,7 +14,7 @@ import { useAlert } from '../../../context/Alert/AlertContext.jsx';
 
 function M_GMain ({ setView }) {
   const [diagnostico, setDiagnostico] = useState('');
-  const [tratamiento, setTratamiento] = useState([]);
+  const [tratamientoState, setTratamientoState] = useState([]);
   const [privateKey, setPrivateKey] = useState(null);
   const [password, setPassword] = useState('');
   const [openPasswordDialog, setOpenPasswordDialog] = useState(false);
@@ -53,8 +53,9 @@ function M_GMain ({ setView }) {
 
   const handlePasswordSubmit = async () => {
     const fechaEmision = new Date().toISOString().split('T')[0];
+    const tratamiento = tratamientoState.map(({id, ...rest}) => rest);
     const receta = {
-      id_paciente: '2878a072-3203-4c33-81e8-81ed4ca7875e',
+      id_paciente: '6702440e-c261-4218-a9b1-c00fb1c6f05d',
       id_medico: auth.userId,
       fechaEmision,
       diagnostico,
@@ -131,7 +132,7 @@ function M_GMain ({ setView }) {
           {/* Tratamiento ---------------------- */}
           <Stack direction="column" sx={{ marginTop: '30px', marginBottom: '30px' }}>
             <Subtitle subtitulo='Tratamiento'/>
-            <M_GCTreatment value={tratamiento} onChange={setTratamiento} />
+            <M_GCTreatment value={tratamientoState} onChange={setTratamientoState} />
           </Stack>
 
           <Divider />
