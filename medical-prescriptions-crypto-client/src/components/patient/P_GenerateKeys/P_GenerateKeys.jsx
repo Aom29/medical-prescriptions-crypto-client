@@ -29,6 +29,7 @@ function P_GenerateKeys () {
       keyType: 'ECDH',
       publicKey: publicBase64,
     }
+    console.log(dhData);
     const dhResponse = await Auth.savePublicKey(dhData);
     if(dhResponse.status >= 400) {
       if(dhResponse.errors) {
@@ -41,10 +42,11 @@ function P_GenerateKeys () {
       return;
     }
     const dhPrivateData = {
-      usuario_id: auth.userId,
-      privateKey: privateBase64,
+      idUser: auth.userId,
+      encryptedKey: privateBase64,
     }
-    const dhPrivateResponse = await Auth.savePrivateKey(dhPrivateData);
+    console.log(dhPrivateData);
+    const dhPrivateResponse = await Auth.savePrivateKey(dhPrivateData, auth.token);
     if(dhPrivateResponse.status >= 400) {
       if(dhPrivateResponse.errors) {
         const errorValidation = Object.values(dhPrivateResponse.errors)[0];
@@ -94,7 +96,7 @@ function P_GenerateKeys () {
           variant='principal'
           textCont='Generar'
           width='auto'
-          clickEvent=''
+          clickEvent={handleGenerate}
           type='submit'
         />
       </DialogActions>
