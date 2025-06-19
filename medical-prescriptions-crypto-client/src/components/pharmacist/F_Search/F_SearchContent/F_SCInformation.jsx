@@ -1,15 +1,15 @@
 import { Box, Stack, Typography }  from '@mui/material';
 
-function F_SCInformation ({ datosPaciente }) {
+function F_SCInformation ({ paciente }) {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginBottom: '30px' }}>
       <Stack direction='row' sx={{ display: 'flex', width: '100%', flexDirection: {md: 'row', xs: 'column'}, justifyContent: 'space-between' }}>
         <Stack direction='column' sx={{ width: {md: '60%', xs:'100%'} }}>
           <Typography variant='body1' fontWeight='bold' color='#4224B0'>
-            Matrícula: {datosPaciente.matricula}
+            Matrícula: {paciente.matricula}
           </Typography>
           <Typography>
-            Nombre del Paciente: {datosPaciente.nombre}
+            Nombre del Paciente: {paciente.nombre}
           </Typography>
         </Stack>
       </Stack>
