@@ -7,7 +7,7 @@ import M_GCDiagnosis from './M_GContent/M_GCDiagnosis';
 import M_GCTreatment from './M_GContent/M_GCTreatment';
 import ButtonsMod from '../../layout/ButtonsMod';
 import Subtitle from '../../layout/Subtitle';
-import { signFile } from '../../../services/eddsa/eddsa.service';
+import { signFile, verifyFile } from '../../../services/eddsa/eddsa.service';
 import { useAuth } from '../../../context/Auth/AuthContext';
 import Prescriptions from '../../../services/prescriptions/prescriptions.service';
 import { useAlert } from '../../../context/Alert/AlertContext.jsx';
@@ -15,7 +15,7 @@ import { useAlert } from '../../../context/Alert/AlertContext.jsx';
 function M_GMain ({ setView }) {
   const [diagnostico, setDiagnostico] = useState('');
   const [tratamiento, setTratamiento] = useState([]);
-  const [privateKey, setPrivateKey] = useState(null);
+  const [publicKey, setPublicKey] = useState(null);
   const [password, setPassword] = useState('');
   const [openPasswordDialog, setOpenPasswordDialog] = useState(false);
 
@@ -35,7 +35,7 @@ function M_GMain ({ setView }) {
       const reader = new FileReader();
       reader.onload = () => {
         const contenido = reader.result;
-        setPrivateKey(contenido);
+        setPublicKey(contenido);
         console.log('Contenido del archivo:', contenido);
       };
       reader.readAsText(archivo);
@@ -43,7 +43,7 @@ function M_GMain ({ setView }) {
   };
 
   const handleGenerateAndSign = async () => {
-    if (!privateKey) {
+    if (!publicKey) {
       alert('Por favor, carga tu clave privada antes de generar la receta.');
       return;
     }
@@ -73,7 +73,16 @@ function M_GMain ({ setView }) {
 
       console.log('Json que se envía al backend:', recetaFirmada);
       console.log('Clave privada utilizada:', privateKeyEdDSA);
-      setPassword(''); // Limpiar la contraseña después de usarla
+      setPassword('');
+
+      const isVerified = await verifyFile(
+        jsonBuffer,
+        recetaFirmada.firma_medico,
+        publicKey
+      );
+
+      console.log('Verificación de firma:', isVerified);
+
 
       const response = await Prescriptions.uploadPrescription(recetaFirmada, auth.token);
       if(response.status >= 400) {
