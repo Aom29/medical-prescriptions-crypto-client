@@ -8,6 +8,9 @@ import M_GCTreatment from './M_GContent/M_GCTreatment';
 import ButtonsMod from '../../layout/ButtonsMod';
 import Subtitle from '../../layout/Subtitle';
 import { signFile } from '../../../services/eddsa/eddsa.service';
+import { useAuth } from '../../../context/Auth/AuthContext';
+import Prescriptions from '../../../services/prescriptions/prescriptions.service';
+import { useAlert } from '../../../context/Alert/AlertContext.jsx';
 
 function M_GMain ({ setView }) {
   const [diagnostico, setDiagnostico] = useState('');
@@ -16,6 +19,8 @@ function M_GMain ({ setView }) {
   const [password, setPassword] = useState('');
   const [openPasswordDialog, setOpenPasswordDialog] = useState(false);
 
+  const { auth, privateKeyEdDSA, privateKeyECDH } = useAuth();
+  const { showAlert } = useAlert();
   const inputRef = useRef(null); // Referencia al input de archivo
 
   const handleClickBoton = () => {
@@ -49,8 +54,8 @@ function M_GMain ({ setView }) {
   const handlePasswordSubmit = async () => {
     const fechaEmision = new Date().toISOString().split('T')[0];
     const receta = {
-      id_paciente: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-      id_medico: 'c56a4180-65aa-42ec-a945-5fd21dec0538',
+      id_paciente: '2878a072-3203-4c33-81e8-81ed4ca7875e',
+      id_medico: auth.userId,
       fechaEmision,
       diagnostico,
       tratamiento,
@@ -68,9 +73,20 @@ function M_GMain ({ setView }) {
 
       console.log('Json que se envía al backend:', recetaFirmada);
       setPassword(''); // Limpiar la contraseña después de usarla
-      alert('Receta generada y firmada exitosamente');
+
+      const response = await Prescriptions.uploadPrescription(recetaFirmada);
+      if(response.status >= 400) {
+        if(response.errors) {
+          const errorValidation = Object.values(response.errors)[0];
+          showAlert(errorValidation, 'error');
+        }
+        else {
+          showAlert(response.message, 'error');
+        }
+        return;
+      }
     } catch (error) {
-      alert('Error al firmar la receta: ' + error.message);
+      showAlert('Error al firmar la receta: ' + error.message, 'error');
     }
 
   };
