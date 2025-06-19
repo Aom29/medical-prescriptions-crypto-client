@@ -1,28 +1,51 @@
 import { decryptAESGCM } from "../crypto/crypto.utils";
+import { fromBase64 } from "../crypto/file.utils";
+import { x25519 } from "@noble/curves/ed25519";
 
+/**
+ * Flujo completo: descifra el contenido final usando una clave privada cifrada, una contraseña y una clave pública del servidor.
+ *
+ * @param {Object} params
+ * @param {string} params.wrappedAESKeyBase64 - Clave AES cifrada con AES-GCM (base64)
+ * @param {string} params.cipherTextBase64 - Contenido cifrado con esa AES key (base64)
+ * @param {string} params.privateKeyEncrypted - Clave privada cifrada con AES-GCM (salt + IV + ciphertext, en base64)
+ * @param {string} params.password - Contraseña para descifrar la clave privada
+ * @param {string} params.serverPublicKeyBase64 - Clave pública del servidor (base64)
+ * @returns {Promise<string>} contenido descifrado en texto
+ */
 export async function decryptWithPasswordAndWrappedKey({
-  wrappedAESKeyBase64,     // clave AES cifrada con AES-GCM (formato: IV + ciphertext)
-  cipherTextBase64,        // contenido cifrado con esa clave AES
-  privateKeyEncrypted,     // clave privada cifrada con AES-GCM (formato: salt + IV + ciphertext)
-  password                 // contraseña del usuario
+  wrappedAESKeyBase64,
+  cipherTextBase64,
+  privateKeyEncrypted,
+  password,
+  serverPublicKeyBase64
 }) {
   try {
-    // === Paso 1: descifrar la clave privada con AES-GCM (salt + iv + ciphertext) ===
-    const encryptedKeyBytes = Uint8Array.from(atob(privateKeyEncrypted), c => c.charCodeAt(0));
+    // === Paso 1: descifrar clave privada cifrada con AES-GCM ===
+    const encryptedKeyBytes = fromBase64(privateKeyEncrypted);
     const salt = encryptedKeyBytes.slice(0, 16);
     const ivKey = encryptedKeyBytes.slice(16, 28);
     const ciphertextKey = encryptedKeyBytes.slice(28);
 
-    const decryptedPrivateKeyBytes = await decryptAESGCM(ciphertextKey, password, salt, ivKey);
+    const decryptedPrivateKeyBytes = await decryptAESGCM(
+      ciphertextKey,
+      password,
+      salt,
+      ivKey
+    );
 
-    // === Paso 2: descifrar la clave AES que está envuelta con AES-GCM ===
-    const wrappedKeyBytes = Uint8Array.from(atob(wrappedAESKeyBase64), c => c.charCodeAt(0));
+    // === Paso 2: derivar secreto compartido con la pública del servidor ===
+    const serverPublicKeyBytes = fromBase64(serverPublicKeyBase64);
+    const sharedSecret = x25519.getSharedSecret(decryptedPrivateKeyBytes, serverPublicKeyBytes);
+
+    // === Paso 3: descifrar AES key envuelta con AES-GCM ===
+    const wrappedKeyBytes = fromBase64(wrappedAESKeyBase64);
     const ivWrapped = wrappedKeyBytes.slice(0, 12);
     const wrappedCipher = wrappedKeyBytes.slice(12);
 
     const wrappingKey = await crypto.subtle.importKey(
       "raw",
-      decryptedPrivateKeyBytes,
+      sharedSecret,
       { name: "AES-GCM" },
       false,
       ["decrypt"]
@@ -38,8 +61,8 @@ export async function decryptWithPasswordAndWrappedKey({
       wrappedCipher
     );
 
-    // === Paso 3: descifrar el contenido final con esa AES key ===
-    const encryptedContent = Uint8Array.from(atob(cipherTextBase64), c => c.charCodeAt(0));
+    // === Paso 4: descifrar el contenido final con esa AES key ===
+    const encryptedContent = fromBase64(cipherTextBase64);
     const ivContent = encryptedContent.slice(0, 12);
     const cipherContent = encryptedContent.slice(12);
 

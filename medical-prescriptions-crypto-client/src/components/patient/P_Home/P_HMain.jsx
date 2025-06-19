@@ -7,7 +7,7 @@ import Usuario from '../../../services/user/Usuario';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../../context/Auth/AuthContext';
 
-function P_HMain({ setView }) {
+function P_HMain({ setView, recetaId }) {
   const { auth } = useAuth();
 
   const [datosPaciente, setDatosPaciente] = useState({

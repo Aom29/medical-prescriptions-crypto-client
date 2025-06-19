@@ -9,7 +9,7 @@ import ButtonsMod from '../../layout/ButtonsMod';
 import Subtitle from '../../layout/Subtitle';
 import { signFile } from '../../../services/eddsa/eddsa.service';
 import { useAuth } from '../../../context/Auth/AuthContext';
-import Prescriptions from '../../../services/prescriptions/prescriptions.service';
+import Prescriptions from '../../../services/prescriptions/prescriptions.service.js';
 import { useAlert } from '../../../context/Alert/AlertContext.jsx';
 
 function M_GMain ({ setView, paciente }) {

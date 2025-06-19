@@ -22,3 +22,12 @@ export function fromHex(hex) {
 export function toBase64(bytes) {
   return btoa(String.fromCharCode(...bytes));
 }
+
+export function fromBase64(base64String) {
+  const binaryString = atob(base64String);
+  const bytes = new Uint8Array(binaryString.length);
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  return bytes;
+}
