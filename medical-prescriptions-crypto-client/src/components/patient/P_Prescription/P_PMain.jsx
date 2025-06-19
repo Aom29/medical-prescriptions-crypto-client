@@ -2,6 +2,7 @@ import { Card, CardContent, Stack, Divider, IconButton, Typography } from '@mui/
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import Subtitle from '../../layout/Subtitle';
 //* Componentes
+import P_PIdPrescription from './P_PContent/P_PIdPrescription';
 import M_GCInformation from '../../medic/M_GeneratePrescription/M_GContent/M_GCInformation';
 import P_PDiagnosis from './P_PContent/P_PDiagnosis';
 import P_PTreatment from './P_PContent/P_PTreatment';
@@ -42,17 +43,8 @@ function P_PMain ({ setView }) {
         </IconButton>
         <CardContent>
           {/* ID Receta ----------------------------------------- */}
-          <Stack direction='row' sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', alignContent: 'center', marginBottom: '30px' }}>
-            <Stack direction='row'>
-              <div className='medic-home-div' />
-              <Typography fontSize='1.1rem' fontWeight='bold' >
-                ID Receta
-              </Typography>
-            </Stack>
-            <Typography fontSize='1.2rem' fontWeight='bold' sx={{ marginLeft: '30px', color: '#4224B0' }}>
-              {receta.idReceta}
-            </Typography>
-          </Stack>
+          <P_PIdPrescription receta={receta} />
+          
           {/* Información general de la receta ------------------- */}
           <Subtitle subtitulo='Información de la receta' />
           <M_GCInformation

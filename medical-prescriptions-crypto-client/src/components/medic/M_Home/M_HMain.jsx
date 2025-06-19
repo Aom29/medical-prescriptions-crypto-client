@@ -5,6 +5,7 @@ import KeyIcon from '@mui/icons-material/Key';
 import ButtonsMod from '../../layout/ButtonsMod';
 import Header from '../../layout/Header';
 import Subtitle from '../../layout/Subtitle';
+import M_HButtonsKeys from './M_HButtonKeys';
 
 function M_HMain () {
   const [archivoCargado, setArchivoCargado] = useState(false);
@@ -84,6 +85,8 @@ function M_HMain () {
               />
             </div>
           </Box>
+
+          <M_HButtonsKeys/>
         </Stack>
       </CardContent>
     </Card>
