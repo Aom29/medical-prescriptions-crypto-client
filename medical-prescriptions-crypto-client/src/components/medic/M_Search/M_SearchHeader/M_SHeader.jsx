@@ -1,74 +1,30 @@
 import { useState } from 'react';
 import { Card, Box, Stack }  from '@mui/material';
 import background from '../../../../img/background.jpg';
+import Usuario from '../../../../services/user/Usuario';
+import { useAuth } from '../../../../context/Auth/AuthContext'
 import M_SButton from './M_SButton';
 
 function M_SHeader ({ onBuscar }) {
+  const { auth } = useAuth();
   const [matricula, setMatricula] = useState('');
 
-  const handleBuscar = () => {
-    const pacienteSimulado = [
-      {
-        matricula: '2025938495',
-        curp: 'RAMS990202HDFRRG09',
-        nombre: 'Ramírez Sergio',
-        fechaNacimiento: '02/02/1999',
-        sexo: 'Hombre',
-        recetas: [
-          {
-            fechaEmision: '11/06/2025',
-            diagnostico: 'Ébola'
-          },
-          {
-            fechaEmision: '01/05/2025',
-            diagnostico: 'Influenza'
-          }
-        ]
-      },
-      {
-        matricula: '2033441122',
-        curp: 'MALU010101MDFLCN09',
-        nombre: 'Martínez Lucía',
-        fechaNacimiento: '01/01/2001',
-        sexo: 'mujer',
-        recetas: [
-          { fechaEmision: '10/04/2025', diagnostico: 'Gripe común' },
-          { fechaEmision: '12/02/2025', diagnostico: 'Dolor muscular' }
-        ]
-      },
-      {
-        matricula: '2055667799',
-        curp: 'LOAN970707MDFTRN03',
-        nombre: 'López Ana',
-        fechaNacimiento: '07/07/1997',
-        sexo: 'mujer',
-        recetas: []
-      },
-      {
-        matricula: '2066123444',
-        curp: 'TOMI950505HDFLKL08',
-        nombre: 'Torres Miguel',
-        fechaNacimiento: '05/05/1995',
-        sexo: 'hombre',
-        recetas: [
-          { fechaEmision: '20/05/2025', diagnostico: 'Diabetes tipo 2' },
-          { fechaEmision: '28/05/2025', diagnostico: 'Hipertensión' },
-          { fechaEmision: '01/06/2025', diagnostico: 'Dolor de cabeza' }
-        ]
-      },
-    ];
+  const handleBuscar =  async (e) => {
+    console.log(auth.token);
+    const data = await Usuario.getUsuarios(matricula, auth.token);
+    console.log("data", data)
 
-    const pacienteEncontrado = pacienteSimulado.find(
-      (p) => p.matricula === matricula
-    );
+    let nuevoPaciente = {}
+    nuevoPaciente.matricula = data.matricula
+    nuevoPaciente.nombre = data.name
+    nuevoPaciente.fechaNacimiento = data.fechaNacimiento
+    nuevoPaciente.curp = data.curp
+    nuevoPaciente.recetas = []
 
-    if (pacienteEncontrado) {
-      onBuscar(pacienteEncontrado);
-    } else {
-      alert('paciente no encontrado');
-      onBuscar(null);
-    }
-  };
+    onBuscar(nuevoPaciente)
+
+    return;
+  }
 
   return (
     <Card position='static' 
