@@ -4,6 +4,7 @@ import M_SCHistory from './M_SCHistory';
 import Subtitle from '../../../layout/Subtitle';
 
 function M_SCMain ({ paciente, setView }) {
+
   if (!paciente) {
     return (
       <Typography variant='h6' sx={{ margin: 4 }}>
@@ -30,7 +31,6 @@ function M_SCMain ({ paciente, setView }) {
             curp={paciente.curp}
             nombre={paciente.nombre}
             fechaNacimiento={paciente.fechaNacimiento}
-            sexo={paciente.sexo}
             onGenerate={() => setView('generate')}
           />
         </Stack>

@@ -1,7 +1,7 @@
 import { Box, Stack, Typography }  from '@mui/material';
 import ButtonsMod from '../../../layout/ButtonsMod';
 
-function M_SCInformation ({ matricula, curp, nombre, fechaNacimiento, sexo, onGenerate}) {
+function M_SCInformation ({ matricula, curp, nombre, fechaNacimiento, onGenerate}) {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginBottom: '50px' }}>
       <Stack direction='row' sx={{ display: 'flex', width: '100%', flexDirection: {md: 'row', xs: 'column'}, justifyContent: 'space-between' }}>
@@ -17,9 +17,6 @@ function M_SCInformation ({ matricula, curp, nombre, fechaNacimiento, sexo, onGe
           </Typography>
           <Typography>
             Fecha de nacimiento: {fechaNacimiento}
-          </Typography>
-          <Typography>
-            Sexo: {sexo}
           </Typography>
         </Stack>
         <Box sx={{ display: 'flex', width: { md: '40%', xs: '100%' }, justifyContent: 'flex-end'}}>
