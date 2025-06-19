@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
 
@@ -11,10 +11,10 @@ export const AuthProvider = ({ children }) => {
   const [privateKeyEdDSA, setPrivateKeyEdDSA] = useState('');
   const [privateKeyECDH, setPrivateKeyECDH] = useState('');
 
-  const storePrivateKeys = (privateKeyEddsa, privateKeyEcdh) => {
-    setPrivateKeyEdDSA(privateKeyEddsa);
-    setPrivateKeyECDH(privateKeyEcdh);
-  }
+  const storePrivateKeys = ({ eddsa, ecdh }) => {
+    if (eddsa !== undefined) setPrivateKeyEdDSA(eddsa);
+    if (ecdh !== undefined) setPrivateKeyECDH(ecdh);
+  };
 
   const login = (data) => {
     setAuth(data);
@@ -29,7 +29,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, storePrivateKeys, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        auth,
+        privateKeyEdDSA,
+        privateKeyECDH,
+        storePrivateKeys,
+        login,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

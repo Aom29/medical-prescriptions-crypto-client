@@ -1,96 +1,143 @@
-import { useRef, useState } from 'react';
-import { Card, Typography, CardContent, Stack, Box }  from '@mui/material';
+import { useRef } from 'react';
+import { Card, Typography, CardContent, Stack, Box } from '@mui/material';
 import KeyIcon from '@mui/icons-material/Key';
 //* Componentes
 import ButtonsMod from '../../layout/ButtonsMod';
 import Header from '../../layout/Header';
 import Subtitle from '../../layout/Subtitle';
 import F_HButtonsKeys from './F_HButtonKeys';
+import { useAuth } from '../../../context/Auth/AuthContext';
 
-function F_Home () {
-    const [archivoCargado, setArchivoCargado] = useState(false);
-    const inputRef = useRef(null);
-    const [privateKey, setPrivateKey] = useState(null);
-  
-    const handleClickBoton = () => {
-      if (inputRef.current) {
-        inputRef.current.click();
-      }
-    };
-  
-    const handleArchivoCargado = (event) => {
-      const archivo = event.target.files[0];
-      if (archivo) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const contenido = reader.result;
-          setPrivateKey(contenido);
-          console.log('Contenido del archivo:', contenido);
-          setArchivoCargado(true);
-        }
-        reader.readAsText(archivo);
-      } else {
-        setArchivoCargado(false);
-      }
+function F_Home() {
+  const inputRefEdDSA = useRef(null);
+  const inputRefX25519 = useRef(null);
+  const { storePrivateKeys, privateKeyEdDSA, privateKeyECDH } = useAuth();
+
+  const handleClickEdDSA = () => inputRefEdDSA.current?.click();
+  const handleClickX25519 = () => inputRefX25519.current?.click();
+
+  const handleArchivoEdDSA = (event) => {
+    const archivo = event.target.files[0];
+    if (archivo) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        storePrivateKeys({ eddsa: reader.result });
+        console.log('Llave privada EdDSA cargada:', reader.result);
+      };
+      reader.readAsText(archivo);
     }
-    
+  };
+
+  const handleArchivoX25519 = (event) => {
+    const archivo = event.target.files[0];
+    if (archivo) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        storePrivateKeys({ ecdh: reader.result });
+        console.log('Llave privada X25519 cargada:', reader.result);
+      };
+      reader.readAsText(archivo);
+    }
+  };
+
   return (
     <>
-    <Header nombre='Farmacéutico' rol='pharmacist' />
-    <Card position='static' 
-      sx={{
-        borderRadius: 2,
-        padding: '2%',
-      }}>
+      <Header nombre='Farmacéutico' rol='pharmacist' />
+      <Card
+        position='static'
+        sx={{
+          borderRadius: 2,
+          padding: '2%',
+        }}
+      >
+        <CardContent>
+          <Stack direction='column' spacing={3}>
+            <Subtitle subtitulo='Llaves Privadas Cifradas' />
 
-      <CardContent>
-        <Stack direction='column'>
-          <Subtitle subtitulo='Estado del sistema' />
-          <Box 
-            sx={{ 
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              padding: 2,
-              borderRadius: 2,
-              borderWidth: 2,
-              border: '2px solid',
-              boxShadow: 1,
-              borderColor: archivoCargado ? '#00ff21' : '#ff3c3c',
-              transition: 'border-color 0.3s ease',
-            }}
-          >
-            <Stack direction='row' sx={{ display: 'flex', alignItems: 'center' }}>
-              <KeyIcon sx={{ fontSize: '1.6rem' }} />
-              <Typography fontSize='1.1rem' sx={{ marginLeft: '10px' }}>
-                Llave privada 
-              </Typography>
-            </Stack>
+            {/* Llave EdDSA */}
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: 2,
+                borderRadius: 2,
+                border: '2px solid',
+                boxShadow: 1,
+                borderColor: privateKeyEdDSA ? '#00ff21' : '#ff3c3c',
+                transition: 'border-color 0.3s ease',
+              }}
+            >
+              <Stack direction='row' alignItems='center'>
+                <KeyIcon sx={{ fontSize: '1.6rem' }} />
+                <Typography fontSize='1.1rem' sx={{ marginLeft: '10px' }}>
+                  Llave privada EdDSA
+                </Typography>
+              </Stack>
 
-            <div>
-              <input
-                type='file'
-                accept='.key,.pem'
-                ref={inputRef}
-                onChange={handleArchivoCargado}
-                style={{ display: 'none' }}
-              />
-              <ButtonsMod
-                variant='principal'
-                textCont='Cargar archivo'
-                width='100%'
-                height='2.5rem'
-                clickEvent={handleClickBoton}
-                type='button'
-              />
-            </div>
-          </Box>
+              <div>
+                <input
+                  type='file'
+                  accept='.key,.pem'
+                  ref={inputRefEdDSA}
+                  onChange={handleArchivoEdDSA}
+                  style={{ display: 'none' }}
+                />
+                <ButtonsMod
+                  variant='principal'
+                  textCont='Cargar EdDSA'
+                  width='100%'
+                  height='2.5rem'
+                  clickEvent={handleClickEdDSA}
+                  type='button'
+                />
+              </div>
+            </Box>
 
-          <F_HButtonsKeys/>
-          
-        </Stack>
-      </CardContent>
-    </Card>
+            {/* Llave X25519 */}
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: 2,
+                borderRadius: 2,
+                border: '2px solid',
+                boxShadow: 1,
+                borderColor: privateKeyECDH ? '#00ff21' : '#ff3c3c',
+                transition: 'border-color 0.3s ease',
+              }}
+            >
+              <Stack direction='row' alignItems='center'>
+                <KeyIcon sx={{ fontSize: '1.6rem' }} />
+                <Typography fontSize='1.1rem' sx={{ marginLeft: '10px' }}>
+                  Llave privada X25519
+                </Typography>
+              </Stack>
+
+              <div>
+                <input
+                  type='file'
+                  accept='.key,.pem'
+                  ref={inputRefX25519}
+                  onChange={handleArchivoX25519}
+                  style={{ display: 'none' }}
+                />
+                <ButtonsMod
+                  variant='principal'
+                  textCont='Cargar X25519'
+                  width='100%'
+                  height='2.5rem'
+                  clickEvent={handleClickX25519}
+                  type='button'
+                />
+              </div>
+            </Box>
+
+            <F_HButtonsKeys />
+          </Stack>
+        </CardContent>
+      </Card>
     </>
   );
 }
