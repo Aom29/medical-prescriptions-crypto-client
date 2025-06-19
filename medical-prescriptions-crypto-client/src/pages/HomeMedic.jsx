@@ -91,6 +91,7 @@ const HomeMedic = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [view, setView] = useState('home');
+  const [paciente, setPaciente] = useState(null);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -166,9 +167,9 @@ const HomeMedic = () => {
           { view === 'home' ? (
             <M_HMain/>
           ) : view === 'generate' ? (
-            <M_GMain setView={setView}/>
+            <M_GMain setView={setView} paciente={paciente}/>
           ) : view === 'buscar' ? (
-            <M_SearchMain setView={setView} />
+            <M_SearchMain setView={setView} setPaciente={setPaciente} paciente={paciente}/>
           ) :(
             <M_PDModal setView={setView}/>
           )}

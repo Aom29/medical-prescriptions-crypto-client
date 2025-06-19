@@ -1,25 +1,22 @@
 import { Stack, Typography }  from '@mui/material';
 
-function M_GCInformation ({ matricula, curp, nombrePaciente, fechaNacimiento, sexo, fechaEmision, nombreMedico, clinica, especialidad, cedula }) {
+function M_GCInformation ({ paciente, fechaEmision, nombreMedico, clinica, especialidad, cedula }) {
   return (
     <Stack direction={{ md: 'row', xs: 'column' }} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
 
       {/* Datos paciente ------------------------- */}
       <Stack direction='column' sx={{ marginBottom: { md: '0px', xs: '30px' }, marginRight: { md: '50px', xs: '0px' } }}>
         <Typography fontWeight='bold' color='#4224B0'>
-          Matrícula {matricula}
+          Matrícula {paciente.matricula}
         </Typography>
         <Typography fontWeight='bold'>
-          CURP: {curp}
+          CURP: {paciente.curp}
         </Typography>
         <Typography>
-          Nombre del Paciente: {nombrePaciente}
+          Nombre del Paciente: {paciente.nombre}
         </Typography>
         <Typography>
-          Fecha de nacimiento: {fechaNacimiento}
-        </Typography>
-        <Typography>
-          Sexo: {sexo}
+          Fecha de nacimiento: {paciente.fechaNacimiento}
         </Typography>
       </Stack>
 
