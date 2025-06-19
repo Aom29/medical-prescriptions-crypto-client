@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import { Box, Dialog, DialogTitle, DialogContent, TextField, Button, DialogActions } from '@mui/material';
 import ButtonsMod from '../../layout/ButtonsMod';
+import { generateKeyPair } from '../../../services/eddsa/eddsa.service';
+import { generateDHKeyPair } from '../../../services/x25519/x25519.service';
+import { useAuth } from '../../../context/Auth/AuthContext';
+import  Auth  from '../../../services/auth/auth';
+import { useAlert } from '../../../context/Alert/AlertContext';
 
 function F_HButtonsKeys () {
+  const { auth } = useAuth();
+  const { showAlert } = useAlert();
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState('');
 
@@ -15,9 +22,44 @@ function F_HButtonsKeys () {
     setPassword('');
   };
 
-  const handleGenerate = () => {
-    console.log('Generar llaves con contraseña:', password);
-    handleClose();
+  const handleGenerate = async () => {
+    // Eddsa key generation
+    const { privateKey, publicKey } = await generateKeyPair(password);
+    const data = {
+      usuario_id: auth.userId,
+      keyType: 'EdDSA',
+      publicKey: publicKey,
+    }
+    const response = await Auth.savePublicKey(data);
+    if(response.status >= 400) {
+      if(response.errors) {
+        const errorValidation = Object.values(response.errors)[0];
+        showAlert(errorValidation, 'error');
+      }
+      else {
+        showAlert(response.message, 'error');
+      }
+      return;
+    }
+
+    // ECDH key generation
+    const { privateBase64, publicBase64 } = await generateDHKeyPair(auth.nombre, password);
+    const dhData = {
+      usuario_id: auth.userId,
+      keyType: 'ECDH',
+      publicKey: publicBase64,
+    }
+    const dhResponse = await Auth.savePublicKey(dhData);
+    if(dhResponse.status >= 400) {
+      if(dhResponse.errors) {
+        const errorValidation = Object.values(dhResponse.errors)[0];
+        showAlert(errorValidation, 'error');
+      }
+      else {
+        showAlert(dhResponse.message, 'error');
+      }
+      return;
+    }
   };
 
   return (
