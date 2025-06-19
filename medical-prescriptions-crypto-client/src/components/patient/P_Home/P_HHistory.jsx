@@ -6,10 +6,10 @@ function P_HHistory ({ receta, setView }) {
     <Stack direction='row' sx={{ width: '100%', justifyContent: 'space-between', marginBottom: '5px', padding: '1%', alignItems:'center' }}>
       <Stack direction='column'>
         <Typography>
-          Fecha de emisión: {receta.fechaEmision}
+          ID Receta: {receta.idReceta}
         </Typography>
         <Typography>
-          Diagnóstico: {receta.diagnostico}
+          Fecha de emisión: {receta.fechaEmision}
         </Typography>
         <Typography>
           Clínica: {receta.clinica}

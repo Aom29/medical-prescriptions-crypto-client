@@ -1,4 +1,4 @@
-import { Card, CardContent, Stack, Divider, IconButton } from '@mui/material';
+import { Card, CardContent, Stack, Divider, IconButton, Typography } from '@mui/material';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import Subtitle from '../../layout/Subtitle';
 //* Componentes
@@ -26,6 +26,7 @@ function P_PMain ({ setView }) {
   ];
 
   const receta = {
+      idReceta: '12345678912345678912',
       fechaEmision: '11/06/2025',
       diagnostico: 'Ébola',
       clinica: 'San Rafael',
@@ -40,6 +41,18 @@ function P_PMain ({ setView }) {
           <ArrowBack />
         </IconButton>
         <CardContent>
+          {/* ID Receta ----------------------------------------- */}
+          <Stack direction='row' sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', alignContent: 'center', marginBottom: '30px' }}>
+            <Stack direction='row'>
+              <div className='medic-home-div' />
+              <Typography fontSize='1.1rem' fontWeight='bold' >
+                ID Receta
+              </Typography>
+            </Stack>
+            <Typography fontSize='1.2rem' fontWeight='bold' sx={{ marginLeft: '30px', color: '#4224B0' }}>
+              {receta.idReceta}
+            </Typography>
+          </Stack>
           {/* Información general de la receta ------------------- */}
           <Subtitle subtitulo='Información de la receta' />
           <M_GCInformation
