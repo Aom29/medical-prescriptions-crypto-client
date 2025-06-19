@@ -29,9 +29,30 @@ const Auth = (() => {
     }
   }
 
+  const savePrivateKey = async (privateKeyData, token) => {
+    try {
+      console.log(privateKeyData);
+      console.log(token);
+      const response = await api.post(`/private/save`, privateKeyData, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      if(error.response?.data) {
+        return error.response.data;
+      }
+
+      return { status: 'error', message: 'Error al conectar con el servidor'};
+    }
+  }
+
   return {
     login,
-    savePublicKey
+    savePublicKey,
+    savePrivateKey,
   }
 })();
 
