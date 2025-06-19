@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Box, Typography, Dialog, DialogTitle, DialogContent, Divider, List, ListItem, ListItemText, Button } from '@mui/material';
 import ButtonsMod from '../../../layout/ButtonsMod';
 import { useAuth } from '../../../../context/Auth/AuthContext';
-import Auth from '../../../../services/auth/auth';
 import Farmaceutico from '../../../../services/pharmacist/Farmaceutico';
 
 function P_PCButton ({ surtida, fechaSurtido }) {
