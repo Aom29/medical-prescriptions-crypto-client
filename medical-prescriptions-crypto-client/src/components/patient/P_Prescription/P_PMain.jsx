@@ -3,7 +3,7 @@ import ArrowBack from '@mui/icons-material/ArrowBack';
 import Subtitle from '../../layout/Subtitle';
 //* Componentes
 import P_PIdPrescription from './P_PContent/P_PIdPrescription';
-import M_GCInformation from '../../medic/M_GeneratePrescription/M_GContent/M_GCInformation';
+import P_PInformation from './P_PContent/P_PInformation';
 import P_PDiagnosis from './P_PContent/P_PDiagnosis';
 import P_PTreatment from './P_PContent/P_PTreatment';
 import P_PSign from './P_PContent/P_PSign';
@@ -47,7 +47,7 @@ function P_PMain ({ setView }) {
           
           {/* Información general de la receta ------------------- */}
           <Subtitle subtitulo='Información de la receta' />
-          <M_GCInformation
+          <P_PInformation
             matricula='392039029304'
             curp='2329832938'
             nombrePaciente='Sergio martínez de la nieves'

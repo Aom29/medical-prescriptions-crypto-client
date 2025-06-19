@@ -1,6 +1,6 @@
 import { Stack, Typography }  from '@mui/material';
 
-function M_GCInformation ({ matricula, curp, nombrePaciente, fechaNacimiento, sexo, fechaEmision, nombreMedico, clinica, especialidad, cedula }) {
+function P_PInformation ({ matricula, curp, nombrePaciente, fechaNacimiento, sexo, fechaEmision, nombreMedico, clinica, especialidad, cedula }) {
   return (
     <Stack direction={{ md: 'row', xs: 'column' }} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
 
@@ -28,6 +28,9 @@ function M_GCInformation ({ matricula, curp, nombrePaciente, fechaNacimiento, se
         <Typography fontWeight={'bold'} color='#4224B0'>
           Cédula Profesional: {cedula}
         </Typography>
+        <Typography fontWeight='bold'>
+          Fecha de emisión: {fechaEmision}
+        </Typography>
         <Typography>
           Médico: {nombreMedico}
         </Typography>
@@ -43,4 +46,4 @@ function M_GCInformation ({ matricula, curp, nombrePaciente, fechaNacimiento, se
   );
 };
 
-export default M_GCInformation;
+export default P_PInformation;
