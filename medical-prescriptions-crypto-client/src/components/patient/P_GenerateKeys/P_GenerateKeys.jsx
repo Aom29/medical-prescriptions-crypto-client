@@ -57,6 +57,8 @@ function P_GenerateKeys () {
       }
       return;
     }
+    showAlert('Llaves generadas y guardadas correctamente', 'success');
+    handleClose();
   };
   
 

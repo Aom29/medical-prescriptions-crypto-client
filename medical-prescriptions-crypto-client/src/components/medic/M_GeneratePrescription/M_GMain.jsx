@@ -7,15 +7,15 @@ import M_GCDiagnosis from './M_GContent/M_GCDiagnosis';
 import M_GCTreatment from './M_GContent/M_GCTreatment';
 import ButtonsMod from '../../layout/ButtonsMod';
 import Subtitle from '../../layout/Subtitle';
-import { signFile, verifyFile } from '../../../services/eddsa/eddsa.service';
+import { signFile } from '../../../services/eddsa/eddsa.service';
 import { useAuth } from '../../../context/Auth/AuthContext';
 import Prescriptions from '../../../services/prescriptions/prescriptions.service';
 import { useAlert } from '../../../context/Alert/AlertContext.jsx';
 
 function M_GMain ({ setView }) {
   const [diagnostico, setDiagnostico] = useState('');
-  const [tratamiento, setTratamiento] = useState([]);
-  const [publicKey, setPublicKey] = useState(null);
+  const [tratamientoState, setTratamientoState] = useState([]);
+  const [privateKey, setPrivateKey] = useState(null);
   const [password, setPassword] = useState('');
   const [openPasswordDialog, setOpenPasswordDialog] = useState(false);
 
@@ -35,7 +35,7 @@ function M_GMain ({ setView }) {
       const reader = new FileReader();
       reader.onload = () => {
         const contenido = reader.result;
-        setPublicKey(contenido);
+        setPrivateKey(contenido);
         console.log('Contenido del archivo:', contenido);
       };
       reader.readAsText(archivo);
@@ -43,7 +43,7 @@ function M_GMain ({ setView }) {
   };
 
   const handleGenerateAndSign = async () => {
-    if (!publicKey) {
+    if (!privateKey) {
       alert('Por favor, carga tu clave privada antes de generar la receta.');
       return;
     }
@@ -53,8 +53,9 @@ function M_GMain ({ setView }) {
 
   const handlePasswordSubmit = async () => {
     const fechaEmision = new Date().toISOString().split('T')[0];
+    const tratamiento = tratamientoState.map(({id, ...rest}) => rest);
     const receta = {
-      id_paciente: '2878a072-3203-4c33-81e8-81ed4ca7875e',
+      id_paciente: '6702440e-c261-4218-a9b1-c00fb1c6f05d',
       id_medico: auth.userId,
       fechaEmision,
       diagnostico,
@@ -73,16 +74,7 @@ function M_GMain ({ setView }) {
 
       console.log('Json que se envía al backend:', recetaFirmada);
       console.log('Clave privada utilizada:', privateKeyEdDSA);
-      setPassword('');
-
-      const isVerified = await verifyFile(
-        jsonBuffer,
-        recetaFirmada.firma_medico,
-        publicKey
-      );
-
-      console.log('Verificación de firma:', isVerified);
-
+      setPassword(''); // Limpiar la contraseña después de usarla
 
       const response = await Prescriptions.uploadPrescription(recetaFirmada, auth.token);
       if(response.status >= 400) {
@@ -140,7 +132,7 @@ function M_GMain ({ setView }) {
           {/* Tratamiento ---------------------- */}
           <Stack direction="column" sx={{ marginTop: '30px', marginBottom: '30px' }}>
             <Subtitle subtitulo='Tratamiento'/>
-            <M_GCTreatment value={tratamiento} onChange={setTratamiento} />
+            <M_GCTreatment value={tratamientoState} onChange={setTratamientoState} />
           </Stack>
 
           <Divider />

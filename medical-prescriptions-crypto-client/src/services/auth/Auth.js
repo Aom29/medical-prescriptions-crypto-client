@@ -33,7 +33,7 @@ const Auth = (() => {
     try {
       console.log(privateKeyData);
       console.log(token);
-      const response = await api.post(`/auth/private/save`, privateKeyData, {
+      const response = await api.post(`/private/save`, privateKeyData, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
