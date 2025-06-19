@@ -8,7 +8,13 @@ export const AuthProvider = ({ children }) => {
     return stored ? JSON.parse(stored) : null;
   });
 
-  // const privateKeyEdDSA = 
+  const [privateKeyEdDSA, setPrivateKeyEdDSA] = useState('');
+  const [privateKeyECDH, setPrivateKeyECDH] = useState('');
+
+  const storePrivateKeys = (privateKeyEddsa, privateKeyEcdh) => {
+    setPrivateKeyEdDSA(privateKeyEddsa);
+    setPrivateKeyECDH(privateKeyEcdh);
+  }
 
   const login = (data) => {
     setAuth(data);
@@ -18,10 +24,12 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setAuth(null);
     localStorage.removeItem('auth');
+    setPrivateKeyEdDSA('');
+    setPrivateKeyECDH('');
   };
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout }}>
+    <AuthContext.Provider value={{ auth, storePrivateKeys, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
