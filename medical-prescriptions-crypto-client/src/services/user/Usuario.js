@@ -21,8 +21,25 @@ const Usuario = (() => {
     }
   }
 
+  const getRecetas = async (userId, token) => {
+    try {
+      const response = await api.get(`/prescription/${userId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return response.data;
+    } catch (error) {
+      if (error.response?.data) {
+        return error.response.data;
+      }
+      return { status: 'error', message: 'Error al conectar con el servidor' };
+    }
+  }
+
   return {
     getUsuarios,
+    getRecetas
   }
 })();
 
