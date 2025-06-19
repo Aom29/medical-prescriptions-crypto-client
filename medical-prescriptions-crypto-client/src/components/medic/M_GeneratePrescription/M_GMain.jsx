@@ -12,7 +12,7 @@ import { useAuth } from '../../../context/Auth/AuthContext';
 import Prescriptions from '../../../services/prescriptions/prescriptions.service';
 import { useAlert } from '../../../context/Alert/AlertContext.jsx';
 
-function M_GMain ({ setView }) {
+function M_GMain ({ setView, paciente }) {
   const [diagnostico, setDiagnostico] = useState('');
   const [tratamiento, setTratamiento] = useState([]);
   const [publicKey, setPublicKey] = useState(null);
@@ -114,11 +114,7 @@ function M_GMain ({ setView }) {
           <Stack direction="column" sx={{ marginBottom: '30px' }}>
             <Subtitle subtitulo='Datos generales'/>
             <M_GCInformation
-              matricula="202249885"
-              curp='394839489'
-              nombrePaciente="Aarón Reyes"
-              fechaNacimiento="23/01/2003"
-              sexo="Masculino"
+              paciente={paciente}
               fechaEmision="11/06/2025"
               nombreMedico="Paolina Olvera"
               clinica="Clínica de Iztapalacra"
