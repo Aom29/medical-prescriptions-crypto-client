@@ -55,7 +55,7 @@ function M_GMain ({ setView }) {
     const fechaEmision = new Date().toISOString().split('T')[0];
     const tratamiento = tratamientoState.map(({id, ...rest}) => rest);
     const receta = {
-      id_paciente: '6702440e-c261-4218-a9b1-c00fb1c6f05d',
+      id_paciente: 'ac7f5a98-ef61-4a37-b53c-b28c50727b0d',
       id_medico: auth.userId,
       fechaEmision,
       diagnostico,
