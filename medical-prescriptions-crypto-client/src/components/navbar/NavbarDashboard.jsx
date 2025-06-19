@@ -4,7 +4,15 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import '../../css/medic/medic.css';
 import logo from '../../img/virus2.svg';
 
+import { useAuth } from '../../context/Auth/AuthContext';
+
 function NavbarDashboard () {
+  const { logout } = useAuth();
+  const onLogout = () => {
+    logout();
+    window.location.href = '/';
+  }
+
   return (
     <>
     <Stack direction='row'>
@@ -18,7 +26,7 @@ function NavbarDashboard () {
     <IconButton
       color='black'
       aria-label='logout'
-      // onClick={onLogout}
+      onClick={onLogout}
     >
       <LogoutIcon />
     </IconButton>
