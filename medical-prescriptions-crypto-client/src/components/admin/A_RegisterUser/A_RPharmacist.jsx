@@ -27,12 +27,20 @@ function A_RPharmacist ({ setView }) {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      try {
-        const data = await Admin.registerPharmacist(formData);
-        showAlert(data.message, 'success');
-      } catch (error) {
-        showAlert(error, 'error');
+      const data = await Admin.registerPharmacist(formData);
+      if (data.status >= 400) {
+        if (data.error) {
+          const errorValidation = Object.values(data.errors)[0];
+          showAlert(errorValidation, 'error');
+        }
+        else {
+          showAlert(data.message, 'error');
+        }
+
+        return;
       }
+
+      showAlert(data.message, 'success');
     };
 
   return (

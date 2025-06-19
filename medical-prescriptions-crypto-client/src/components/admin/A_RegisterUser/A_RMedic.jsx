@@ -34,19 +34,19 @@ function A_RMedic ({ setView }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const data = await Admin.registerDoctor(formData);
-      if(data.status === 'error') {
+    const data = await Admin.registerDoctor(formData);
+    if(data.status === 400) {
+      if (data.errors) {
+        const errorValidation = Object.values(data.errors)[0];
+        showAlert(errorValidation, 'error');
+      }
+      else {
         showAlert(data.message, 'error');
       }
-
-      else {
-        showAlert(data.message, 'success');
-      }
-
-    } catch {
-      showAlert("Error al establecer la conexión", "error");
+      return;
     }
+
+    showAlert(data.message, 'success');
   };
 
   return (
