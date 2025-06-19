@@ -8,6 +8,8 @@ export const AuthProvider = ({ children }) => {
     return stored ? JSON.parse(stored) : null;
   });
 
+  // const privateKeyEdDSA = 
+
   const login = (data) => {
     setAuth(data);
     localStorage.setItem('auth', JSON.stringify(data));

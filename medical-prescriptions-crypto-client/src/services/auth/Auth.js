@@ -16,8 +16,22 @@ const Auth = (() => {
     }
   }
 
+  const savePublicKey = async (publicKeyData) => {
+    try {
+      const response = await api.post(`/auth/savePublicKey`, publicKeyData);
+      return response.data;
+    } catch (error) {
+      if(error.response?.data) {
+        return error.response.data;
+      }
+
+      return { status: 'error', message: 'Error al conectar con el servidor'};
+    }
+  }
+
   return {
-    login
+    login,
+    savePublicKey
   }
 })();
 
