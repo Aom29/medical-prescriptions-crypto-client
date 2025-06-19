@@ -24,7 +24,7 @@ function M_HButtonsKeys () {
 
   const handleGenerate = async () => {
     // Eddsa key generation
-    const { privateKey, publicKey } = await generateKeyPair(password);
+    const { privateKey, publicKey } = await generateKeyPair(auth.nombre, password);
     const data = {
       usuario_id: auth.userId,
       keyType: 'EdDSA',

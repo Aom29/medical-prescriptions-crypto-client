@@ -64,7 +64,7 @@ function M_GMain ({ setView }) {
     const jsonBuffer = new TextEncoder().encode(JSON.stringify(receta));
     
     try {
-      const signature = await signFile(jsonBuffer, privateKey, password);
+      const signature = await signFile(jsonBuffer, privateKeyEdDSA, password);
       console.log('Firma generada:', signature);
       const recetaFirmada = {
         ...receta,
@@ -72,9 +72,10 @@ function M_GMain ({ setView }) {
       };
 
       console.log('Json que se envía al backend:', recetaFirmada);
+      console.log('Clave privada utilizada:', privateKeyEdDSA);
       setPassword(''); // Limpiar la contraseña después de usarla
 
-      const response = await Prescriptions.uploadPrescription(recetaFirmada);
+      const response = await Prescriptions.uploadPrescription(recetaFirmada, auth.token);
       if(response.status >= 400) {
         if(response.errors) {
           const errorValidation = Object.values(response.errors)[0];
