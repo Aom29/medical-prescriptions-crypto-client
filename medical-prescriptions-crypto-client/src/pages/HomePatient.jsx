@@ -28,6 +28,7 @@ import '../css/medic/medic.css';
 import NavbarDashboard from '../components/navbar/NavbarDashboard';
 import P_HMain from '../components/patient/P_Home/P_HMain';
 import P_PMain from '../components/patient/P_Prescription/P_PMain';
+import P_GenerateKeys from '../components/patient/P_GenerateKeys/P_GenerateKeys';
 
 const drawerWidth = 240;
 
@@ -145,6 +146,7 @@ const HomePatient = () => {
           <List>
             {[
               { text: 'Home', view: 'home', icon: <HomeIcon/> },
+              { text: 'Generar llaves', view: 'generar', icon: <VaccinesIcon/> },
             ].map(({ text, view: viewName, icon }) => (
               <ListItem key={text} disablePadding onClick={() => setView(viewName)}>
                 <ListItemButton>
@@ -165,6 +167,8 @@ const HomePatient = () => {
             <>
             <P_HMain setView={setView}/>
             </>
+          ) : view === 'generar' ? (
+            <P_GenerateKeys/>
           ) : (
             <>
             <P_PMain setView={setView}/>

@@ -25,6 +25,19 @@ export async function generateDHKeyPair(identifier, password) {
   return { privateBase64, publicBase64 };
 }
 
+export async function generateDHKeyPairNoDownload(identifier, password) {
+  const privateKey = x25519.utils.randomPrivateKey(); // Uint8Array(32)
+  const publicKey = x25519.getPublicKey(privateKey); // Uint8Array(32)
+
+  const { ciphertext, salt, iv } = await encryptAESGCM(privateKey, password);
+  const combined = new Uint8Array([...salt, ...iv, ...new Uint8Array(ciphertext)]);
+  const privateBase64 = toBase64(combined);
+  const publicBase64 = toBase64(publicKey);
+
+  return { privateBase64, publicBase64 };
+}
+
+
 export async function computeSharedSecret(myPrivateFile, password, otherPublicFile) {
   const myPrivateText = await myPrivateFile.text();
   const myCombined = fromBase64(myPrivateText);

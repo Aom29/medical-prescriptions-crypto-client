@@ -1,17 +1,26 @@
 import { useState } from 'react';
 import { Box, Typography, Dialog, DialogTitle, DialogContent, Divider, List, ListItem, ListItemText, Button } from '@mui/material';
 import ButtonsMod from '../../../layout/ButtonsMod';
+import { useAuth } from '../../../../context/Auth/AuthContext';
+import Farmaceutico from '../../../../services/pharmacist/Farmaceutico';
 
 function P_PCButton ({ surtida, fechaSurtido }) {
   const [open, setOpen] = useState(false);
-
-  const [farmaceuticos, setFarmaceuticos] = useState([
-    { nombre: 'María Pérez', clinica: 'San Rafael', permisosOtorgados: true },
-    { nombre: 'Juan Gómez', clinica: 'San Cristobal', permisosOtorgados: false },
-    { nombre: 'Lucía Torres', clinica: 'Santa Lucía', permisosOtorgados: true }
-  ]);
+  const [farmaceuticos, setFarmaceuticos] = useState([]);
+  const { auth } = useAuth();
 
   const handleOpen = async() => {
+    const lista = await Farmaceutico.getFarmaceuticos(auth.token);
+    console.log(lista);
+
+    const listaConPermisos = lista.map(f => ({
+      nombre: f.name,
+      clinica: f.farmacia,
+      permisosOtorgados: false
+    }));
+  
+    setFarmaceuticos(listaConPermisos);
+
     setOpen(true);
   }
 
