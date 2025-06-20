@@ -37,7 +37,6 @@ export const AuthProvider = ({ children }) => {
         storePrivateKeys,
         login,
         logout,
-        userPassword,
       }}
     >
       {children}
