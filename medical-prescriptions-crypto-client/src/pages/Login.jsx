@@ -30,6 +30,7 @@ const Login = () => {
     setShowPassword((prev) => !prev);
   };
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -38,7 +39,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await Auth.login(formData);
-    console.log(data);
     if(data.status >= 400) {
       if(data.errors) {
         const errorValidation = Object.values(data.errors)[0];
@@ -48,7 +48,6 @@ const Login = () => {
       else {
         showAlert(data.message, 'error');
       }
-
       return;
     }
 

@@ -21,7 +21,6 @@ export async function decryptWithPasswordAndWrappedKey({
   serverPublicKeyBase64
 }) {
   try {
-    // === Paso 1: descifrar clave privada cifrada con AES-GCM ===
     const encryptedKeyBytes = fromBase64(privateKeyEncrypted);
     const salt = encryptedKeyBytes.slice(0, 16);
     const ivKey = encryptedKeyBytes.slice(16, 28);

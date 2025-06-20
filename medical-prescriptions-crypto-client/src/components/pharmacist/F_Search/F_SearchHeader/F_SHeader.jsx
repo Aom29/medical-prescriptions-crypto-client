@@ -8,7 +8,8 @@ import { useAuth } from '../../../../context/Auth/AuthContext.jsx';
 function F_SHeader ({ onBuscar }) {
   const { auth } = useAuth();
   const [matricula, setMatricula] = useState('');
-   
+  
+
   const handleBuscar = async (e) => {
     console.log(auth.token);
     const data = await Usuario.getUsuarios(matricula, auth.token);

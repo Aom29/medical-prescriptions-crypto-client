@@ -5,13 +5,7 @@ import {
   Stack,
   Divider,
   IconButton,
-  Typography,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Button
+  Typography
 } from '@mui/material';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 
@@ -29,72 +23,48 @@ import { useAuth } from '../../../context/Auth/AuthContext';
 import { decryptWithPasswordAndWrappedKey } from '../../../services/aesgcm/aes.gcm.service';
 
 function P_PMain({ setView, recetaId }) {
-  const { auth } = useAuth();
+  const { auth, userPassword } = useAuth();
   const [receta, setReceta] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const [openPasswordModal, setOpenPasswordModal] = useState(false);
-  const [password, setPassword] = useState('');
-  const [pendingDecryptionData, setPendingDecryptionData] = useState(null);
-
   useEffect(() => {
-    const fetchReceta = async () => {
+    const fetchAndDecryptReceta = async () => {
       try {
-        console.log('Receta ID:', recetaId);
-        const response = await Prescriptions.getDecipherementInformation(recetaId, auth.token);
+        const response = await Prescriptions.getDecipherementInformation('52f1dbcf-8ffa-4d17-bdc2-b9c721fd3c21', auth.token);
+        console.log(response);
         const { encryptedPrescription, publicKeyServidor, accessKey } = response;
+
         const response2 = await Patient.getPrivateKey(auth.userId, auth.token);
         const { encryptedKey } = response2;
 
-        setPendingDecryptionData({
-          encryptedPrescription,
-          publicKeyServidor,
-          accessKey,
-          encryptedKey
+        console.log("Llave de acceso", accessKey);
+        console.log("Encrypted: ", encryptedPrescription);
+        console.log("Encrypted Key: ", encryptedKey);
+        console.log("Password: ", userPassword);
+        console.log("PublicKeyServidor:", publicKeyServidor);
+
+        const deciphered = await decryptWithPasswordAndWrappedKey({
+          wrappedAESKeyBase64: accessKey,
+          cipherTextBase64: encryptedPrescription,
+          privateKeyEncrypted: encryptedKey,
+          password: userPassword,
+          serverPublicKeyBase64: publicKeyServidor
         });
 
-        setOpenPasswordModal(true);
+        const recetaJson = JSON.parse(deciphered);
+        console.log(recetaJson)
+        setReceta(recetaJson);
       } catch (err) {
-        setError('Error al conectar con el servidor');
-        console.error(err);
+        console.error('Error al descifrar la receta:', err);
+        setError('No se pudo descifrar la receta. Verifique su contraseña o intente nuevamente.');
+      } finally {
         setLoading(false);
       }
     };
 
-    fetchReceta();
-  }, [recetaId, auth.token]);
-
-  const handleDecrypt = async () => {
-    try {
-      const {
-        encryptedPrescription,
-        publicKeyServidor,
-        accessKey,
-        encryptedKey
-      } = pendingDecryptionData;
-
-      const deciphered = await decryptWithPasswordAndWrappedKey({
-        wrappedAESKeyBase64: accessKey,
-        cipherTextBase64: encryptedPrescription,
-        privateKeyEncrypted: encryptedKey,
-        password: passwordIngresadaPorElUsuario,
-        serverPublicKeyBase64: publicKeyServidor
-      });
-
-      console.log('Descifrado exitoso:', deciphered);
-
-      const recetaJson = JSON.parse(deciphered);
-      setReceta(recetaJson);
-      setOpenPasswordModal(false);
-    } catch (err) {
-      console.error('Error al descifrar:', err);
-      setError('La contraseña es incorrecta o hubo un error al descifrar.');
-      setOpenPasswordModal(false);
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetchAndDecryptReceta();
+  }, [recetaId, auth.token, auth.userId, userPassword]);
 
   if (loading) {
     return <Typography textAlign="center">Cargando receta...</Typography>;
@@ -141,24 +111,6 @@ function P_PMain({ setView, recetaId }) {
           {receta.surtida && <P_PSign label='Firma farmacéutico' />}
         </CardContent>
       </Card>
-
-      <Dialog open={openPasswordModal} onClose={() => setOpenPasswordModal(false)}>
-        <DialogTitle>Ingrese su contraseña</DialogTitle>
-        <DialogContent>
-          <TextField
-            type="password"
-            label="Contraseña"
-            fullWidth
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoFocus
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenPasswordModal(false)}>Cancelar</Button>
-          <Button onClick={handleDecrypt} variant="contained">Descifrar</Button>
-        </DialogActions>
-      </Dialog>
     </Stack>
   );
 }

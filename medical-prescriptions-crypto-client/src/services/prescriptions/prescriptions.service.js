@@ -31,11 +31,12 @@ const Prescriptions = (() => {
 // }
   const getDecipherementInformation = async (prescriptionId, token) => {
     try {
-      const response = await api.get(`/prescription/${prescriptionId}`, {
+      const response = await api.get(`/prescription/encrypted/${prescriptionId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
+
       return response.data;
     } catch (error) {
       if (error.response?.data) {
