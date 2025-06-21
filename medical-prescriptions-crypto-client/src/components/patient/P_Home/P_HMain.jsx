@@ -22,7 +22,7 @@ function P_HMain({ setView, recetaId }) {
     const fetchRecetas = async () => {
       try {
         const response = await Usuario.getRecetas(auth.userId, auth.token);
-
+        console.log(response);
         if (response.status >= 400) {
           const message = response.message || 'Error desconocido';
           setError(message);

@@ -23,36 +23,11 @@ function M_GMain ({ setView, paciente }) {
   const { showAlert } = useAlert();
   const inputRef = useRef(null); // Referencia al input de archivo
 
-  // const handleClickBoton = () => {
-  //   if (inputRef.current) {
-  //     inputRef.current.click(); // Simula el clic en el input de archivo
-  //   }
-  // };
-
-  const handleArchivoCargado = (event) => {
-    const archivo = event.target.files[0];
-    if (archivo) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const contenido = reader.result;
-        setPrivateKey(contenido);
-        console.log('Contenido del archivo:', contenido);
-      };
-      reader.readAsText(archivo);
-    }
-  };
-
   const handleGenerateAndSign = async () => {
-    // if (!privateKey) {
-    //   alert('Por favor, carga tu clave privada antes de generar la receta.');
-    //   return;
-    // }
-
     setOpenPasswordDialog(true);
   };
 
   const handlePasswordSubmit = async () => {
-    console.log(paciente.id);
     const fechaEmision = new Date().toISOString().split('T')[0];
     const tratamiento = tratamientoState.map(({id, ...rest}) => rest);
     const receta = {
@@ -73,8 +48,6 @@ function M_GMain ({ setView, paciente }) {
         firma_medico: signature.base64,
       };
 
-      console.log('Json que se envía al backend:', recetaFirmada);
-      console.log('Clave privada utilizada:', privateKeyEdDSA);
       setPassword(''); // Limpiar la contraseña después de usarla
 
       const response = await Prescriptions.uploadPrescription(recetaFirmada, auth.token);
@@ -88,7 +61,9 @@ function M_GMain ({ setView, paciente }) {
         }
         return;
       }
+
       showAlert('Receta generada y firmada correctamente', 'success');
+      setOpenPasswordDialog(false);
     } catch (error) {
       showAlert('Error al firmar la receta: ' + error.message, 'error');
     }
@@ -136,22 +111,6 @@ function M_GMain ({ setView, paciente }) {
           <Divider />
 
           <Box sx={{ marginTop: '30px', width: '100%' }}>
-            <input
-              type="file"
-              accept=".key,.pem"
-              ref={inputRef} // Asignar la referencia al input de archivo
-              onChange={handleArchivoCargado}
-              style={{ display: 'none' }} // Ocultar el input de archivo
-            />
-            {/* <Button
-              variant="outlined"
-              onClick={handleClickBoton} // Activar el input de archivo
-              fullWidth
-              sx={{ marginBottom: '20px' }}
-            >
-              Cargar clave privada
-            </Button> */}
-            {/* Generar receta ---------------------- */}
             <ButtonsMod
               variant="principal"
               textCont="Generar y firmar receta"
