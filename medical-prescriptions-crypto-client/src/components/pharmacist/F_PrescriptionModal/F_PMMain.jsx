@@ -1,10 +1,10 @@
-import { Box, Divider, IconButton, Dialog, DialogContent } from '@mui/material';
+import { Box, Divider, IconButton, Dialog, DialogContent, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Subtitle from '../../layout/Subtitle';
 import F_PMInformation from './F_PMContent/F_PMInformation';
 import P_PDiagnosis from '../../patient/P_Prescription/P_PContent/P_PDiagnosis';
 import P_PTreatment from '../../patient/P_Prescription/P_PContent/P_PTreatment';
-import P_PSign from '../../patient/P_Prescription/P_PContent/P_PSign';
+import ButtonsMod from '../../layout/ButtonsMod';
 
 function F_PMMain ({ open, onClose, receta }) {
   const medicamentos = [
@@ -65,7 +65,27 @@ function F_PMMain ({ open, onClose, receta }) {
 
         {/* Firmas ---------------------------------------- */}
         <Subtitle subtitulo='Firmas' />
-        <P_PSign label='Firma médico'/>
+        <Subtitle subtitulo='Firmas' />
+        <TextField
+          disabled
+          label='Firma médico'
+          defaultValue=''
+          multiline
+          sx={{
+            marginBottom: '15px', width: '100%',
+            '& .MuiInputBase-input.Mui-disabled': { WebkitTextFillColor: '#000', },
+            '& .MuiInputLabel-root.Mui-disabled': { color: '#4224B0',},
+          }}
+        />
+        <Box sx={{ width: '100%', marginBottom: '20px' }}>
+          <ButtonsMod
+            variant='secundario'
+            textCont='Verificar firma'
+            width='100%'
+            clickEvent=''
+            type='button'
+          />
+        </Box>
 
       </DialogContent>
     </Dialog>
