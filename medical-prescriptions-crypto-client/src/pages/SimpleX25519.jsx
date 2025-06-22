@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   generateDHKeyPair,
   computeSharedSecret
-} from '../services/x25519/x25519.service';
+} from '../services/crypto/x25519/x25519.service';
 
 export default function SimpleX25519Page() {
   const [identifier, setIdentifier] = useState('');

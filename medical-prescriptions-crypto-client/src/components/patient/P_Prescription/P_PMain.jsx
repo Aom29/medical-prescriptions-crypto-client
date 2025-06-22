@@ -20,7 +20,9 @@ import P_PCButton from './P_PComponents/P_PCButton';
 import Patient from '../../../services/patient/patient';
 import Prescriptions from '../../../services/prescriptions/prescriptions.service';
 import { useAuth } from '../../../context/Auth/AuthContext';
-import { decryptWithPasswordAndWrappedKey } from '../../../services/aesgcm/aes.gcm.service';
+import { decryptWithPasswordAndWrappedKey } from '../../../services/crypto/aesgcm/aes.gcm.service';
+import KeyStorage from '../../../services/crypto/cryptoKeyStorage';
+import { getDerivedKeyFromStorage } from '../../../services/crypto/patient.keys.service';
 
 function P_PMain({ setView, recetaId }) {
   const { auth, userPassword } = useAuth();
@@ -31,24 +33,16 @@ function P_PMain({ setView, recetaId }) {
   useEffect(() => {
     const fetchAndDecryptReceta = async () => {
       try {
-        const response = await Prescriptions.getDecipherementInformation('52f1dbcf-8ffa-4d17-bdc2-b9c721fd3c21', auth.token);
-        console.log(response);
+        const response = await Prescriptions.getDecipherementInformation('21d0e6c3-6d0a-4d75-a58e-1cdb5e72f06f', auth.token);
         const { encryptedPrescription, publicKeyServidor, accessKey } = response;
-
-        const response2 = await Patient.getPrivateKey(auth.userId, auth.token);
-        const { encryptedKey } = response2;
-
-        console.log("Llave de acceso", accessKey);
-        console.log("Encrypted: ", encryptedPrescription);
-        console.log("Encrypted Key: ", encryptedKey);
-        console.log("Password: ", userPassword);
-        console.log("PublicKeyServidor:", publicKeyServidor);
+        const encryptedKey = await KeyStorage.getPrivateKey();
+        const derivedKey = await getDerivedKeyFromStorage();
 
         const deciphered = await decryptWithPasswordAndWrappedKey({
           wrappedAESKeyBase64: accessKey,
           cipherTextBase64: encryptedPrescription,
           privateKeyEncrypted: encryptedKey,
-          password: userPassword,
+          derivedKey,
           serverPublicKeyBase64: publicKeyServidor
         });
 

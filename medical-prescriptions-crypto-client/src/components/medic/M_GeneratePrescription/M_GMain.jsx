@@ -7,7 +7,7 @@ import M_GCDiagnosis from './M_GContent/M_GCDiagnosis';
 import M_GCTreatment from './M_GContent/M_GCTreatment';
 import ButtonsMod from '../../layout/ButtonsMod';
 import Subtitle from '../../layout/Subtitle';
-import { signFile } from '../../../services/eddsa/eddsa.service';
+import { signFile } from '../../../services/crypto/eddsa/eddsa.service.js'
 import { useAuth } from '../../../context/Auth/AuthContext';
 import Prescriptions from '../../../services/prescriptions/prescriptions.service.js';
 import { useAlert } from '../../../context/Alert/AlertContext.jsx';

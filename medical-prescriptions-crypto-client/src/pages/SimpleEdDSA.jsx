@@ -3,7 +3,7 @@ import {
   generateKeyPair,
   signFile,
   verifyFile
-} from '../services/eddsa/eddsa.service';
+} from '../services/crypto/eddsa/eddsa.service';
 
 export default function SimpleEdDSA() {
   const [fileToSign, setFileToSign] = useState(null);

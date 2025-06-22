@@ -1,6 +1,6 @@
 import { x25519 } from '@noble/curves/ed25519';
-import { encryptAESGCM, decryptAESGCM } from '../crypto/crypto.utils';
-import { downloadBase64File } from '../crypto/file.utils';
+import { encryptAESGCM, decryptAESGCM } from '../crypto.utils';
+import { downloadBase64File } from '../file.utils';
 
 function toBase64(bytes) {
   return btoa(String.fromCharCode(...bytes));
@@ -37,7 +37,6 @@ export async function generateDHKeyPairNoDownload(identifier, password) {
   return { privateBase64, publicBase64 };
 }
 
-// ✅ Versión actualizada: ya no recibe archivos, sino directamente las claves
 export async function computeSharedSecret(
   myPrivateKeyEncryptedBase64,
   password,

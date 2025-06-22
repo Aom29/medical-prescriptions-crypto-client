@@ -11,7 +11,7 @@ function M_SHeader ({ onBuscar }) {
 
   const handleBuscar =  async (e) => {
     const data = await Usuario.getUsuarios(matricula, auth.token);
-
+    console.log(data);
     let nuevoPaciente = {}
     nuevoPaciente.matricula = data.matricula
     nuevoPaciente.nombre = data.name

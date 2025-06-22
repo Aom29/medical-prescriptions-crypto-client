@@ -1,5 +1,7 @@
 import { use, useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+
 import { Container, Stack, Box, Card, Typography, CardContent, TextField, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff, AccountCircle } from '@mui/icons-material';
 import ThemeMaterialUI from '../components/ThemeMaterialUI.js';
@@ -13,9 +15,14 @@ import logo from '../img/virus2.svg';
 import Auth from '../services/auth/auth';
 import { useAlert } from '../context/Alert/AlertContext.jsx';
 import { useAuth } from '../context/Auth/AuthContext.jsx';
+import { extractDerivedKey, generateAndSaveKeys } from '../services/crypto/patient.keys.service.js';
+import Patient from '../services/patient/patient.js';
+import { deriveAESKey } from '../services/crypto/crypto.utils.js';
+import { fromBase64 } from '../services/crypto/file.utils.js';
 
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -53,13 +60,26 @@ const Login = () => {
 
     login(data);
     if(data.rol === 'ADMIN') {
-      window.location.href = '/home-admin';
+      navigate('/home-admin');
     } else if(data.rol === 'MEDICO') {
-      window.location.href = '/home-medic';
+      navigate('/home-medic');
     } else if(data.rol === 'FARMACEUTICO') {
-      window.location.href = '/home-pharmacist';
+      navigate('/home-pharmacist');
     } else if(data.rol === 'PACIENTE') {
-      window.location.href = '/home-patient';
+
+      let privateKeyBase64;
+      if(data.keys) {
+        const { encryptedKey } = await Patient.getPrivateKey(data.userId, data.token);
+        privateKeyBase64 = encryptedKey;
+      }
+
+      else {
+        privateKeyBase64 = await generateAndSaveKeys(data.userId, formData.password, data.nombre, data.token);
+        console.log('Generando llaves');
+      }
+
+      extractDerivedKey(privateKeyBase64, formData.password);
+      navigate('/home-patient');
     }
     else {
       showAlert('Rol no reconocido', 'error');

@@ -1,3 +1,5 @@
+import { getDerivedKeyFromStorage } from "./patient.keys.service";
+
 const encoder = new TextEncoder();
 
 export async function deriveAESKey(password, salt) {
@@ -18,7 +20,7 @@ export async function deriveAESKey(password, salt) {
     },
     keyMaterial,
     { name: 'AES-GCM', length: 256 },
-    false,
+    true,
     ['encrypt', 'decrypt']
   );
 }
@@ -34,4 +36,15 @@ export async function encryptAESGCM(data, password) {
 export async function decryptAESGCM(ciphertext, password, salt, iv) {
   const aesKey = await deriveAESKey(password, salt);
   return await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, aesKey, ciphertext);
+}
+
+export async function decryptAESGCMwithDerivedKey(ciphertext, iv, derivedKey) {
+  return await crypto.subtle.decrypt(
+  {
+    name: 'AES-GCM',
+    iv,
+  },
+    derivedKey,
+    ciphertext
+  );
 }

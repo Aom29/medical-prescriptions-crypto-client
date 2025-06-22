@@ -16,9 +16,13 @@ const Auth = (() => {
     }
   }
 
-  const savePublicKey = async (publicKeyData) => {
+  const savePublicKey = async (publicKeyData, token) => {
     try {
-      const response = await api.post(`/auth/savePublicKey`, publicKeyData);
+      const response = await api.post(`/auth/savePublicKey`, publicKeyData, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       return response.data;
     } catch (error) {
       if(error.response?.data) {
@@ -31,14 +35,11 @@ const Auth = (() => {
 
   const savePrivateKey = async (privateKeyData, token) => {
     try {
-      console.log(privateKeyData);
-      console.log(token);
       const response = await api.post(`/private/save`, privateKeyData, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-      console.log(response);
       return response.data;
     } catch (error) {
       if(error.response?.data) {

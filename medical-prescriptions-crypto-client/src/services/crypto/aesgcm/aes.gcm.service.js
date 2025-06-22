@@ -1,10 +1,8 @@
-import { decryptAESGCM } from "../crypto/crypto.utils";
-import { fromBase64 } from "../crypto/file.utils";
+import { decryptAESGCM, decryptAESGCMwithDerivedKey } from "../crypto.utils";
+import { fromBase64 } from "../file.utils";
 import { x25519 } from "@noble/curves/ed25519";
 
 /**
- * Flujo completo: descifra el contenido final usando una clave privada cifrada, una contraseña y una clave pública del servidor.
- *
  * @param {Object} params
  * @param {string} params.wrappedAESKeyBase64 - Clave AES cifrada con AES-GCM (base64)
  * @param {string} params.cipherTextBase64 - Contenido cifrado con esa AES key (base64)
@@ -17,27 +15,24 @@ export async function decryptWithPasswordAndWrappedKey({
   wrappedAESKeyBase64,
   cipherTextBase64,
   privateKeyEncrypted,
-  password,
-  serverPublicKeyBase64
+  derivedKey,
+  serverPublicKeyBase64,
 }) {
   try {
     const encryptedKeyBytes = fromBase64(privateKeyEncrypted);
-    const salt = encryptedKeyBytes.slice(0, 16);
     const ivKey = encryptedKeyBytes.slice(16, 28);
     const ciphertextKey = encryptedKeyBytes.slice(28);
 
-    const decryptedPrivateKeyBytes = await decryptAESGCM(
+    const decryptedPrivateKeyBytes = await decryptAESGCMwithDerivedKey(
       ciphertextKey,
-      password,
-      salt,
-      ivKey
+      ivKey,
+      derivedKey
     );
+    const privateKeyDecrypted = new Uint8Array(decryptedPrivateKeyBytes);
 
-    // === Paso 2: derivar secreto compartido con la pública del servidor ===
     const serverPublicKeyBytes = fromBase64(serverPublicKeyBase64);
-    const sharedSecret = x25519.getSharedSecret(decryptedPrivateKeyBytes, serverPublicKeyBytes);
-
-    // === Paso 3: descifrar AES key envuelta con AES-GCM ===
+    const sharedSecret = x25519.getSharedSecret(privateKeyDecrypted, serverPublicKeyBytes);
+    // === Descifrar AES key envuelta con AES-GCM ===
     const wrappedKeyBytes = fromBase64(wrappedAESKeyBase64);
     const ivWrapped = wrappedKeyBytes.slice(0, 12);
     const wrappedCipher = wrappedKeyBytes.slice(12);

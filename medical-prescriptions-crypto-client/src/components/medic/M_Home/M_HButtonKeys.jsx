@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Box, Dialog, DialogTitle, DialogContent, TextField, Button, DialogActions } from '@mui/material';
 import ButtonsMod from "../../layout/ButtonsMod";
-import { generateKeyPair } from '../../../services/eddsa/eddsa.service';
-import { generateDHKeyPair } from '../../../services/x25519/x25519.service';
+import { generateKeyPair } from '../../../services/crypto/eddsa/eddsa.service';
+import { generateDHKeyPair } from '../../../services/crypto/x25519/x25519.service';
 import { useAuth } from '../../../context/Auth/AuthContext';
 import  Auth  from '../../../services/auth/auth';
 import { useAlert } from '../../../context/Alert/AlertContext';

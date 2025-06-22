@@ -1,7 +1,7 @@
 import * as ed from '@noble/ed25519';
-import { encryptAESGCM, decryptAESGCM } from '../crypto/crypto.utils';
-import { downloadBase64File } from '../crypto/file.utils';
-import { toBase64 } from '../crypto/file.utils';
+import { encryptAESGCM, decryptAESGCM } from '../crypto.utils';
+import { downloadBase64File } from '../file.utils';
+import { toBase64 } from '../file.utils';
 
 ed.utils.randomBytes = (len) => crypto.getRandomValues(new Uint8Array(len));
 
