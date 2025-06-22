@@ -27,7 +27,6 @@ import {
 import '../css/medic/medic.css';
 import NavbarDashboard from '../components/navbar/NavbarDashboard';
 import P_HMain from '../components/patient/P_Home/P_HMain';
-import P_PMain from '../components/patient/P_Prescription/P_PMain';
 import P_GenerateKeys from '../components/patient/P_GenerateKeys/P_GenerateKeys';
 
 const drawerWidth = 240;
@@ -123,9 +122,7 @@ const HomePatient = () => {
         </AppBar>
 
         <Drawer
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
+          sx={{ width: drawerWidth, flexShrink: 0,
             '& .MuiDrawer-paper': {
               backgroundColor: '#ff5725',
               color: 'white',
@@ -161,20 +158,21 @@ const HomePatient = () => {
           <Divider />
         </Drawer>
         
+        {/* Aquí se maneja la vista de páginas dentro del Dashboard */}
         <Main open={open}>
           <DrawerHeader />
           { view === 'home' ? (
             <>
-            <P_HMain setView={setView}/>
+            <P_HMain/>
             </>
           ) : view === 'generar' ? (
             <P_GenerateKeys/>
           ) : (
             <>
-            <P_PMain setView={setView}/>
             </>
           )}
         </Main>
+
       </Box>
     </ThemeProvider>
   );
