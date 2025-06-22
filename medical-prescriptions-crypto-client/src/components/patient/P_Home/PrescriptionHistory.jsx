@@ -4,6 +4,7 @@ import ButtonsMod from '../../layout/ButtonsMod';
 import P_PrescriptionDetail from '../P_Prescription/P_PrescriptionDetail';
 
 function PrescriptionHistory ({ receta }) {
+  console.log('Datos de la receta: ', receta);
   const [openModal, setOpenModal] = useState(false);
 
   const handleOpen = () => setOpenModal(true);
@@ -13,7 +14,7 @@ function PrescriptionHistory ({ receta }) {
     <>
     <Stack direction='row' sx={{ width: '100%', justifyContent: 'space-between', marginBottom: '5px', padding: '1%', alignItems:'center' }}>
       <Stack direction='column'>
-        <Typography> ID Receta: {receta.id} </Typography>
+        <Typography fontWeight='bold'> ID Receta: {receta.id} </Typography>
         <Typography> Fecha de emisión: {receta.fechaEmision} </Typography>
         <Typography> Clínica: {receta.clinica} </Typography>
       </Stack>
@@ -42,7 +43,7 @@ function PrescriptionHistory ({ receta }) {
       </DialogTitle>
       <DialogContent>
         {/* Aquí se muestran todos los detalles ------------------------- */}
-        <P_PrescriptionDetail setView={handleClose} receta={receta} />
+        <P_PrescriptionDetail recetaId={receta.id} />
       </DialogContent>
     </Dialog>
     </>
