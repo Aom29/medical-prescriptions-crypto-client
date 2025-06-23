@@ -17,6 +17,8 @@ import { getDerivedKeyFromStorage } from '../../../services/crypto/patient.keys.
 function P_PrescriptionDetail({ recetaId }) {
   const { auth, userPassword } = useAuth();
   const [receta, setReceta] = useState(null);
+  const [paciente, setPaciente] = useState(null);
+  const [medico, setMedico] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -35,6 +37,9 @@ function P_PrescriptionDetail({ recetaId }) {
           derivedKey,
           serverPublicKeyBase64: publicKeyServidor
         });
+        
+        setPaciente(response.paciente);
+        setMedico(response.medico);
 
         const recetaJson = JSON.parse(deciphered);
         console.log(recetaJson)
@@ -63,7 +68,7 @@ function P_PrescriptionDetail({ recetaId }) {
     <Stack direction='column' sx={{ width: '100%', padding: '2%', display: 'flex', justifyContent: 'flex-start' }}>
       <Subtitle subtitulo='Información de la receta' />
       {/* Información del paciente y médico que generó la receta */}
-      <P_PInformation receta={receta}/>
+      <P_PInformation paciente={paciente} medico={medico} fechaEmision={receta.fechaEmision} />
       
       {/* Botón para ver farmacéuticos cuando la receta no ha sido surtida */}
       <P_PCButton surtida={receta.surtida} fechaSurtido={receta.fechaSurtido} />
