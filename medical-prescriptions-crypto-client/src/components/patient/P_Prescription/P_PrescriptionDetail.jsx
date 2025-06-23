@@ -19,6 +19,7 @@ function P_PrescriptionDetail({ recetaId }) {
   const [receta, setReceta] = useState(null);
   const [paciente, setPaciente] = useState(null);
   const [medico, setMedico] = useState(null);
+  const [firmaMedico, setFirmaMedico] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -40,6 +41,7 @@ function P_PrescriptionDetail({ recetaId }) {
         
         setPaciente(response.paciente);
         setMedico(response.medico);
+        setFirmaMedico(response.prescription.firma_medico);
 
         const recetaJson = JSON.parse(deciphered);
         console.log(recetaJson)
@@ -88,17 +90,17 @@ function P_PrescriptionDetail({ recetaId }) {
       <TextField
         disabled
         label='Firma médico'
-        defaultValue=''
+        defaultValue={firmaMedico}
         multiline
         sx={{
           marginBottom: '15px', width: '100%',
           '& .MuiInputBase-input.Mui-disabled': { WebkitTextFillColor: '#000', },
-          '& .MuiInputLabel-root.Mui-disabled': { color: '#4224B0',},
+          '& .MuiInputLabel-root.Mui-disabled': { color: '#00a1b4',},
         }}
       />
       <Box sx={{ width: '100%', marginBottom: '20px' }}>
         <ButtonsMod
-          variant='secundario'
+          variant='secundarioPaciente'
           textCont='Verificar firma'
           width='100%'
           clickEvent=''
@@ -122,7 +124,7 @@ function P_PrescriptionDetail({ recetaId }) {
           />
           <Box sx={{ width: '100%', marginBottom: '20px' }}>
             <ButtonsMod
-              variant='secundario'
+              variant='secundarioPaciente'
               textCont='Verificar firma'
               width='100%'
               clickEvent=''

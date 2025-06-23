@@ -50,7 +50,7 @@ function P_PCButton ({ surtida, fechaSurtido }) {
     <>
     <Box sx={{ marginTop: '30px', marginBottom: '30px', width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
       <ButtonsMod
-        variant='principal'
+        variant='principalPaciente'
         textCont='Ver farmacéuticos'
         width='100%'
         clickEvent={handleOpen}
@@ -71,7 +71,7 @@ function P_PCButton ({ surtida, fechaSurtido }) {
               />
               <Box>
                 <ButtonsMod
-                  variant={farmaceutico.permisosOtorgados ? '' : 'principal'}
+                  variant={farmaceutico.permisosOtorgados ? '' : 'principalPaciente'}
                   textCont={farmaceutico.permisosOtorgados ? 'Quitar permisos' : 'Otorgar permisos'}
                   width='100%'
                   clickEvent={() => togglePermisos(index)}
@@ -84,9 +84,13 @@ function P_PCButton ({ surtida, fechaSurtido }) {
           ))}
         </List>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: 2 }}>
-          <Button onClick={handleClose} variant="outlined" color="primary">
-            Cerrar
-          </Button>
+          <ButtonsMod
+            variant='secundarioPaciente'
+            textCont='Cerrar'
+            width='100%'
+            clickEvent={handleClose}
+            type='button'
+          />
         </Box>
       </DialogContent>
     </Dialog>

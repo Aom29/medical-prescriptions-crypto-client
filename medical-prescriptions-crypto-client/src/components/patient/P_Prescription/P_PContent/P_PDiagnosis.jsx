@@ -17,7 +17,7 @@ function P_PDiagnosis ({ diagnostico }) {
           WebkitTextFillColor: '#000',
         },
         '& .MuiInputLabel-root.Mui-disabled': {
-          color: '#4224B0',
+          color: '#ff5725',
         },
       }}
       />

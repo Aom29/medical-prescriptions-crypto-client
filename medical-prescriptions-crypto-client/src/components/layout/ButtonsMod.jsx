@@ -50,6 +50,28 @@ function ButtonsMod({ variant, textCont, clickEvent, width, height, startIcon, t
         borderColor: '#FFFFFF',
       }
     }
+  } else if (variant === 'principalPaciente') {
+    buttonStyle = {
+      ...buttonStyle,
+      backgroundColor: '#00a1b4',
+      borderColor: '#00a1b4',
+      color: '#FFFFFF',
+      '&:hover': {
+        backgroundColor: '#01707d',
+      }
+    }
+  } else if (variant === 'secundarioPaciente') {
+    buttonStyle = {
+      ...buttonStyle,
+      backgroundColor: '#FFFFFF',
+      borderColor: '#00a1b4',
+      color: '#00a1b4',
+      '&:hover': {
+        backgroundColor: '#00a1b4',
+        borderColor: '#FFFFFF',
+        color: '#FFFFFF',
+      }
+    }
   } else {
     buttonStyle = {
       ...buttonStyle,

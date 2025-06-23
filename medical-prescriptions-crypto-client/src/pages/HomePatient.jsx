@@ -89,7 +89,7 @@ const HomePatient = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [view, setView] = useState('home');
-
+5
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -124,7 +124,7 @@ const HomePatient = () => {
         <Drawer
           sx={{ width: drawerWidth, flexShrink: 0,
             '& .MuiDrawer-paper': {
-              backgroundColor: '#ff5725',
+              backgroundColor: '#00a1b4',
               color: 'white',
               width: drawerWidth,
               boxSizing: 'border-box',

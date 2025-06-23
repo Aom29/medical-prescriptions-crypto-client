@@ -20,7 +20,7 @@ function PrescriptionHistory ({ receta }) {
       </Stack>
       <Box>
         <ButtonsMod
-          variant='secundario'
+          variant='secundarioPaciente'
           textCont='Ver detalles'
           width='auto'
           clickEvent={handleOpen}
@@ -31,10 +31,10 @@ function PrescriptionHistory ({ receta }) {
 
     {/* Modal con detalles de la receta ------------------------------- */}
     <Dialog open={openModal} onClose={handleClose} fullWidth maxWidth="md">
-      <DialogTitle  fontWeight='bold' sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#4224B0' }}>
+      <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#00a1b4' }}>
         ID Receta: {receta.id}
         <ButtonsMod
-          variant='secundario'
+          variant='secundarioPaciente'
           textCont='Cerrar'
           width='auto'
           clickEvent={handleClose}

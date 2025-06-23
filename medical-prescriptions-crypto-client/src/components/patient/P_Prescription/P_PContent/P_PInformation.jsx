@@ -2,14 +2,15 @@ import { Stack, Typography }  from '@mui/material';
 
 function P_PInformation ({ paciente, medico, fechaEmision }) {
   return (
+    <>
     <Stack direction={{ md: 'row', xs: 'column' }} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
 
       {/* Datos paciente ------------------------- */}
       <Stack direction='column' sx={{ marginBottom: { md: '0px', xs: '30px' }, marginRight: { md: '50px', xs: '0px' } }}>
-        <Typography fontWeight='bold' color='#4224B0'>
+        <Typography fontWeight='bold'>
           Matrícula {paciente.matricula}
         </Typography>
-        <Typography fontWeight='bold'>
+        <Typography>
           CURP: {paciente.curp}
         </Typography>
         <Typography>
@@ -22,10 +23,7 @@ function P_PInformation ({ paciente, medico, fechaEmision }) {
 
       {/* Datos médico y generales ----------------- */}
       <Stack direction='column'>
-        <Typography fontWeight='bold' color='#4224B0'>
-          Fecha de emisión: {fechaEmision}
-        </Typography>
-        <Typography fontWeight={'bold'}>
+        <Typography>
           Cédula Profesional: {medico.cedula}
         </Typography>
         <Typography>
@@ -40,6 +38,12 @@ function P_PInformation ({ paciente, medico, fechaEmision }) {
       </Stack>
 
     </Stack>
+    <Stack direction='row' sx={{ display: 'flex', width: '100%', justifyContent: 'flex-end', marginTop: '10px' }}>
+      <Typography fontWeight='bold' color='#00a1b4'>
+        Fecha de emisión: {fechaEmision}
+      </Typography>
+    </Stack>
+    </>
   );
 };
 
