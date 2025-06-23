@@ -9,6 +9,7 @@ import M_HButtonsKeys from './M_HButtonKeys';
 import { useAuth } from '../../../context/Auth/AuthContext';
 
 function M_HMain() {
+  const { auth } = useAuth();
   const inputRefEdDSA = useRef(null);
   const inputRefX25519 = useRef(null);
 
@@ -43,7 +44,7 @@ function M_HMain() {
 
   return (
     <>
-      <Header />
+      <Header nombre={auth.nombre}/>
       <Card
         position='static'
         sx={{
