@@ -1,7 +1,5 @@
-import { Box, Divider, Button, Dialog, DialogContent, DialogTitle, TextField, Typography } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import { Box, Divider, Stack, TextField, Typography } from '@mui/material';
 import Subtitle from '../../layout/Subtitle';
-import M_GCInformation from '../M_GeneratePrescription/M_GContent/M_GCInformation';
 import P_PTreatment from '../../patient/P_Prescription/P_PContent/P_PTreatment';
 import ButtonsMod from '../../layout/ButtonsMod';
 import P_PDiagnosis from '../../patient/P_Prescription/P_PContent/P_PDiagnosis';
@@ -31,7 +29,7 @@ function M_PDModal ({ recetaId }) {
         // const encryptedKey = await KeyStorage.getPrivateKey();
         // const derivedKey = await getDerivedKeyFromStorage();
         const encryptedKey = privateKeyECDH;
-        const password = 'aom';
+        const password = prompt("Ingresa tu contraseña");
         const encryptedKeyBytes = fromBase64(encryptedKey);
         const salt = encryptedKeyBytes.slice(0, 16);
         const derivedKey = await deriveAndImportAESKey(password, salt);;
@@ -79,13 +77,39 @@ function M_PDModal ({ recetaId }) {
     <>
     {/* Información general de la receta ------------------- */}
     <Subtitle subtitulo='Información de la receta' />
-    <M_GCInformation
-      paciente={paciente}
-      nombreMedico={medico.usuario.nombre}
-      clinica= {medico.clinica}
-      especialidad={medico.especialidad}
-      cedula={medico.cedula}
-    />
+    <Stack direction={{ md: 'row', xs: 'column' }} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+      {/* Datos paciente ------------------------- */}
+      <Stack direction='column' sx={{ marginBottom: { md: '0px', xs: '30px' }, marginRight: { md: '50px', xs: '0px' } }}>
+        <Typography fontWeight='bold'>
+          Matrícula {paciente.matricula}
+        </Typography>
+        <Typography>
+          CURP: {paciente.curp}
+        </Typography>
+        <Typography>
+          Nombre del Paciente: {paciente.usuario.nombre}
+        </Typography>
+        <Typography>
+          Fecha de nacimiento: {paciente.usuario.fechaNacimiento}
+        </Typography>
+      </Stack>
+
+      {/* Datos médico y generales ----------------- */}
+      <Stack direction='column'>
+        <Typography>
+          Cédula Profesional: {medico.cedula}
+        </Typography>
+        <Typography>
+          Médico: {medico.usuario.nombre}
+        </Typography>
+        <Typography>
+          Clínica: {medico.clinica}
+        </Typography>
+        <Typography>
+          Especialidad: {medico.especialidad}
+        </Typography>
+      </Stack>
+    </Stack>
 
     {/* Diagnóstico ---------------------------------------- */}
     <P_PDiagnosis
@@ -109,7 +133,7 @@ function M_PDModal ({ recetaId }) {
       sx={{
         marginBottom: '15px', width: '100%',
         '& .MuiInputBase-input.Mui-disabled': { WebkitTextFillColor: '#000', },
-        '& .MuiInputLabel-root.Mui-disabled': { color: '#4224B0',},
+        '& .MuiInputLabel-root.Mui-disabled': { color: '#6034FD',},
       }}
     />
     <Box sx={{ width: '100%', marginBottom: '20px' }}>

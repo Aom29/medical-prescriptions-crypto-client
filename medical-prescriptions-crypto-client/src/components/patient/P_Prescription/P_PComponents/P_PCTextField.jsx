@@ -13,7 +13,7 @@ function P_PCTextField ({ label, value }) {
             WebkitTextFillColor: '#000',
           },
           '& .MuiInputLabel-root.Mui-disabled': {
-            color: '#00a1b4',
+            color: '#6034FD',
           },
         }}
         />

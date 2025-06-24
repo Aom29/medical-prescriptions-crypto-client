@@ -14,10 +14,10 @@ function M_GCInformation ({ paciente, nombreMedico, clinica, especialidad, cedul
           CURP: {paciente.curp}
         </Typography>
         <Typography>
-          Nombre del Paciente: {paciente.usuario.nombre}
+          Nombre del Paciente: {paciente.nombre}
         </Typography>
         <Typography>
-          Fecha de nacimiento: {paciente.usuario.fechaNacimiento}
+          Fecha de nacimiento: {paciente.fechaNacimiento}
         </Typography>
       </Stack>
 
