@@ -73,7 +73,7 @@ function P_PrescriptionDetail({ recetaId }) {
       <P_PInformation paciente={paciente} medico={medico} fechaEmision={receta.fechaEmision} />
       
       {/* Botón para ver farmacéuticos cuando la receta no ha sido surtida */}
-      <P_PCButton surtida={receta.surtida} fechaSurtido={receta.fechaSurtido} />
+      <P_PCButton surtida={receta.surtida} fechaSurtido={receta.fechaSurtido} recetaId={recetaId} />
 
       {/* Espacio para ver el diagnóstico del paciente */}
       <P_PDiagnosis diagnostico={receta.diagnostico} />
