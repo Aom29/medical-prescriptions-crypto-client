@@ -3,7 +3,7 @@ import { Box, Stack, Typography }  from '@mui/material';
 function M_SCInformation ({ paciente }) {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginBottom: '50px' }}>  
-      <Stack direction='column' sx={{ width: {md: '60%', xs:'100%'}}}>
+      <Stack direction='column' sx={{ width:'100%'}}>
         <Typography variant='body1' fontWeight='bold' color='#4224B0'>
           Matrícula: {paciente.matricula}
         </Typography>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, Stack, List, ListItemButton, Divider, Typography, Box, Dialog, IconButton, DialogTitle, DialogContent }  from '@mui/material';
 import M_SCInformation from './M_SCInformation';
 import M_SCHistory from './M_SCHistory';
@@ -6,11 +6,44 @@ import ButtonsMod from '../../../layout/ButtonsMod';
 import Subtitle from '../../../layout/Subtitle';
 import M_GMain from '../../M_GeneratePrescription/M_GMain';
 
+import { useAuth } from '../../../../context/Auth/AuthContext';
+import Usuario from '../../../../services/user/Usuario';
+
 function M_SCMain ({ paciente }) {
+  const { auth } = useAuth();
   const [openModal, setOpenModal] = useState(false);
 
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
+
+  const [recetas, setRecetas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+  useEffect(() => {
+    const fetchRecetas = async () => {
+      if (!paciente) return;
+      try {
+        const response = await Usuario.getRecetas(paciente.id, auth.token);
+        console.log('Response: ', response);
+        if (response.status >= 400) {
+          const message = response.message || 'Error desconocido';
+          setError(message);
+          return;
+        }
+
+        setRecetas(response || []);
+        setError(null);
+      } catch (err) {
+        console.error('Error al obtener recetas:', err);
+        setError('No se pudo cargar el historial clínico.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecetas();
+  }, [auth, paciente]);
 
   if (!paciente) {
     return (
@@ -31,11 +64,11 @@ function M_SCMain ({ paciente }) {
             {/* Información general del paciente ----------------- */}
             <M_SCInformation paciente={paciente} />
             {/* Botón para generar receta ------------------------ */}
-            <Box sx={{ display: 'flex', width: { md: '40%', xs: '100%' }, justifyContent: 'flex-end'}}>
+            <Box sx={{ display: 'flex', width: { md: '40%', xs: '100%' }, justifyContent: 'flex-end', marginBottom: {md: 0, xs: '30px' }}}>
               <ButtonsMod
                 variant='principal'
                 textCont='Generar receta'
-                width='10rem'
+                width='100%'
                 height='2.5rem'
                 clickEvent={handleOpen}
                 type='button'
@@ -47,23 +80,26 @@ function M_SCMain ({ paciente }) {
         <Stack direction='column'>
           {/* Historial Clínico -------------------------------- */}
           <Subtitle subtitulo='Historial Clínico' />
-          <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-            {paciente.recetas && paciente.recetas.length > 0 ? (
-              paciente.recetas.map((receta, index) => (
-                <div key={index}>
-                  <ListItemButton>
-                    <M_SCHistory
-                      fechaEmision={receta.fechaEmision}
-                      diagnostico={receta.diagnostico}
-                    />
-                  </ListItemButton>
-                  {index < paciente.recetas.length - 1 && <Divider />}
-                </div>
-              ))
-            ) : (
-              <Typography sx={{ padding: 2 }}>Este paciente no tiene recetas registradas.</Typography>
-            )}
-          </List>
+
+          {loading ? (
+            <Typography>Cargando historial...</Typography>
+          ) : error ? (
+            <Typography color="error">{error}</Typography>
+          ) : recetas.length === 0 ? (
+            <Typography>No se encontraron recetas.</Typography>
+          ) : (
+            <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+              {recetas.map((receta, index) => (
+                  <div key={index}>
+                    <ListItemButton>
+                      <M_SCHistory receta={receta} />
+                    </ListItemButton>
+                    {index < recetas.length - 1 && <Divider />}
+                  </div>
+              ))}
+            </List>
+          )}
+
         </Stack>
       </CardContent>
     </Card>

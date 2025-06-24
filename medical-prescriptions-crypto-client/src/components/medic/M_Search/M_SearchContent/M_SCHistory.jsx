@@ -3,7 +3,7 @@ import { Box, Stack, Typography }  from '@mui/material';
 import ButtonsMod from '../../../layout/ButtonsMod';
 import M_PDModal from '../../M_PrescriptionDetail/M_PDModal';
 
-function M_SCHistory ({fechaEmision, diagnostico}) {
+function M_SCHistory ({ receta }) {
   const [open, setOpen] = useState(false);
   
   return (
@@ -16,10 +16,10 @@ function M_SCHistory ({fechaEmision, diagnostico}) {
       <Stack sx={{ justifyContent: { sm: 'space-between' }, alignItems: 'center', width:'100%', flexDirection: {sm: 'row', xs: 'column'}}}>
         <Stack direction='column' sx={{ justifyContent: {xs: 'flex-start', width: { xs: '100%' }, alignContent: 'flex-start' }}}>
           <Typography>
-            Fecha de emisión: {fechaEmision}
+            ID Receta: {receta.id}
           </Typography>
           <Typography>
-            Diagnóstico: {diagnostico}
+            Fecha de emisión: {receta.fechaEmision}
           </Typography>
         </Stack>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end'}}>

@@ -71,7 +71,7 @@ function M_PDModal ({ open, onClose, receta }) {
         <TextField
           disabled
           label='Firma médico'
-          defaultValue={receta.firmas.medico}
+          defaultValue=''
           multiline
           sx={{
             marginBottom: '15px', width: '100%',
