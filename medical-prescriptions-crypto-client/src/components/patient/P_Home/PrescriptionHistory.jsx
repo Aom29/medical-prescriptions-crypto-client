@@ -43,7 +43,7 @@ function PrescriptionHistory ({ receta }) {
       </DialogTitle>
       <DialogContent>
         {/* Aquí se muestran todos los detalles ------------------------- */}
-        <P_PrescriptionDetail recetaId={receta.id} />
+        <P_PrescriptionDetail recetaId={receta.id} onClose={handleClose} />
       </DialogContent>
     </Dialog>
     </>

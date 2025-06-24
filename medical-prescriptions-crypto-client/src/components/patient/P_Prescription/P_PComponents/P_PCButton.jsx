@@ -6,7 +6,7 @@ import Farmaceutico from '../../../../services/pharmacist/Farmaceutico';
 import { useAlert } from '../../../../context/Alert/AlertContext';
 import Patient from '../../../../services/patient/patient';
 
-function P_PCButton ({ surtida, fechaSurtido, recetaId }) {
+function P_PCButton ({ surtida, fechaSurtido, recetaId, onClose }) {
   const [open, setOpen] = useState(false);
   const [farmaceuticos, setFarmaceuticos] = useState([]);
   const [idFarmaceuticos, setIdFarmaceuticos] = useState(null);
@@ -47,9 +47,13 @@ function P_PCButton ({ surtida, fechaSurtido, recetaId }) {
       if(response.status >= 400) {
         if(response.errors) {
           const errorValidation = Object.values(response.errors)[0];
-          // showAlert(errorValidation, 'error');
+          setOpen(false);
+          onClose();
+          showAlert(errorValidation, 'error');
         } else {
-          // showAlert(response.message, 'error');
+          setOpen(false);
+          onClose();
+          showAlert(response.message, 'error');
         }
         return;
       }
