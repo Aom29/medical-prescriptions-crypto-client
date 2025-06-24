@@ -14,6 +14,7 @@ function M_GCMedicament({ id, data, showDelete, onDelete, onChange }) {
       <Stack direction='row' sx={{ width: '100%', marginBottom: '15px' }}>
         <TextField
           label='Nombre del medicamento'
+          autoComplete='off'
           value={nombre}
           onChange={(e) => handleInputChange(e, 'nombre')}
           fullWidth
@@ -23,6 +24,7 @@ function M_GCMedicament({ id, data, showDelete, onDelete, onChange }) {
       <Stack direction={{ md: 'row', xs: 'column' }} sx={{ marginBottom: '15px' }}>
         <TextField
           label='Dosis'
+          autoComplete='off'
           value={dosis}
           onChange={(e) => handleInputChange(e, 'dosis')}
           fullWidth
@@ -32,6 +34,7 @@ function M_GCMedicament({ id, data, showDelete, onDelete, onChange }) {
       <Stack direction={{ md: 'row', xs: 'column' }} sx={{ marginBottom: '15px' }}>
         <TextField
           label='Duración'
+          autoComplete='off'
           value={duracion}
           onChange={(e) => handleInputChange(e, 'duracion')}
           fullWidth
@@ -41,6 +44,7 @@ function M_GCMedicament({ id, data, showDelete, onDelete, onChange }) {
       <Stack direction={{ md: 'row', xs: 'column' }} sx={{ marginBottom: '15px' }}>
         <TextField
           label='Frecuencia'
+          autoComplete='off'
           value={frecuencia}
           onChange={(e) => handleInputChange(e, 'frecuencia')}
           fullWidth

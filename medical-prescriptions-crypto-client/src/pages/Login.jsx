@@ -126,6 +126,7 @@ const Login = () => {
                     label='Correo electrónico'
                     placeholder='Ej. user@example.com'
                     onChange={handleChange}
+                    autoComplete='off'
                     name='email'
                     value={formData.email}
                     slotProps={{
@@ -150,6 +151,7 @@ const Login = () => {
                     placeholder='Ingresa tu contraseña'
                     onChange={handleChange}
                     name='password'
+                    autoComplete='off'
                     value={formData.password}
                     slotProps={{
                       input: {

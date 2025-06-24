@@ -8,6 +8,7 @@ function M_GCDiagnosis ({ value, onChange }) {
       multiline
       rows={3}
       placeholder='Ej. Gastritis'
+      autoComplete='off'
       value={value}
       onChange={(e) => onChange(e.target.value)}
     />

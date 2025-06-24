@@ -51,6 +51,7 @@ function M_SearchMain ({ setView }) {
         <Stack direction='row' sx={{ display: 'flex', justifyContent: {md: 'flex-end', xs: 'center' }, alignItems: 'center', width: '100%' }}>
           <TextField
             value={matricula}
+            autoComplete='off'
             onChange={(e) => setMatricula(e.target.value)}
             id='filled-basic'
             label='Buscar Matrícula'
