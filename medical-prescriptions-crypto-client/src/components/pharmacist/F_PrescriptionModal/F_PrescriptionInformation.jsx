@@ -1,6 +1,6 @@
 import { Stack, Typography }  from '@mui/material';
 
-function F_PrescriptionInformation ({ matricula, nombrePaciente, sexo, fechaEmision, nombreMedico, clinica, especialidad, cedula }) {
+function F_PrescriptionInformation ({ matricula, nombrePaciente, fechaEmision, nombreMedico, clinica, especialidad, cedula }) {
   return (
     <Stack direction={{ md: 'row', xs: 'column' }} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
 
@@ -14,9 +14,6 @@ function F_PrescriptionInformation ({ matricula, nombrePaciente, sexo, fechaEmis
         </Typography>
         <Typography>
           Nombre del Paciente: {nombrePaciente}
-        </Typography>
-        <Typography>
-          Sexo: {sexo}
         </Typography>
       </Stack>
 

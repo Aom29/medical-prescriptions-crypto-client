@@ -14,7 +14,6 @@ function F_PrescriptionModal ({ receta }) {
       <F_PrescriptionInformation
         matricula={receta.matricula}
         nombrePaciente={receta.nombrePaciente}
-        sexo={receta.sexo}
         cedula={receta.cedula}
         nombreMedico={receta.nombreMedico}
         clinica={receta.clinica}
