@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { Box, Stack, Typography }  from '@mui/material';
+import { Box, Stack, Typography, Dialog, DialogTitle, DialogContent }  from '@mui/material';
 import ButtonsMod from '../../../layout/ButtonsMod';
 import M_PDModal from '../../M_PrescriptionDetail/M_PDModal';
-
+/* ------------------------------------------ COMPONENTE PARA VER LOS DETALLES DE LA RECETA --------------------------------------- */
 function M_SCHistory ({ receta }) {
-  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => setOpenModal(false);
+
   return (
     <>
     <Box sx={{
@@ -31,34 +34,30 @@ function M_SCHistory ({ receta }) {
             textCont='Ver detalles'
             width='10rem'
             height='2.5rem'
-            clickEvent={() => setOpen(true)}
+            clickEvent={handleOpen}
             type=''
           />
         </Box>
       </Stack>
     </Box>
 
-    <M_PDModal
-      open={open}
-      onClose={() => setOpen(false)}
-      receta={{
-        matricula: '392039029304',
-        curp: '2329832938',
-        nombrePaciente: 'Sergio martínez de la nieves',
-        fechaNacimiento: '03/05/1293',
-        sexo: 'Indefinido',
-        cedula: '2390290329',
-        nombreMedico: 'Sergino Fininino',
-        clinica: 'escom',
-        especialidad: 'alta especialidad',
-        fechaEmision: '03/04/2025',
-        diagnostico: 'Lorem ipsum dolor sit amet...'
-      }}
-      medicamentos={[
-        { nombre: 'Paracetamol', dosis: '500mg', duracion: '5 días', frecuencia: 'cada 8h' },
-        { nombre: 'Ibuprofeno', dosis: '200mg', duracion: '3 días', frecuencia: 'cada 6h' },
-      ]}
-    />
+    {/* Modal con detalles de la receta ------------------------------- */}
+    <Dialog open={openModal} onClose={handleClose} fullWidth maxWidth="md">
+      <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#6034FD' }}>
+        ID Receta: {receta.id}
+        <ButtonsMod
+          variant='secundario'
+          textCont='Cerrar'
+          width='auto'
+          clickEvent={handleClose}
+          type='button'
+        />
+      </DialogTitle>
+      <DialogContent>
+        {/* Aquí se muestran todos los detalles ------------------------- */}
+        <M_PDModal receta={receta.id} />
+      </DialogContent>
+    </Dialog>
     </>
   );
 };
