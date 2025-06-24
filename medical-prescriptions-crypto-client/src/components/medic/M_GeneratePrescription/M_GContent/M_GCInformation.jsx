@@ -1,6 +1,7 @@
 import { Stack, Typography }  from '@mui/material';
 
 function M_GCInformation ({ paciente, nombreMedico, clinica, especialidad, cedula }) {
+  console.log('paciente: ', paciente);
   return (
     <Stack direction={{ md: 'row', xs: 'column' }} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
 
@@ -13,10 +14,10 @@ function M_GCInformation ({ paciente, nombreMedico, clinica, especialidad, cedul
           CURP: {paciente.curp}
         </Typography>
         <Typography>
-          Nombre del Paciente: {paciente.nombre}
+          Nombre del Paciente: {paciente.usuario.nombre}
         </Typography>
         <Typography>
-          Fecha de nacimiento: {paciente.fechaNacimiento}
+          Fecha de nacimiento: {paciente.usuario.fechaNacimiento}
         </Typography>
       </Stack>
 

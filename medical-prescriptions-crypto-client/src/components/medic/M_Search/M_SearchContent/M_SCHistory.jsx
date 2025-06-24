@@ -9,6 +9,7 @@ function M_SCHistory ({ receta }) {
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
 
+  console.log('Datos de la receta: ', receta);
   return (
     <>
     <Box sx={{
@@ -55,7 +56,7 @@ function M_SCHistory ({ receta }) {
       </DialogTitle>
       <DialogContent>
         {/* Aquí se muestran todos los detalles ------------------------- */}
-        <M_PDModal receta={receta.id} />
+        <M_PDModal recetaId={receta.id} />
       </DialogContent>
     </Dialog>
     </>

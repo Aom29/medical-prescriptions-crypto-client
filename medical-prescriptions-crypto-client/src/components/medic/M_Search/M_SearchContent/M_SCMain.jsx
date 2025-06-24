@@ -22,6 +22,7 @@ function M_SCMain ({ paciente }) {
   
   useEffect(() => {
     const fetchRecetas = async () => {
+      console.log('Fetching recetas for paciente:', paciente);
       if (!paciente) return;
       try {
         const response = await Usuario.getRecetas(paciente.id, auth.token);
