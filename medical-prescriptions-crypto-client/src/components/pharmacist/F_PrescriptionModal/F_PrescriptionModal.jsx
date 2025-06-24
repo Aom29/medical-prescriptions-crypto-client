@@ -1,17 +1,17 @@
 import { Box, Divider, DialogContent, TextField } from '@mui/material';
 import Subtitle from '../../layout/Subtitle';
-import F_PMInformation from './F_PMContent/F_PMInformation';
+import F_PrescriptionInformation from './F_PrescriptionInformation';
 import P_PDiagnosis from '../../patient/P_Prescription/P_PContent/P_PDiagnosis';
 import P_PTreatment from '../../patient/P_Prescription/P_PContent/P_PTreatment';
 import ButtonsMod from '../../layout/ButtonsMod';
 
-function F_PMMain ({ receta }) {
+function F_PrescriptionModal ({ receta }) {
 
   return (
     <DialogContent>
       {/* Información general de la receta ------------------- */}
       <Subtitle subtitulo='Información de la receta' />
-      <F_PMInformation
+      <F_PrescriptionInformation
         matricula={receta.matricula}
         nombrePaciente={receta.nombrePaciente}
         sexo={receta.sexo}
@@ -30,7 +30,9 @@ function F_PMMain ({ receta }) {
       <Divider sx={{ marginTop: '30px', marginBottom: '30px'}} />
       {/* Tratamiento ---------------------------------------- */}
       <Subtitle subtitulo='Tratamiento' />
-      <P_PTreatment medicamento='' />
+      {(receta.tratamiento || []).map((med, idx) => (
+        <P_PTreatment key={idx} medicamento={med} />
+      ))}
         
       
 
@@ -60,4 +62,4 @@ function F_PMMain ({ receta }) {
   );
 }
 
-export default F_PMMain;
+export default F_PrescriptionModal;

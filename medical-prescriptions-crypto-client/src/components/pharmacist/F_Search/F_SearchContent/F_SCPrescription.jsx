@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Stack, Typography, Dialog, DialogTitle } from '@mui/material';
 import ButtonsMod from '../../../layout/ButtonsMod';
-import F_PMMain from '../../F_PrescriptionModal/F_PMMain';
+import F_PrescriptionModal from '../../F_PrescriptionModal/F_PrescriptionModal';
 
 function F_SCPrescription ({ receta }) {
   const [openModal, setOpenModal] = useState(false);
@@ -50,7 +50,7 @@ function F_SCPrescription ({ receta }) {
         />
       </DialogTitle>
 
-      <F_PMMain receta={receta} />
+      <F_PrescriptionModal receta={receta} />
     </Dialog>
     
     </>
