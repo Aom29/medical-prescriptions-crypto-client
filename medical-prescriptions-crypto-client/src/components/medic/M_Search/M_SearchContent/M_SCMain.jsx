@@ -117,8 +117,8 @@ function M_SCMain ({ paciente }) {
           type='button'
         />       
       </DialogTitle>
-      <DialogContent>
-        <M_GMain paciente={paciente}/>
+      <DialogContent> 
+        <M_GMain paciente={paciente} onClose={handleClose} />
       </DialogContent>
     </Dialog>
     </>

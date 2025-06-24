@@ -11,7 +11,7 @@ import { useAuth } from '../../../context/Auth/AuthContext';
 import Prescriptions from '../../../services/prescriptions/prescriptions.service.js';
 import { useAlert } from '../../../context/Alert/AlertContext.jsx';
 
-function M_GMain ({ paciente }) {
+function M_GMain ({ paciente, onClose }) {
   const [diagnostico, setDiagnostico] = useState('');
   const [tratamientoState, setTratamientoState] = useState([]);
   const [privateKey, setPrivateKey] = useState(null);
@@ -61,9 +61,12 @@ function M_GMain ({ paciente }) {
         return;
       }
 
-      showAlert('Receta generada y firmada correctamente', 'success');
       setOpenPasswordDialog(false);
+      onClose();
+      showAlert('Receta generada y firmada correctamente', 'success');
     } catch (error) {
+      setOpenPasswordDialog(false);
+      onClose();
       showAlert('Error al firmar la receta: ' + error.message, 'error');
     }
 
