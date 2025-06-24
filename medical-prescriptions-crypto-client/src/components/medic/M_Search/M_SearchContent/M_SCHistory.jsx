@@ -21,6 +21,9 @@ function M_SCHistory ({ receta }) {
           <Typography>
             Fecha de emisión: {receta.fechaEmision}
           </Typography>
+          <Typography>
+            Clínica: {receta.clinica}
+          </Typography>
         </Stack>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end'}}>
           <ButtonsMod

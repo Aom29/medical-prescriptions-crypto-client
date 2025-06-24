@@ -107,7 +107,7 @@ function M_SCMain ({ paciente }) {
 
     {/* Modal para generar receta ------------------------------------------------------ */}
     <Dialog open={openModal} onClose={handleClose} maxWidth='md' fullWidth>
-      <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#00a1b4' }}>
+      <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#6034FD' }}>
         Generar receta
         <ButtonsMod
           variant='secundario'
