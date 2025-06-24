@@ -1,10 +1,16 @@
 import { useState } from 'react';
-import { Card, CardContent, Stack, List, ListItemButton, Divider, Typography }  from '@mui/material';
+import { Card, CardContent, Stack, List, ListItemButton, Divider, Typography, Box, Dialog, IconButton, DialogTitle, DialogContent }  from '@mui/material';
 import M_SCInformation from './M_SCInformation';
 import M_SCHistory from './M_SCHistory';
+import ButtonsMod from '../../../layout/ButtonsMod';
 import Subtitle from '../../../layout/Subtitle';
+import M_GMain from '../../M_GeneratePrescription/M_GMain';
 
-function M_SCMain ({ setView, paciente }) {
+function M_SCMain ({ paciente }) {
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => setOpenModal(false);
 
   if (!paciente) {
     return (
@@ -14,25 +20,28 @@ function M_SCMain ({ setView, paciente }) {
     );
   }
 
-
   return (
-    <Card
-      sx={{
-        borderRadius: 2,
-        marginBottom: '50px',
-        padding: '2%',
-      }}>
+    <>
+    <Card sx={{ borderRadius: 2, marginBottom: '50px', padding: '2%' }}>
 
       <CardContent>
         <Stack direction='column'>
-          {/* Información general del paciente ----------------- */}
           <Subtitle subtitulo='Información general del paciente' />
-          <M_SCInformation
-            paciente={paciente}
-            onGenerate={() => {
-              setView('generate');
-            }}
-          />
+          <Stack direction='row' sx={{ display: 'flex', width: '100%', flexDirection: {md: 'row', xs: 'column'}, justifyContent: 'space-between' }}>
+            {/* Información general del paciente ----------------- */}
+            <M_SCInformation paciente={paciente} />
+            {/* Botón para generar receta ------------------------ */}
+            <Box sx={{ display: 'flex', width: { md: '40%', xs: '100%' }, justifyContent: 'flex-end'}}>
+              <ButtonsMod
+                variant='principal'
+                textCont='Generar receta'
+                width='10rem'
+                height='2.5rem'
+                clickEvent={handleOpen}
+                type='button'
+              />
+            </Box>
+          </Stack>
         </Stack>
 
         <Stack direction='column'>
@@ -46,7 +55,6 @@ function M_SCMain ({ setView, paciente }) {
                     <M_SCHistory
                       fechaEmision={receta.fechaEmision}
                       diagnostico={receta.diagnostico}
-                      setView={setView}
                     />
                   </ListItemButton>
                   {index < paciente.recetas.length - 1 && <Divider />}
@@ -59,6 +67,25 @@ function M_SCMain ({ setView, paciente }) {
         </Stack>
       </CardContent>
     </Card>
+
+
+    {/* Modal para generar receta ------------------------------------------------------ */}
+    <Dialog open={openModal} onClose={handleClose} maxWidth='md' fullWidth>
+      <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#00a1b4' }}>
+        Generar receta
+        <ButtonsMod
+          variant='secundario'
+          textCont='Cerrar'
+          width='auto'
+          clickEvent={handleClose}
+          type='button'
+        />       
+      </DialogTitle>
+      <DialogContent>
+        <M_GMain paciente={paciente}/>
+      </DialogContent>
+    </Dialog>
+    </>
   );
 };
 

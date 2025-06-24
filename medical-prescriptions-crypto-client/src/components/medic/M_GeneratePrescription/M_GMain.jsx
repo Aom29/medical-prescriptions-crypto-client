@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
-import { Card, CardContent, CardHeader, Stack, TextField, Box, Divider, Button, Dialog, DialogTitle, DialogContent, DialogActions, IconButton } from '@mui/material';
-import ArrowBack from '@mui/icons-material/ArrowBack';
+import { Stack, TextField, Box, Divider, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 //* Componentes
 import M_GCInformation from './M_GContent/M_GCInformation';
 import M_GCDiagnosis from './M_GContent/M_GCDiagnosis';
@@ -12,7 +11,7 @@ import { useAuth } from '../../../context/Auth/AuthContext';
 import Prescriptions from '../../../services/prescriptions/prescriptions.service.js';
 import { useAlert } from '../../../context/Alert/AlertContext.jsx';
 
-function M_GMain ({ setView, paciente }) {
+function M_GMain ({ paciente }) {
   const [diagnostico, setDiagnostico] = useState('');
   const [tratamientoState, setTratamientoState] = useState([]);
   const [privateKey, setPrivateKey] = useState(null);
@@ -71,84 +70,75 @@ function M_GMain ({ setView, paciente }) {
   };
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Card sx={{ width: { md: '80%', xs: '100%' }, padding: '2%' }}>
-        <IconButton onClick={() => setView('buscar')} sx={{ alignSelf: 'flex-start' }}>
-          <ArrowBack />
-        </IconButton>
+    <Stack direction='column' sx={{ display: 'flex', justifyContent: 'center', padding: '2%' }}>
+      {/* Datos generales ---------------------- */}
+      <Stack direction="column" sx={{ marginBottom: '30px' }}>
+        <Subtitle subtitulo='Datos generales'/>
+        <M_GCInformation
+          paciente={paciente}
+          fechaEmision="11/06/2025"
+          nombreMedico="Paolina Olvera"
+          clinica="Clínica de Iztapalacra"
+          especialidad="Alta especialidad"
+          cedula="299309403"
+        />
+      </Stack>
 
-        <CardHeader title='Generar receta' />
-        <CardContent>
-          {/* Datos generales ---------------------- */}
-          <Stack direction="column" sx={{ marginBottom: '30px' }}>
-            <Subtitle subtitulo='Datos generales'/>
-            <M_GCInformation
-              paciente={paciente}
-              fechaEmision="11/06/2025"
-              nombreMedico="Paolina Olvera"
-              clinica="Clínica de Iztapalacra"
-              especialidad="Alta especialidad"
-              cedula="299309403"
-            />
-          </Stack>
+      <Divider />
 
-          <Divider />
+      {/* Diagnóstico ---------------------- */}
+      <Stack direction="column" sx={{ marginTop: '30px', marginBottom: '30px' }}>
+        <Subtitle subtitulo='Diagnóstico'/>
+        <M_GCDiagnosis value={diagnostico} onChange={setDiagnostico} />
+      </Stack>
 
-          {/* Diagnóstico ---------------------- */}
-          <Stack direction="column" sx={{ marginTop: '30px', marginBottom: '30px' }}>
-            <Subtitle subtitulo='Diagnóstico'/>
-            <M_GCDiagnosis value={diagnostico} onChange={setDiagnostico} />
-          </Stack>
+      <Divider />
 
-          <Divider />
+      {/* Tratamiento ---------------------- */}
+      <Stack direction="column" sx={{ marginTop: '30px', marginBottom: '30px' }}>
+        <Subtitle subtitulo='Tratamiento'/>
+        <M_GCTreatment value={tratamientoState} onChange={setTratamientoState} />
+      </Stack>
 
-          {/* Tratamiento ---------------------- */}
-          <Stack direction="column" sx={{ marginTop: '30px', marginBottom: '30px' }}>
-            <Subtitle subtitulo='Tratamiento'/>
-            <M_GCTreatment value={tratamientoState} onChange={setTratamientoState} />
-          </Stack>
+      <Divider />
 
-          <Divider />
-
-          <Box sx={{ marginTop: '30px', width: '100%' }}>
-            <ButtonsMod
-              variant="principal"
-              textCont="Generar y firmar receta"
-              height="2.5rem"
-              width="100%"
-              clickEvent={handleGenerateAndSign}
-              type="button"
-            />
-          </Box>
+      <Box sx={{ marginTop: '30px', width: '100%' }}>
+        <ButtonsMod
+          variant="principal"
+          textCont="Generar y firmar receta"
+          height="2.5rem"
+          width="100%"
+          clickEvent={handleGenerateAndSign}
+          type="button"
+        />
+      </Box>
 
 
-          {/* HACER COMPONENTE MÁS BONITO */}
-          <Dialog open={openPasswordDialog} onClose={() => setOpenPasswordDialog(false)}>
-            <DialogTitle>Ingresa tu contraseña</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                margin="dense"
-                label="Contraseña"
-                type="password"
-                fullWidth
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                variant="standard"
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => setOpenPasswordDialog(false)} color="primary">
-                Cancelar
-              </Button>
-              <Button onClick={handlePasswordSubmit} color="primary">
-                Aceptar
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </CardContent>
-      </Card>
-    </Box>
+      {/* HACER COMPONENTE MÁS BONITO */}
+      <Dialog open={openPasswordDialog} onClose={() => setOpenPasswordDialog(false)}>
+        <DialogTitle>Ingresa tu contraseña</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Contraseña"
+            type="password"
+            fullWidth
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenPasswordDialog(false)} color="primary">
+            Cancelar
+          </Button>
+          <Button onClick={handlePasswordSubmit} color="primary">
+            Aceptar
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Stack>
   );
 }
 

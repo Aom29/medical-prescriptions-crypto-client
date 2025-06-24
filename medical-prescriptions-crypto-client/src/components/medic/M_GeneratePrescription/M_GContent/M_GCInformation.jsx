@@ -1,15 +1,15 @@
 import { Stack, Typography }  from '@mui/material';
 
-function M_GCInformation ({ paciente, fechaEmision, nombreMedico, clinica, especialidad, cedula }) {
+function M_GCInformation ({ paciente, nombreMedico, clinica, especialidad, cedula }) {
   return (
     <Stack direction={{ md: 'row', xs: 'column' }} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
 
       {/* Datos paciente ------------------------- */}
       <Stack direction='column' sx={{ marginBottom: { md: '0px', xs: '30px' }, marginRight: { md: '50px', xs: '0px' } }}>
-        <Typography fontWeight='bold' color='#4224B0'>
+        <Typography fontWeight='bold'>
           Matrícula {paciente.matricula}
         </Typography>
-        <Typography fontWeight='bold'>
+        <Typography>
           CURP: {paciente.curp}
         </Typography>
         <Typography>
@@ -22,7 +22,7 @@ function M_GCInformation ({ paciente, fechaEmision, nombreMedico, clinica, espec
 
       {/* Datos médico y generales ----------------- */}
       <Stack direction='column'>
-        <Typography fontWeight={'bold'} color='#4224B0'>
+        <Typography>
           Cédula Profesional: {cedula}
         </Typography>
         <Typography>
