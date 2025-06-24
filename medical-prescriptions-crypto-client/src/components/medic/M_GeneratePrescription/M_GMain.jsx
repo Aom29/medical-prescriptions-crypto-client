@@ -11,7 +11,7 @@ import { useAuth } from '../../../context/Auth/AuthContext';
 import Prescriptions from '../../../services/prescriptions/prescriptions.service.js';
 import { useAlert } from '../../../context/Alert/AlertContext.jsx';
 
-function M_GMain ({ paciente }) {
+function M_GMain ({ paciente, onClose }) {
   const [diagnostico, setDiagnostico] = useState('');
   const [tratamientoState, setTratamientoState] = useState([]);
   const [privateKey, setPrivateKey] = useState(null);
@@ -61,9 +61,12 @@ function M_GMain ({ paciente }) {
         return;
       }
 
-      showAlert('Receta generada y firmada correctamente', 'success');
       setOpenPasswordDialog(false);
+      onClose();
+      showAlert('Receta generada y firmada correctamente', 'success');
     } catch (error) {
+      setOpenPasswordDialog(false);
+      onClose();
       showAlert('Error al firmar la receta: ' + error.message, 'error');
     }
 
@@ -76,11 +79,10 @@ function M_GMain ({ paciente }) {
         <Subtitle subtitulo='Datos generales'/>
         <M_GCInformation
           paciente={paciente}
-          fechaEmision="11/06/2025"
-          nombreMedico="Paolina Olvera"
-          clinica="Clínica de Iztapalacra"
-          especialidad="Alta especialidad"
-          cedula="299309403"
+          nombreMedico={auth.nombre}
+          clinica={auth.clinica}
+          especialidad={auth.especialidad}
+          cedula={auth.cedula}
         />
       </Stack>
 

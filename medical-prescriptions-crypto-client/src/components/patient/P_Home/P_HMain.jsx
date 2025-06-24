@@ -10,10 +10,6 @@ import { useAuth } from '../../../context/Auth/AuthContext';
 function P_HMain() {
   const { auth } = useAuth();
 
-  const [datosPaciente, setDatosPaciente] = useState({
-    nombre: auth?.nombre || ''
-  });
-
   const [recetas, setRecetas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -57,7 +53,7 @@ function P_HMain() {
         <CardContent>
           {/* Información general del paciente ---------------- */}
           <Subtitle subtitulo='Información general' />
-          <PatientInformation datosPaciente={datosPaciente} />
+          <PatientInformation/>
 
           <Subtitle subtitulo='Historial clínico' />
 

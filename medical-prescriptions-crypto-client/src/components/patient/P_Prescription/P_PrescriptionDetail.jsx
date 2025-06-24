@@ -14,7 +14,7 @@ import { decryptWithPasswordAndWrappedKey } from '../../../services/crypto/aesgc
 import KeyStorage from '../../../services/crypto/cryptoKeyStorage';
 import { getDerivedKeyFromStorage } from '../../../services/crypto/patient.keys.service';
 
-function P_PrescriptionDetail({ recetaId }) {
+function P_PrescriptionDetail({ recetaId, onClose }) {
   const { auth, userPassword } = useAuth();
   const [receta, setReceta] = useState(null);
   const [paciente, setPaciente] = useState(null);
@@ -73,7 +73,7 @@ function P_PrescriptionDetail({ recetaId }) {
       <P_PInformation paciente={paciente} medico={medico} fechaEmision={receta.fechaEmision} />
       
       {/* Botón para ver farmacéuticos cuando la receta no ha sido surtida */}
-      <P_PCButton surtida={receta.surtida} fechaSurtido={receta.fechaSurtido} recetaId={recetaId} />
+      <P_PCButton surtida={receta.surtida} fechaSurtido={receta.fechaSurtido} recetaId={recetaId} onClose={onClose}/>
 
       {/* Espacio para ver el diagnóstico del paciente */}
       <P_PDiagnosis diagnostico={receta.diagnostico} />
