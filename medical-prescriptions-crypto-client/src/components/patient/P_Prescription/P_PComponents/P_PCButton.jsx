@@ -3,11 +3,15 @@ import { Box, Typography, Dialog, DialogTitle, DialogContent, Divider, List, Lis
 import ButtonsMod from '../../../layout/ButtonsMod';
 import { useAuth } from '../../../../context/Auth/AuthContext';
 import Farmaceutico from '../../../../services/pharmacist/Farmaceutico';
+import { useAlert } from '../../../../context/Alert/AlertContext';
+import Patient from '../../../../services/patient/Patient';
 
-function P_PCButton ({ surtida, fechaSurtido }) {
+function P_PCButton ({ surtida, fechaSurtido, recetaId }) {
   const [open, setOpen] = useState(false);
   const [farmaceuticos, setFarmaceuticos] = useState([]);
+  const [idFarmaceuticos, setIdFarmaceuticos] = useState(null);
   const { auth } = useAuth();
+  const { showAlert } = useAlert();
 
   const handleOpen = async() => {
     const lista = await Farmaceutico.getFarmaceuticos(auth.token);
@@ -20,6 +24,7 @@ function P_PCButton ({ surtida, fechaSurtido }) {
     }));
   
     setFarmaceuticos(listaConPermisos);
+    setIdFarmaceuticos(lista.map(f => f.id));
 
     setOpen(true);
   }
@@ -28,12 +33,30 @@ function P_PCButton ({ surtida, fechaSurtido }) {
     setOpen(false);
   }
 
-  const togglePermisos = (index) => {
+  const togglePermisos = async(index) => {
     setFarmaceuticos((prev) =>
       prev.map((f, i) =>
         i === index ? { ...f, permisosOtorgados: !f.permisosOtorgados} : f
       )
     )
+    if (!farmaceuticos[index].permisosOtorgados) {
+      console.log(farmaceuticos[index]);
+      console.log(idFarmaceuticos[index]);
+      const password = prompt('Ingrese su contraseña para otorgar permisos:');
+      const response = await Patient.grantAccessToPharmacist(recetaId, idFarmaceuticos[index], password, auth.token);
+      if(response.status >= 400) {
+        if(response.errors) {
+          const errorValidation = Object.values(response.errors)[0];
+          // showAlert(errorValidation, 'error');
+        } else {
+          // showAlert(response.message, 'error');
+        }
+        return;
+      }
+      // showAlert('Permisos otorgados correctamente', 'success');
+    } else {
+      console.log('quitar permisos');
+    }
   }
 
   if (surtida) {
