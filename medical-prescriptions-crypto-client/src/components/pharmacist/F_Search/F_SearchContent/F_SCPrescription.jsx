@@ -18,11 +18,14 @@ function F_SCPrescription ({ receta }) {
     }}>
       <Stack sx={{ justifyContent: { sm: 'space-between' }, alignItems: 'center', width:'100%', flexDirection: {sm: 'row', xs: 'column'}}}>
         <Stack direction='column' sx={{ justifyContent: {xs: 'flex-start', width: { xs: '100%' }, alignContent: 'flex-start' }}}>
+          <Typography fontWeight='bold'>
+            ID Receta: {receta.id}
+          </Typography>
           <Typography>
             Fecha de emisión: {receta.fechaEmision}
           </Typography>
           <Typography>
-            Diagnóstico: {receta.diagnostico}
+            Clínica: {receta.clinica}
           </Typography>
         </Stack>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end'}}>
@@ -50,7 +53,7 @@ function F_SCPrescription ({ receta }) {
         />
       </DialogTitle>
 
-      <F_PrescriptionModal receta={receta} />
+      <F_PrescriptionModal recetaId={receta.id} />
     </Dialog>
     
     </>

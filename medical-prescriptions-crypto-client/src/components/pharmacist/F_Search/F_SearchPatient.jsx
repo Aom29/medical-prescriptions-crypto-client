@@ -13,7 +13,6 @@ function F_SearchPatient () {
   const [matricula, setMatricula] = useState('');
   
   const handleBuscar = async (e) => {
-    console.log(auth.token);
     const data = await Usuario.getUsuarios(matricula, auth.token);
     console.log('data', data);
 
@@ -22,8 +21,9 @@ function F_SearchPatient () {
         nuevoPaciente.nombre = data.name
         nuevoPaciente.fechaNacimiento = data.fechaNacimiento
         nuevoPaciente.curp = data.curp
-        nuevoPaciente.recetas = []  
+        nuevoPaciente.recetas = await Usuario.getRecetas(auth.userId, auth.token) || [];
 
+    console.log('recetas', nuevoPaciente.recetas);
     setPaciente(nuevoPaciente);
 
     return;

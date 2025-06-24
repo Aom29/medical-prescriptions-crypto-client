@@ -30,7 +30,7 @@ function F_HButtonsKeys () {
       keyType: 'EdDSA',
       publicKey: publicKey,
     }
-    const response = await Auth.savePublicKey(data);
+    const response = await Auth.savePublicKey(data, auth.token);
     if(response.status >= 400) {
       if(response.errors) {
         const errorValidation = Object.values(response.errors)[0];
@@ -49,7 +49,7 @@ function F_HButtonsKeys () {
       keyType: 'ECDH',
       publicKey: publicBase64,
     }
-    const dhResponse = await Auth.savePublicKey(dhData);
+    const dhResponse = await Auth.savePublicKey(dhData, auth.token);
     if(dhResponse.status >= 400) {
       if(dhResponse.errors) {
         const errorValidation = Object.values(dhResponse.errors)[0];
