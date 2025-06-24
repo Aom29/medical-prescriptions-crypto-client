@@ -4,7 +4,7 @@ import ButtonsMod from '../../../layout/ButtonsMod';
 import { useAuth } from '../../../../context/Auth/AuthContext';
 import Farmaceutico from '../../../../services/pharmacist/Farmaceutico';
 import { useAlert } from '../../../../context/Alert/AlertContext';
-import Patient from '../../../../services/patient/Patient';
+import Patient from '../../../../services/patient/patient';
 
 function P_PCButton ({ surtida, fechaSurtido, recetaId }) {
   const [open, setOpen] = useState(false);
