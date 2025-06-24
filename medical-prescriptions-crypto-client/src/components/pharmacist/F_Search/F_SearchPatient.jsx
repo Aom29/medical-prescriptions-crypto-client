@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Stack, Card, Box, TextField, InputAdornment } from '@mui/material';
-import F_SCMain from './F_SearchContent/F_SCMain';
+import F_PatientInformation from './F_SearchContent/F_PatientInformation';
 import ButtonsMod from '../../layout/ButtonsMod';
 import background from '../../../img/pharmacist.jpg';
 
 import { useAuth } from '../../../context/Auth/AuthContext';
 import Usuario from '../../../services/user/Usuario';
 
-function F_SearchMain () {
+function F_SearchPatient () {
   const { auth } = useAuth();
   const [paciente, setPaciente] = useState(null);
   const [matricula, setMatricula] = useState('');
@@ -77,9 +77,9 @@ function F_SearchMain () {
       </Card>
       
       {/* Aquí se muestra la información del paciente ---------------------------------------------------- */}
-      <F_SCMain paciente={paciente}/>
+      <F_PatientInformation paciente={paciente}/>
     </Stack> 
   );
 }
 
-export default F_SearchMain;
+export default F_SearchPatient;

@@ -1,10 +1,14 @@
 import { useState } from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, Dialog, DialogTitle } from '@mui/material';
 import ButtonsMod from '../../../layout/ButtonsMod';
 import F_PMMain from '../../F_PrescriptionModal/F_PMMain';
 
 function F_SCPrescription ({ receta }) {
-  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => setOpenModal(false);
+
   return (
     <>
     <Box sx={{
@@ -15,7 +19,7 @@ function F_SCPrescription ({ receta }) {
       <Stack sx={{ justifyContent: { sm: 'space-between' }, alignItems: 'center', width:'100%', flexDirection: {sm: 'row', xs: 'column'}}}>
         <Stack direction='column' sx={{ justifyContent: {xs: 'flex-start', width: { xs: '100%' }, alignContent: 'flex-start' }}}>
           <Typography>
-            Fecha de emisión: {receta.fecha_emision}
+            Fecha de emisión: {receta.fechaEmision}
           </Typography>
           <Typography>
             Diagnóstico: {receta.diagnostico}
@@ -27,34 +31,28 @@ function F_SCPrescription ({ receta }) {
             textCont='Ver detalles'
             width='10rem'
             height='2.5rem'
-            clickEvent={() => setOpen(true)}
+            clickEvent={handleOpen}
             type=''
           />
         </Box>
       </Stack>
     </Box>
 
-    <F_PMMain
-      open={open}
-      onClose={() => setOpen(false)}
-      receta={{
-        matricula: '392039029304',
-        curp: '2329832938',
-        nombrePaciente: 'Sergio martínez de la nieves',
-        fechaNacimiento: '03/05/1293',
-        sexo: 'Indefinido',
-        cedula: '2390290329',
-        nombreMedico: 'Sergino Fininino',
-        clinica: 'escom',
-        especialidad: 'alta especialidad',
-        fechaEmision: '03/04/2025',
-        diagnostico: 'Lorem ipsum dolor sit amet...'
-      }}
-      medicamentos={[
-        { nombre: 'Paracetamol', dosis: '500mg', duracion: '5 días', frecuencia: 'cada 8h' },
-        { nombre: 'Ibuprofeno', dosis: '200mg', duracion: '3 días', frecuencia: 'cada 6h' },
-      ]}
-    />
+    <Dialog open={openModal} onClose={handleClose} fullWidth maxWidth="md">
+      <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#00a1b4' }}>
+        Información de la receta
+        <ButtonsMod
+          variant='secundario'
+          textCont='Cerrar'
+          width='auto'
+          clickEvent={handleClose}
+          type='button'
+        />
+      </DialogTitle>
+
+      <F_PMMain receta={receta} />
+    </Dialog>
+    
     </>
   );
 }
