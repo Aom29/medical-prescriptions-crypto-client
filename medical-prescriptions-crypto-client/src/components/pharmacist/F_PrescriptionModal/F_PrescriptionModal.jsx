@@ -15,7 +15,7 @@ import { getDerivedKeyFromStorage } from '../../../services/crypto/patient.keys.
 
 function F_PrescriptionModal ({ recetaId }) {
 
-  const { auth, userPassword, privateKeyECDH } = useAuth();
+  const { auth, privateKeyECDH } = useAuth();
   const [receta, setReceta] = useState(null);
   const [paciente, setPaciente] = useState(null);
   const [medico, setMedico] = useState(null);
@@ -32,16 +32,16 @@ function F_PrescriptionModal ({ recetaId }) {
         // const encryptedKey = await KeyStorage.getPrivateKey();
         // const derivedKey = await getDerivedKeyFromStorage();
         const encryptedKey = privateKeyECDH;
-        const password = 'aom';
+        const password = 'aaron';
         const encryptedKeyBytes = fromBase64(encryptedKey);
         const salt = encryptedKeyBytes.slice(0, 16);
         const derivedKey = await deriveAndImportAESKey(password, salt);;
 
-        console.log('wrappedAESKeyBase64', accessKey);
-        console.log('cipherTextBase64', encryptedPrescription);
-        console.log('privateKeyEncrypted', encryptedKey);
-        console.log('derivedKey', derivedKey);
-        console.log('serverPublicKeyBase64', publicKeyServidor);
+        // console.log('wrappedAESKeyBase64', accessKey);
+        // console.log('cipherTextBase64', encryptedPrescription);
+        // console.log('privateKeyEncrypted', encryptedKey);
+        // console.log('derivedKey', derivedKey);
+        // console.log('serverPublicKeyBase64', publicKeyServidor);
         const deciphered = await decryptWithPasswordAndWrappedKey({
           wrappedAESKeyBase64: accessKey,
           cipherTextBase64: encryptedPrescription,
@@ -66,7 +66,7 @@ function F_PrescriptionModal ({ recetaId }) {
     };
 
     fetchAndDecryptReceta();
-  }, [recetaId, auth.token, auth.userId, userPassword]);
+  }, [recetaId, auth.token, auth.userId]);
 
   console.log('DATOS RECETA: ', receta);
   if (loading) {

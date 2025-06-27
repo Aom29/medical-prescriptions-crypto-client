@@ -12,7 +12,7 @@ import { deriveAndImportAESKey } from '../../../services/crypto/crypto.utils';
 import { fromBase64 } from '../../../services/crypto/file.utils';
 
 function M_PDModal ({ recetaId }) {
-  const { auth, userPassword, privateKeyECDH } = useAuth();
+  const { auth, privateKeyECDH } = useAuth();
   const [receta, setReceta] = useState(null);
   const [paciente, setPaciente] = useState(null);
   const [medico, setMedico] = useState(null);
@@ -63,7 +63,7 @@ function M_PDModal ({ recetaId }) {
     };
 
     fetchAndDecryptReceta();
-  }, [recetaId, auth.token, auth.userId, userPassword]);
+  }, [recetaId, auth.token, auth.userId]);
 
   console.log('DATOS RECETA: ', receta);
   if (loading) {
