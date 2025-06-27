@@ -44,7 +44,7 @@ function M_SCMain ({ paciente }) {
     };
 
     fetchRecetas();
-  }, [auth, paciente]);
+  }, [auth, paciente?.id]);
 
   if (!paciente) {
     return (
