@@ -26,10 +26,8 @@ function M_PDModal ({ recetaId }) {
         const response = await Prescriptions.getDecipherementInformation(recetaId, auth.token);
         console.log('response', response);
         const { encryptedPrescription, publicKeyServidor, accessKey } = response;
-        // const encryptedKey = await KeyStorage.getPrivateKey();
-        // const derivedKey = await getDerivedKeyFromStorage();
         const encryptedKey = privateKeyECDH;
-        const password = prompt("Ingresa tu contraseña");
+        const password = prompt("Ingresa tu contraseña de la clave privada de X25519:");
         const encryptedKeyBytes = fromBase64(encryptedKey);
         const salt = encryptedKeyBytes.slice(0, 16);
         const derivedKey = await deriveAndImportAESKey(password, salt);;
