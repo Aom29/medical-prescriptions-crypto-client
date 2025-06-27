@@ -20,7 +20,7 @@ function P_PCButton ({ surtida, fechaSurtido, recetaId, onClose }) {
     const listaConPermisos = lista.map(f => ({
       nombre: f.name,
       clinica: f.farmacia,
-      permisosOtorgados: false
+      permisosOtorgados: f.permisosOtorgados,
     }));
   
     setFarmaceuticos(listaConPermisos);
@@ -57,9 +57,24 @@ function P_PCButton ({ surtida, fechaSurtido, recetaId, onClose }) {
         }
         return;
       }
+      console.log(response);
       // showAlert('Permisos otorgados correctamente', 'success');
     } else {
-      console.log('quitar permisos');
+      const response = await Patient.revokeAccessToPharmacist(recetaId, idFarmaceuticos[index], auth.token);
+      if(response.status >= 400) {
+        if(response.errors) {
+          const errorValidation = Object.values(response.errors)[0];
+          setOpen(false);
+          onClose();
+          showAlert(errorValidation, 'error');
+        } else {
+          setOpen(false);
+          onClose();
+          showAlert(response.message, 'error');
+        }
+        return;
+      }
+      console.log(response);
     }
   }
 

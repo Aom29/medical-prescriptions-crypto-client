@@ -40,10 +40,33 @@ const Patient = (() => {
       return { status: 'error', message: 'Error al conectar con el servidor' };
     }
   }
+// ## ENDPOINT DELETE
+// ```
+// http://localhost:8080/patient/revoke-access?prescriptionId=21d0e6c3-6d0a-4d75-a58e-1cdb5e72f06f&pharmacistId=b1060168-b395-476c-b97e-5cc6000acf40
+  const revokeAccessToPharmacist = async (recetaId, pharmacistId, token) => {
+    try {
+      const response = await api.delete(`/patient/revoke-access`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        params: {
+          prescriptionId: recetaId,
+          pharmacistId: pharmacistId
+        }
+      });
+      return response.data;
+    } catch (error) {
+      if (error.response?.data) {
+        return error.response.data;
+      }
+      return { status: 'error', message: 'Error al conectar con el servidor' };
+    }
+  }
 
   return {
     getPrivateKey,
-    grantAccessToPharmacist
+    grantAccessToPharmacist,
+    revokeAccessToPharmacist
   }
 })();
 
