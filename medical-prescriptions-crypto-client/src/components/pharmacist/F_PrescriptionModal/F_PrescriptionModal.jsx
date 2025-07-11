@@ -10,6 +10,7 @@ import { useAuth } from '../../../context/Auth/AuthContext';
 import { decryptWithPasswordAndWrappedKey } from '../../../services/crypto/aesgcm/aes.gcm.service';
 import { deriveAndImportAESKey } from '../../../services/crypto/crypto.utils';
 import { fromBase64 } from '../../../services/crypto/file.utils';
+import { verifyFile } from '../../../services/crypto/eddsa/eddsa.service';
 
 function F_PrescriptionModal({ recetaId }) {
   const { auth, privateKeyECDH } = useAuth();
@@ -21,6 +22,7 @@ function F_PrescriptionModal({ recetaId }) {
   const [error, setError] = useState(null);
   const [openPasswordModal, setOpenPasswordModal] = useState(true);
   const [passwordInput, setPasswordInput] = useState("");
+  const [isSignatureValid, setIsSignatureValid] = useState(false);
 
   const passwordRef = useRef(null);
   const hasFetched = useRef(false);
@@ -50,6 +52,10 @@ function F_PrescriptionModal({ recetaId }) {
       setMedico(response.medico);
       setFirmaMedico(response.prescription.firma_medico);
       setReceta(JSON.parse(deciphered));
+
+      // const jsonBuffer = new TextEncoder().encode(JSON.stringify(deciphered));
+      // const isValid = await verifyFile(jsonBuffer, response.prescription.firma_medico, publicKeyServidor);
+
     } catch (err) {
       console.error('Error al descifrar la receta:', err);
       setError('No se pudo descifrar la receta. Verifique su contraseña o intente nuevamente.');
